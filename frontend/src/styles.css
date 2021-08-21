@@ -5,12 +5,40 @@
   --green-color-accent: #24cca7;
   --blue-color-accent: #4a56e2;
   --red-color-accent: #ff6596;
+}
 
-  --primery-text-color: #212121;
-  --secondary-text-color: #757575;
-  --color-accent: #2196f3;
-  --white-text-color: #ffffff;
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), local('Poppins-Regular'),
+    url('./assets/fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
 
-  --color-bcg-btn: #f5f4fa;
-  --color-link-ftr: rgba(255, 255, 255, 0.6);
+@font-face {
+  font-family: 'Poppins';
+  src: local('Poppins'), local('Poppins-Bold'),
+    url('./assets/fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe';
+  src: local('Circe'), local('Circe-Regular'),
+    url('./assets/fonts/Circe-Regular.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe';
+  src: local('Circe'), local('Circe-Bold'),
+    url('./assets/fonts/Circe-Bold.otf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
