@@ -1,0 +1,60 @@
+import { Suspense, lazy, useEffect } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import ProtectedRoute from '../ProtectedRoute';
+import PublicRoute from '../PublicRoute';
+import { authOperations } from '../../redux/auth';
+import routes from '../../routes';
+
+const RegisterPage = lazy(() =>
+  import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),
+);
+const LogInPage = lazy(() =>
+  import('../../pages/LogInPage' /* webpackChunkName: "login-page" */),
+);
+const DashboardPage = lazy(() =>
+  import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
+);
+const NotFoundPage = lazy(() =>
+  import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
+);
+
+function App() {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
+
+  return (
+    <>
+      <Suspense fallback={<p>Loading...</p>}>
+        <Switch>
+          <PublicRoute
+            path={routes.register}
+            restricted
+            // redirectTo={routes.login}
+          >
+            <RegisterPage />
+          </PublicRoute>
+
+          <PublicRoute
+            path={routes.login}
+            restricted
+            // redirectTo={routes.login}
+          >
+            <LogInPage />
+          </PublicRoute>
+
+          <ProtectedRoute path={routes.wallet} redirectTo={routes.login}>
+            <DashboardPage />
+          </ProtectedRoute>
+
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Suspense>
+    </>
+  );
+}
+
+export default App;
