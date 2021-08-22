@@ -7,11 +7,11 @@ import {
 } from './currency-actions';
 
 const courseReducer = createReducer([], {
-  [fetchCurrencySuccess]: (state, { payload }) => payload,
+  [fetchCurrencySuccess]: (state, { payload }) => payload.course,
 });
 
-const dateGetReducer = createReducer([], {
-  [fetchCurrencySuccess]: (state, { payload }) => payload.dateGet,
+const currentCourseReducer = createReducer([], {
+  [fetchCurrencySuccess]: (state, { payload }) => payload,
 });
 
 const loadingReducer = createReducer(false, {
@@ -23,7 +23,7 @@ const loadingReducer = createReducer(false, {
 const currencyReducer = combineReducers({
   course: courseReducer,
   loading: loadingReducer,
-  dateGet: dateGetReducer,
+  currentCourse: currentCourseReducer,
 });
 
 export default currencyReducer;

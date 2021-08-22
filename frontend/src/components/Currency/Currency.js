@@ -24,15 +24,16 @@ const Currency = () => {
             </tr>
           </thead>
           <tbody>
-            {currency
-              .filter(c => c.ccy !== 'BTC')
-              .map(c => (
-                <tr key={c.buy}>
-                  <td>{c.ccy}</td>
-                  <td>{Number(c.buy).toFixed(2)}</td>
-                  <td>{Number(c.sale).toFixed(2)}</td>
-                </tr>
-              ))}
+            {currency &&
+              currency
+                .filter(c => c.ccy !== 'BTC')
+                .map(c => (
+                  <tr key={c.buy}>
+                    <td>{c.ccy}</td>
+                    <td>{Number(c.buy).toFixed(2)}</td>
+                    <td>{Number(c.sale).toFixed(2)}</td>
+                  </tr>
+                ))}
           </tbody>
         </table>
         {isLoadingCurrency && <span>Loading ...</span>}
