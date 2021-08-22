@@ -1,6 +1,7 @@
 const routes = {
   register: '/register',
   login: '/login',
-  wallet: '/wallet',
+  home: '/home',
+  diagram: '/diagram',
 };
 export default routes;
