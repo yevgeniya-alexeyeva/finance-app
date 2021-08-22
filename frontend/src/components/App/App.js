@@ -7,21 +7,22 @@ import { authOperations } from '../../redux/auth';
 import routes from '../../routes';
 
 const RegisterPage = lazy(() =>
-  import('../../pages' /* webpackChunkName: "register-page" */),
+  import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),
 );
 const LogInPage = lazy(() =>
-  import('../../pages' /* webpackChunkName: "login-page" */),
+  import('../../pages/LogInPage' /* webpackChunkName: "login-page" */),
 );
 const HomePage = lazy(() =>
-  import('../../pages' /* webpackChunkName: "home-page" */),
+  import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
 );
 const DiagramPage = lazy(() =>
-  import('../../pages' /* webpackChunkName: "diagram-page" */),
+  import('../../pages/DiagramPage' /* webpackChunkName: "diagram-page" */),
 );
 
 const NotFoundPage = lazy(() =>
-  import('../../pages' /* webpackChunkName: "notFound-page" */),
+  import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
 );
+console.log(DiagramPage);
 
 function App() {
   const dispatch = useDispatch();
