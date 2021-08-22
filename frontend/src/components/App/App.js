@@ -7,16 +7,20 @@ import { authOperations } from '../../redux/auth';
 import routes from '../../routes';
 
 const RegisterPage = lazy(() =>
-  import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),
+  import('../../pages' /* webpackChunkName: "register-page" */),
 );
 const LogInPage = lazy(() =>
-  import('../../pages/LogInPage' /* webpackChunkName: "login-page" */),
+  import('../../pages' /* webpackChunkName: "login-page" */),
 );
-const DashboardPage = lazy(() =>
-  import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
+const HomePage = lazy(() =>
+  import('../../pages' /* webpackChunkName: "home-page" */),
 );
+const DiagramPage = lazy(() =>
+  import('../../pages' /* webpackChunkName: "diagram-page" */),
+);
+
 const NotFoundPage = lazy(() =>
-  import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
+  import('../../pages' /* webpackChunkName: "notFound-page" */),
 );
 
 function App() {
@@ -46,8 +50,11 @@ function App() {
             <LogInPage />
           </PublicRoute>
 
-          <ProtectedRoute path={routes.wallet} redirectTo={routes.login}>
-            <DashboardPage />
+          <ProtectedRoute path={routes.home} redirectTo={routes.login}>
+            <HomePage />
+          </ProtectedRoute>
+          <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
+            <DiagramPage />
           </ProtectedRoute>
 
           <Route component={NotFoundPage} />
