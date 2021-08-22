@@ -1,0 +1,32 @@
+@font-face {
+  font-family: 'Segoe UI';
+  src: local('Segoe UI'), url('../assets/fonts/segoeui.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Segoe UI';
+  src: local('Segoe UI'), url('../assets/fonts/segoeuib.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe';
+  src: local('Circe'), local('Circe-Regular'),
+    url('../assets/fonts/Circe-Regular.otf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Circe';
+  src: local('Circe'), local('Circe-Bold'),
+    url('../assets/fonts/Circe-Bold.otf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
