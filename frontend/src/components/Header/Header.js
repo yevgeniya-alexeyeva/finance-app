@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
+import Exit from './exit.svg';
 import routes from '../../routes';
 import styles from './Header.module.css';
 
@@ -10,9 +11,14 @@ const Header = () => {
         <img src={Logo} width="40" height="40" />
         <h1>Wallet</h1>
       </Link>
-      <div>
-        <p>Имя</p>
-        <button>Выйти</button>
+      <div className={styles.exitBox}>
+        <p className={styles.name}>Имя</p>
+        <button className={styles.exitBtn}>
+          <svg className={styles.exitIcon} width="18" height="18">
+            <use href={`${Exit}#clip0`}></use>
+          </svg>{' '}
+          Выйти
+        </button>
       </div>
     </div>
   );

@@ -2,6 +2,9 @@
 
 .header {
   padding: 20px 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 .logo {
   display: flex;
@@ -17,4 +20,38 @@
   font-weight: 700;
   font-size: 30px;
   line-height: 1.5;
+}
+.exitBox {
+  display: flex;
+  align-items: center;
+  font-family: Circe;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--grey-text-color);
+}
+.name {
+  padding: 0 14px;
+}
+.exitBtn {
+  background-color: #fff;
+  border: none;
+  outline: none;
+  color: var(--grey-text-color);
+  padding: 0 14px;
+  border-left: 1px solid var(--grey-text-color);
+  display: flex;
+  align-items: center;
+}
+.exitBtn:hover,
+.exitBtn:focus {
+  color: var(--blue-color-accent);
+}
+.exitBtn:hover .exitIcon,
+.exitBtn:focus .exitIcon {
+  fill: var(--blue-color-accent);
+}
+.exitIcon {
+  margin-right: 10px;
+  fill: var(--grey-text-color);
 }
