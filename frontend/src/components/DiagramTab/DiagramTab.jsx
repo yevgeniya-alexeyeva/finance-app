@@ -1,7 +1,13 @@
-import Chart from '../Chart.js';
+import Chart from '../Chart';
+import Tab from '../Tab';
 
 const DiagramTab = () => {
-  return <Chart />;
+  return (
+    <>
+      <Chart />
+      <Tab />
+    </>
+  );
 };
 
 export default DiagramTab;
