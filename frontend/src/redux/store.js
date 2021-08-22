@@ -16,7 +16,6 @@ import {
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import { authReducer } from './auth';
-import { currencyReducer } from './currency';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -31,14 +30,9 @@ const authPersistConfig = {
   storage,
   whitelist: ['token'],
 };
-const currencyPersistConfig = {
-  key: 'currentCourse',
-  storage,
-  whitelist: ['currentCourse'],
-};
+
 const rootReducer = combineReducers({
   auth: persistReducer(authPersistConfig, authReducer),
-  currency: persistReducer(currencyPersistConfig, currencyReducer),
 });
 
 const store = configureStore({

@@ -111,29 +111,55 @@ export default function AddTransaction() {
         aria-describedby="add-transaction-description"
       >
         <div style={modalStyle} className={classes.paper}>
-          <CloseIcon />
-          <h2 id="add-transaction-title">Добавить транзакцию</h2>
-          <Switch
-            checked={state.checkedA}
-            onChange={handleChange}
-            name="checkedA"
-            inputProps={{ 'aria-label': 'secondary checkbox' }}
-          />
-          <TextField
-            //   error={f.errors?.host && f.touched.host ? true : false}
-            fullWidth
-            id="category"
-            name="cstegory"
-            //   label={t('locationFormRoute').host}
-            select
-            value={f.values.category}
-            onChange={f.handleChange}
-            //   helperText={
-            //     f.errors?.host && f.touched.host ? f.errors?.host : ' '
-            //   }
-            //   className={s.input}
-          >
-            {/* {hostsList?.map(hostEl => (
+          <div className={styles.modalWindow}>
+            <button
+              className={styles.closeBtn}
+              type="button"
+              onClick={handleClose}
+            >
+              <CloseIcon />
+            </button>
+
+            <h2 id="add-transaction-title" className={styles.title}>
+              Добавить транзакцию
+            </h2>
+            <div className={styles.switchBox}>
+              <div className={`${styles.switchBtn} ${styles.switchBtnAava}`}>
+                <input id="toggleButton" type="checkbox" />
+                <label
+                  for="toggleButton"
+                  data-on-text="Доход"
+                  data-off-text="Расход"
+                ></label>
+                <div className={styles.switchBtnIcon}></div>
+              </div>
+            </div>
+
+            {/* <div class="toggle-button toggle-button--aava">
+                <input id="toggleButton" type="checkbox"/>
+                <label for="toggleButton" data-on-text="On" data-off-text="Off"></label>
+                <div class="toggle-button__icon"></div></div> */}
+            {/* <Switch
+              checked={state.checkedA}
+              onChange={handleChange}
+              name="checkedA"
+              inputProps={{ 'aria-label': 'secondary checkbox' }}
+            /> */}
+            <TextField
+              //   error={f.errors?.host && f.touched.host ? true : false}
+              fullWidth
+              id="category"
+              name="cstegory"
+              //   label={t('locationFormRoute').host}
+              select
+              value={f.values.category}
+              onChange={f.handleChange}
+              //   helperText={
+              //     f.errors?.host && f.touched.host ? f.errors?.host : ' '
+              //   }
+              //   className={s.input}
+            >
+              {/* {hostsList?.map(hostEl => (
                 <option
                   key={hostEl._id}
                   value={hostEl.name}
@@ -142,67 +168,68 @@ export default function AddTransaction() {
                   {hostEl.name}
                 </option>
               ))} */}
-          </TextField>
-          <TextField
-            //   error={
-            //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-            //       ? true
-            //       : false
-            //   }
-            id="sum"
-            name="sum"
-            value={f.values.sum}
-            onChange={f.handleChange}
-            //   className={s.input}
-            //   helperText={
-            //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-            //       ? f.errors?.cabinets?.S?.price
-            //       : ' '
-            //   }
-          />
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <KeyboardDatePicker
-              disableToolbar
-              variant="inline"
-              format="MM/dd/yyyy"
-              margin="normal"
-              id="date-picker-inline"
-              label="Date picker inline"
-              value={selectedDate}
-              onChange={handleDateChange}
-              KeyboardButtonProps={{
-                'aria-label': 'change date',
-              }}
+            </TextField>
+            <TextField
+              //   error={
+              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
+              //       ? true
+              //       : false
+              //   }
+              id="sum"
+              name="sum"
+              value={f.values.sum}
+              onChange={f.handleChange}
+              //   className={s.input}
+              //   helperText={
+              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
+              //       ? f.errors?.cabinets?.S?.price
+              //       : ' '
+              //   }
             />
-          </MuiPickersUtilsProvider>
-          <TextField
-            //   error={
-            //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-            //       ? true
-            //       : false
-            //   }
-            id="comment"
-            name="comment"
-            value={f.values.comment}
-            onChange={f.handleChange}
-            //   className={s.input}
-            //   helperText={
-            //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-            //       ? f.errors?.cabinets?.S?.price
-            //       : ' '
-            //   }
-          />
-          <Button
-            variant="outlined"
-            fullWidth
-            type="button"
-            // onClick={goBack}
-          >
-            {/* {t('locationFormRoute').cancelBtn} */}
-          </Button>
-          <Button color="primary" variant="contained" fullWidth type="submit">
-            {/* {t('locationFormRoute').submitBtn} */}
-          </Button>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                disableToolbar
+                variant="inline"
+                format="MM/dd/yyyy"
+                margin="normal"
+                id="date-picker-inline"
+                label="Date picker inline"
+                value={selectedDate}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
+            <TextField
+              //   error={
+              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
+              //       ? true
+              //       : false
+              //   }
+              id="comment"
+              name="comment"
+              value={f.values.comment}
+              onChange={f.handleChange}
+              //   className={s.input}
+              //   helperText={
+              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
+              //       ? f.errors?.cabinets?.S?.price
+              //       : ' '
+              //   }
+            />
+            <Button
+              variant="outlined"
+              fullWidth
+              type="button"
+              // onClick={goBack}
+            >
+              {/* {t('locationFormRoute').cancelBtn} */}
+            </Button>
+            <Button color="primary" variant="contained" fullWidth type="submit">
+              {/* {t('locationFormRoute').submitBtn} */}
+            </Button>
+          </div>
         </div>
       </Modal>
     </div>
