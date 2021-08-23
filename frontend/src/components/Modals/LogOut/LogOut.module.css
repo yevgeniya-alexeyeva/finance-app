@@ -8,17 +8,22 @@
   display: flex;
   align-items: center;
 }
-.exitBtn:hover,
-.exitBtn:focus {
+.exitBtn:hover {
   color: var(--blue-color-accent);
 }
-.exitBtn:hover .exitIcon,
-.exitBtn:focus .exitIcon {
+.exitBtn:hover .exitIcon {
   fill: var(--blue-color-accent);
 }
 .exitIcon {
   margin-right: 10px;
   fill: var(--grey-text-color);
+}
+.exitIconSmall {
+  margin: 0;
+}
+.exitBtnSmall {
+  border: none;
+  padding: 0;
 }
 .modalWindow {
   position: relative;
@@ -41,6 +46,12 @@
 .closeBtn:focus {
   transform: rotate(180deg);
 }
+.closeBtnSmall {
+  top: -20px;
+  right: -25px;
+  background-color: transparent;
+  padding: 8px;
+}
 .title {
   font-family: Segoe UI;
   font-weight: 400;
@@ -49,6 +60,11 @@
   text-align: center;
   margin: 0;
   margin-bottom: 40px;
+}
+.titleSmall {
+  font-size: 20px;
+  line-height: 1.5;
+  margin-bottom: 20px;
 }
 .btns {
   display: flex;

@@ -1,25 +1,17 @@
-@import '../../stylesheet//vars.css';
+@import '../../stylesheet/vars.css';
 
 .header {
-  padding: 20px 85px;
+  padding: 15px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: var(--secondary-bcg-color);
 }
-.logo {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: var(--primery-text-color);
+.headerMedium {
+  padding: 20px 40px;
 }
-.logo h1 {
-  margin: 0;
-  margin-left: 20px;
-  font-family: Segoe UI;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 30px;
-  line-height: 1.5;
+.headerLarge {
+  padding: 20px 85px;
 }
 .exitBox {
   display: flex;
@@ -31,5 +23,7 @@
   color: var(--grey-text-color);
 }
 .name {
-  padding: 0 14px;
+  margin: 0;
+  margin-right: 14px;
+  padding: 0;
 }

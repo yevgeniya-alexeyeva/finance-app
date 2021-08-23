@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import Media from 'react-media';
 import { getCurrency } from '../../services/privatBank-api';
 import styles from './Currency.module.css';
 
@@ -33,30 +34,52 @@ const Currency = () => {
   }, []);
 
   return (
-    <div className={styles.boxTable}>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <th>Валюта</th>
-            <th>Покупка</th>
-            <th>Продажа</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currency &&
-            currency
-              .filter(c => c.ccy !== 'BTC')
-              .map(c => (
-                <tr key={c.buy}>
-                  <td>{c.ccy}</td>
-                  <td>{Number(c.buy).toFixed(2)}</td>
-                  <td>{Number(c.sale).toFixed(2)}</td>
-                </tr>
-              ))}
-        </tbody>
-      </table>
-      {loading && <span>Loading ...</span>}
-    </div>
+    <Media
+      queries={{
+        small: { maxWidth: 767 },
+        medium: { minWidth: 768, maxWidth: 1279 },
+        large: { minWidth: 1280 },
+      }}
+    >
+      {matches => (
+        <div
+          className={
+            (matches.small && styles.boxTable) ||
+            (matches.medium && `${styles.boxTable} ${styles.boxTableMedium}`) ||
+            (matches.large && `${styles.boxTable} ${styles.boxTableLarge}`)
+          }
+        >
+          <table
+            className={
+              (matches.small && styles.table) ||
+              (matches.medium && `${styles.table} ${styles.tableMedium}`) ||
+              (matches.large && `${styles.table} ${styles.tableLarge}`)
+            }
+          >
+            <thead>
+              <tr>
+                <th>Валюта</th>
+                <th>Покупка</th>
+                <th>Продажа</th>
+              </tr>
+            </thead>
+            <tbody>
+              {currency &&
+                currency
+                  .filter(c => c.ccy !== 'BTC')
+                  .map(c => (
+                    <tr key={c.buy}>
+                      <td>{c.ccy}</td>
+                      <td>{Number(c.buy).toFixed(2)}</td>
+                      <td>{Number(c.sale).toFixed(2)}</td>
+                    </tr>
+                  ))}
+            </tbody>
+          </table>
+          {loading && <span>Loading ...</span>}
+        </div>
+      )}
+    </Media>
   );
 };
 

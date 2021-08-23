@@ -1,0 +1,27 @@
+@import '../stylesheet/vars.css';
+
+.container {
+  padding: 10px 20px;
+}
+.containerMedium {
+  padding: 20px 40px;
+}
+.containerLarge {
+  padding: 40px 85px;
+}
+.contentMobile {
+  text-align: center;
+}
+.btnAdd {
+  position: absolute;
+  bottom: 30px;
+  right: 20px;
+}
+.btnAddMedium {
+  bottom: 40px;
+  right: 40px;
+}
+.btnAddLarge {
+  bottom: 40px;
+  right: 85px;
+}
