@@ -1,8 +1,7 @@
 const routes = {
   register: '/register',
   login: '/login',
-  testPublic: '/test',
-  wallet: '/wallet',
+  dashboard: '/dashboard',
   home: '/home',
   diagram: '/diagram',
 };

@@ -1,21 +1,33 @@
-import { Link } from 'react-router-dom';
-import Logo from '../../assets/Logo.png';
+import Media from 'react-media';
+import Logo from '../Logo';
 import LogOut from '../Modals/LogOut';
-import routes from '../../routes';
 import styles from './Header.module.css';
 
 const Header = () => {
   return (
-    <div className={styles.header}>
-      <Link to={routes.home} className={styles.logo}>
-        <img src={Logo} width="40" height="40" />
-        <h1>Wallet</h1>
-      </Link>
-      <div className={styles.exitBox}>
-        <p className={styles.name}>Имя</p>
-        <LogOut />
-      </div>
-    </div>
+    <Media
+      queries={{
+        small: { maxWidth: 767 },
+        medium: { minWidth: 768, maxWidth: 1279 },
+        large: { minWidth: 1280 },
+      }}
+    >
+      {matches => (
+        <div
+          className={
+            (matches.small && styles.header) ||
+            (matches.medium && `${styles.header} ${styles.headerMedium}`) ||
+            (matches.large && `${styles.header} ${styles.headerLarge}`)
+          }
+        >
+          <Logo />
+          <div className={styles.exitBox}>
+            <p className={styles.name}>Имя</p>
+            <LogOut />
+          </div>
+        </div>
+      )}
+    </Media>
   );
 };
 

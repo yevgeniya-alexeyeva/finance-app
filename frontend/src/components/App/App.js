@@ -13,13 +13,14 @@ const LogInPage = lazy(() =>
   import('../../pages/LogInPage' /* webpackChunkName: "login-page" */),
 );
 
-const TestPage = lazy(() =>
-  import('../../pages/TestPage' /* webpackChunkName: "test-page" */),
+const DashboardPage = lazy(() =>
+  import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
 );
 
 const HomePage = lazy(() =>
   import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
 );
+
 const DiagramPage = lazy(() =>
   import('../../pages/DiagramPage' /* webpackChunkName: "diagram-page" */),
 );
@@ -27,7 +28,6 @@ const DiagramPage = lazy(() =>
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
 );
-console.log(DiagramPage);
 
 function App() {
   const dispatch = useDispatch();
@@ -57,11 +57,11 @@ function App() {
           </PublicRoute>
 
           <PublicRoute
-            path={routes.testPublic}
+            path={routes.dashboard}
             restricted
             // redirectTo={routes.login}
           >
-            <TestPage />
+            <DashboardPage />
           </PublicRoute>
 
           <ProtectedRoute path={routes.home} redirectTo={routes.login}>
