@@ -16,8 +16,6 @@ const LogInPage = lazy(() =>
 const TestPage = lazy(() =>
   import('../../pages/TestPage' /* webpackChunkName: "test-page" */),
 );
-// const DashboardPage = lazy(() =>
-//   import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */));
 
 const HomePage = lazy(() =>
   import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
@@ -66,9 +64,6 @@ function App() {
             <TestPage />
           </PublicRoute>
 
-          {/* <ProtectedRoute path={routes.wallet} redirectTo={routes.login}>
-            <DashboardPage />
-          </ProtectedRoute> */}
           <ProtectedRoute path={routes.home} redirectTo={routes.login}>
             <HomePage />
           </ProtectedRoute>

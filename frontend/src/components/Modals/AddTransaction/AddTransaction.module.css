@@ -126,7 +126,7 @@
 }
 
 .switchBtnAava input[type='checkbox']:checked ~ .switchBtnIcon:before {
-  transform: translate(10%, 40%) rotate(0deg);
+  transform: translate(10%, 20%) rotate(0deg);
   width: 25px;
 }
 
@@ -147,7 +147,6 @@
   height: 3px;
   border-radius: 3px;
   background: #fff;
-  /* box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); */
 }
 .switchBtnAava .switchBtnIcon:before {
   width: 25px;
