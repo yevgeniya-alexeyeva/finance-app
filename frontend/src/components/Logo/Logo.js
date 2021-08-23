@@ -10,6 +10,7 @@ const Logo = () => {
       {matches => (
         <Link to={routes.home} className={styles.logo}>
           <img
+            alt="logo"
             src={LogoImg}
             width={matches.small ? '30' : '40'}
             height={matches.small ? '30' : '40'}

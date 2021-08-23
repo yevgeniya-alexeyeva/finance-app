@@ -24,7 +24,7 @@ const DashboardPage = () => {
               (matches.large && `${styles.container} ${styles.containerLarge}`)
             }
           >
-            <div className={matches.small && styles.contentMobile}>
+            <div className={matches.small ? styles.contentMobile : undefined}>
               <Currency />
             </div>
             <div
