@@ -7,14 +7,16 @@
 .title {
   margin: 0;
   padding: 0;
-  margin-left: 20px;
+  font-size: 20px;
+  margin-left: 15px;
   font-family: Segoe UI;
   font-style: normal;
   font-weight: 700;
-  font-size: 30px;
   line-height: 1.5;
 }
-.titleSmall {
-  font-size: 20px;
-  margin-left: 15px;
+@media (min-width: 768px) {
+  .title {
+    font-size: 30px;
+    margin-left: 20px;
+  }
 }

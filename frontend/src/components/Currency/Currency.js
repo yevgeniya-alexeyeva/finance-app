@@ -42,20 +42,8 @@ const Currency = () => {
       }}
     >
       {matches => (
-        <div
-          className={
-            (matches.small && styles.boxTable) ||
-            (matches.medium && `${styles.boxTable} ${styles.boxTableMedium}`) ||
-            (matches.large && `${styles.boxTable} ${styles.boxTableLarge}`)
-          }
-        >
-          <table
-            className={
-              (matches.small && styles.table) ||
-              (matches.medium && `${styles.table} ${styles.tableMedium}`) ||
-              (matches.large && `${styles.table} ${styles.tableLarge}`)
-            }
-          >
+        <div className={styles.boxTable}>
+          <table className={styles.table}>
             <thead>
               <tr>
                 <th>Валюта</th>

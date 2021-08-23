@@ -1,27 +1,38 @@
 @import '../stylesheet/vars.css';
 
-.container {
-  padding: 10px 20px;
-}
-.containerMedium {
-  padding: 20px 40px;
-}
-.containerLarge {
-  padding: 40px 85px;
-}
-.contentMobile {
-  text-align: center;
-}
 .btnAdd {
   position: absolute;
-  bottom: 30px;
-  right: 20px;
 }
-.btnAddMedium {
-  bottom: 40px;
-  right: 40px;
+
+@media (max-width: 767px) {
+  .container {
+    padding: 10px 20px;
+  }
+  .contentMobile {
+    text-align: center;
+  }
+  .btnAdd {
+    bottom: 30px;
+    right: 20px;
+  }
 }
-.btnAddLarge {
-  bottom: 40px;
-  right: 85px;
+
+@media (min-width: 768px) and (max-width: 1279px) {
+  .container {
+    padding: 20px 40px;
+  }
+  .btnAdd {
+    bottom: 40px;
+    right: 40px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    padding: 40px 85px;
+  }
+  .btnAdd {
+    bottom: 40px;
+    right: 85px;
+  }
 }

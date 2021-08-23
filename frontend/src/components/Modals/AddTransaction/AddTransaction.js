@@ -14,6 +14,12 @@ import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './AddTransaction.module.css';
 
+const categories = [
+  { _id: '6123b46f7b92ce7fa2ca7442', name: 'Разное' },
+  { _id: '6123b46f7b92ce7fa2ca7443', name: 'Продукты' },
+  { _id: '6123b46f7b92ce7fa2ca7444', name: 'Машина' },
+];
+
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -53,7 +59,7 @@ export default function AddTransaction() {
 
   const f = useFormik({
     initialValues: {
-      type: true,
+      type: false,
       category: null,
       sum: 0,
       date: null,
@@ -138,14 +144,7 @@ export default function AddTransaction() {
                   <CloseIcon />
                 </button>
 
-                <h2
-                  id="add-transaction-title"
-                  className={
-                    matches.small
-                      ? styles.title
-                      : `${styles.title} ${styles.titleMedium}`
-                  }
-                >
+                <h2 id="add-transaction-title" className={styles.title}>
                   Добавить транзакцию
                 </h2>
                 <div className={styles.switchBox}>
@@ -190,15 +189,15 @@ export default function AddTransaction() {
                       }
                       className={styles.input}
                     >
-                      {/* {hostsList?.map(hostEl => (
-                <option
-                  key={hostEl._id}
-                  value={hostEl.name}
-                  className={s.option}
-                >
-                  {hostEl.name}
-                </option>
-              ))} */}
+                      {categories?.map(c => (
+                        <option
+                          key={c._id}
+                          value={c.name}
+                          className={styles.option}
+                        >
+                          {c.name}
+                        </option>
+                      ))}
                     </TextField>
                   )}
                   <div className={!matches.small && styles.rowInputs}>
@@ -250,11 +249,7 @@ export default function AddTransaction() {
                     label="Комментарий"
                     value={f.values.comment}
                     onChange={f.handleChange}
-                    className={
-                      matches.small
-                        ? styles.comment
-                        : `${styles.comment} ${styles.commentMedium}`
-                    }
+                    className={styles.comment}
                     helperText={
                       f.errors?.comment && f.touched.comment
                         ? f.errors?.comment

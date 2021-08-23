@@ -16,24 +16,11 @@ const DashboardPage = () => {
       {matches => (
         <>
           <Header />
-          <div
-            className={
-              (matches.small && styles.container) ||
-              (matches.medium &&
-                `${styles.container} ${styles.containerMedium}`) ||
-              (matches.large && `${styles.container} ${styles.containerLarge}`)
-            }
-          >
-            <div className={matches.small ? styles.contentMobile : undefined}>
+          <div className={styles.container}>
+            <div className={styles.contentMobile}>
               <Currency />
             </div>
-            <div
-              className={
-                (matches.small && styles.btnAdd) ||
-                (matches.medium && `${styles.btnAdd} ${styles.btnAddMedium}`) ||
-                (matches.large && `${styles.btnAdd} ${styles.btnAddLarge}`)
-              }
-            >
+            <div className={styles.btnAdd}>
               <AddTransaction />
             </div>
           </div>
