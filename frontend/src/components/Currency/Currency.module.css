@@ -1,4 +1,4 @@
-@import '../../stylesheet//vars.css';
+@import '../../stylesheet/vars.css';
 
 .boxTable {
   background: url('./BcgCurrency.png'),
@@ -8,14 +8,18 @@
       rgba(255, 255, 255, 0) 100%
     ),
     var(--blue-color-accent);
+  animation: bg-animation 25s ease-in-out infinite;
   color: var(--secondary-text-color);
   background-repeat: no-repeat;
   background-position: bottom;
   display: inline-block;
   border-radius: 30px;
   overflow: hidden;
-  height: 348px;
+  height: 174px;
   text-align: center;
+}
+.boxTableLarge {
+  height: 348px;
 }
 .table {
   border-collapse: collapse;
@@ -27,8 +31,42 @@
   font-size: 18px;
   line-height: 1.5;
 }
-
 .table th,
 .table td {
+  padding: 11px 13px;
+}
+.tableMedium th,
+.tableMedium td {
+  padding: 11px 22px;
+}
+.tableLarge th,
+.tableLarge td {
   padding: 16px 24px;
+}
+
+@keyframes bg-animation {
+  0% {
+    background-size: 120%;
+    background-position: 50% 50%;
+  }
+  20% {
+    background-size: 150%;
+    background-position: 0 50%;
+  }
+  40% {
+    background-size: 110%;
+    background-position: 20% 80%;
+  }
+  60% {
+    background-size: 160%;
+    background-position: 60% 10%;
+  }
+  80% {
+    background-size: 120%;
+    background-position: 40% 70%;
+  }
+  100% {
+    background-size: 120%;
+    background-position: 50% 50%;
+  }
 }

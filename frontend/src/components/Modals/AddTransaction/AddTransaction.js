@@ -1,13 +1,15 @@
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import Media from 'react-media';
 import DateFnsUtils from '@date-io/date-fns';
 import * as Yup from 'yup';
 import { makeStyles } from '@material-ui/core/styles';
-import { Modal, Switch, TextField, Button } from '@material-ui/core';
+import { Modal, TextField, Button } from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './AddTransaction.module.css';
@@ -26,8 +28,16 @@ function getModalStyle() {
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
+    width: '100vw',
+    height: '100vh',
+    padding: '0px 11px 30px',
+    overflow: 'scroll',
+    backgroundColor: theme.palette.background.paper,
+  },
+  paperMedium: {
+    position: 'absolute',
     width: 540,
-    height: 540,
+    height: 'auto',
     borderRadius: 20,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
@@ -39,26 +49,22 @@ export default function AddTransaction() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [state, setState] = useState({
-    checkedA: true,
-    checkedB: true,
-  });
   const [selectedDate, setSelectedDate] = useState(Date.now());
 
   const f = useFormik({
     initialValues: {
-      type: null,
+      type: true,
       category: null,
-      sum: null,
+      sum: 0,
       date: null,
       comment: null,
     },
     validationSchema: Yup.object({
       sum: Yup.string()
         .matches(/^([0-9])*([.][0-9]{2})?$/, {
-          message: 'Invalid value',
+          message: 'Невалидное значение',
         })
-        .required('The field is required'),
+        .required('Обязательное поле'),
       //  holderName: Yup.string()
       //    .min(1, 'Minimum 1 character')
       //    .required('Required field'),
@@ -91,75 +97,100 @@ export default function AddTransaction() {
     setOpen(false);
   };
 
-  const handleChange = event => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
   const handleDateChange = date => {
     setSelectedDate(date);
   };
 
   return (
-    <div>
-      <button className={styles.addBtn} type="button" onClick={handleOpen}>
-        <AddIcon />
-      </button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="add-transaction-title"
-        aria-describedby="add-transaction-description"
-      >
-        <div style={modalStyle} className={classes.paper}>
-          <div className={styles.modalWindow}>
-            <button
-              className={styles.closeBtn}
-              type="button"
-              onClick={handleClose}
+    <Media
+      queries={{
+        small: { maxWidth: 767 },
+        medium: { minWidth: 768, maxWidth: 1279 },
+        large: { minWidth: 1280 },
+      }}
+    >
+      {matches => (
+        <div>
+          <button className={styles.addBtn} type="button" onClick={handleOpen}>
+            <AddIcon />
+          </button>
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="add-transaction-title"
+            aria-describedby="add-transaction-description"
+          >
+            <div
+              style={modalStyle}
+              className={
+                matches.small
+                  ? classes.paper
+                  : `${classes.paper} ${classes.paperMedium}`
+              }
             >
-              <CloseIcon />
-            </button>
+              {matches.small && <Header />}
+              <div className={styles.modalWindow}>
+                <button
+                  className={styles.closeBtn}
+                  type="button"
+                  onClick={handleClose}
+                >
+                  <CloseIcon />
+                </button>
 
-            <h2 id="add-transaction-title" className={styles.title}>
-              Добавить транзакцию
-            </h2>
-            <div className={styles.switchBox}>
-              <div className={`${styles.switchBtn} ${styles.switchBtnAava}`}>
-                <input id="toggleButton" type="checkbox" />
-                <label
-                  for="toggleButton"
-                  data-on-text="Доход"
-                  data-off-text="Расход"
-                ></label>
-                <div className={styles.switchBtnIcon}></div>
-              </div>
-            </div>
-
-            {/* <div class="toggle-button toggle-button--aava">
-                <input id="toggleButton" type="checkbox"/>
-                <label for="toggleButton" data-on-text="On" data-off-text="Off"></label>
-                <div class="toggle-button__icon"></div></div> */}
-            {/* <Switch
-              checked={state.checkedA}
-              onChange={handleChange}
-              name="checkedA"
-              inputProps={{ 'aria-label': 'secondary checkbox' }}
-            /> */}
-            <TextField
-              //   error={f.errors?.host && f.touched.host ? true : false}
-              fullWidth
-              id="category"
-              name="cstegory"
-              //   label={t('locationFormRoute').host}
-              select
-              value={f.values.category}
-              onChange={f.handleChange}
-              //   helperText={
-              //     f.errors?.host && f.touched.host ? f.errors?.host : ' '
-              //   }
-              //   className={s.input}
-            >
-              {/* {hostsList?.map(hostEl => (
+                <h2
+                  id="add-transaction-title"
+                  className={
+                    matches.small
+                      ? styles.title
+                      : `${styles.title} ${styles.titleMedium}`
+                  }
+                >
+                  Добавить транзакцию
+                </h2>
+                <div className={styles.switchBox}>
+                  <div
+                    className={`${styles.switchBtn} ${styles.switchBtnAava}`}
+                  >
+                    <input
+                      id="toggleButton"
+                      type="checkbox"
+                      onChange={e =>
+                        f.setValues({ ...f.values, type: e.target.checked })
+                      }
+                      checked={f.values.type}
+                      value={f.values.type}
+                    />
+                    <label
+                      htmlFor="toggleButton"
+                      data-on-text="Доход"
+                      data-off-text="Расход"
+                    ></label>
+                    <div className={styles.switchBtnIcon}></div>
+                  </div>
+                </div>
+                <div className={matches.small && styles.contentForm}>
+                  {!f.values.type && (
+                    <TextField
+                      error={
+                        f.errors.category && f.touched.category ? true : false
+                      }
+                      fullWidth
+                      id="category"
+                      name="category"
+                      color="secondary"
+                      label="Выберите категорию"
+                      select
+                      value={f.values.category}
+                      onChange={f.handleChange}
+                      helperText={
+                        f.errors?.category && f.touched.category
+                          ? f.errors?.category
+                          : ' '
+                      }
+                      className={styles.input}
+                    >
+                      {/* {hostsList?.map(hostEl => (
                 <option
                   key={hostEl._id}
                   value={hostEl.name}
@@ -168,70 +199,102 @@ export default function AddTransaction() {
                   {hostEl.name}
                 </option>
               ))} */}
-            </TextField>
-            <TextField
-              //   error={
-              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-              //       ? true
-              //       : false
-              //   }
-              id="sum"
-              name="sum"
-              value={f.values.sum}
-              onChange={f.handleChange}
-              //   className={s.input}
-              //   helperText={
-              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-              //       ? f.errors?.cabinets?.S?.price
-              //       : ' '
-              //   }
-            />
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <KeyboardDatePicker
-                disableToolbar
-                variant="inline"
-                format="MM/dd/yyyy"
-                margin="normal"
-                id="date-picker-inline"
-                label="Date picker inline"
-                value={selectedDate}
-                onChange={handleDateChange}
-                KeyboardButtonProps={{
-                  'aria-label': 'change date',
-                }}
-              />
-            </MuiPickersUtilsProvider>
-            <TextField
-              //   error={
-              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-              //       ? true
-              //       : false
-              //   }
-              id="comment"
-              name="comment"
-              value={f.values.comment}
-              onChange={f.handleChange}
-              //   className={s.input}
-              //   helperText={
-              //     f.errors?.cabinets?.S?.price && f.touched.cabinets?.S?.price
-              //       ? f.errors?.cabinets?.S?.price
-              //       : ' '
-              //   }
-            />
-            <Button
-              variant="outlined"
-              fullWidth
-              type="button"
-              // onClick={goBack}
-            >
-              {/* {t('locationFormRoute').cancelBtn} */}
-            </Button>
-            <Button color="primary" variant="contained" fullWidth type="submit">
-              {/* {t('locationFormRoute').submitBtn} */}
-            </Button>
-          </div>
+                    </TextField>
+                  )}
+                  <div className={!matches.small && styles.rowInputs}>
+                    <TextField
+                      error={f.errors?.sum && f.touched.sum ? true : false}
+                      id="sum"
+                      name="sum"
+                      color="secondary"
+                      label="Сумма"
+                      value={f.values.sum.toFixed(2)}
+                      onChange={f.handleChange}
+                      className={styles.input}
+                      helperText={
+                        f.errors?.sum && f.touched.sum ? f.errors?.sum : ' '
+                      }
+                    />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <KeyboardDatePicker
+                        error={f.errors?.date && f.touched.date ? true : false}
+                        disableToolbar
+                        variant="inline"
+                        format="dd.MM.yyyy"
+                        margin="normal"
+                        name="date"
+                        className={styles.input}
+                        color="secondary"
+                        id="date-picker-inline"
+                        label="Дата транзакции"
+                        value={selectedDate}
+                        onChange={handleDateChange}
+                        helperText={
+                          f.errors?.date && f.touched.date
+                            ? f.errors?.date
+                            : ' '
+                        }
+                        KeyboardButtonProps={{
+                          'aria-label': 'change date',
+                        }}
+                      />
+                    </MuiPickersUtilsProvider>
+                  </div>
+                  <TextField
+                    error={
+                      f.errors?.comment && f.touched.comment ? true : false
+                    }
+                    id="comment"
+                    name="comment"
+                    color="secondary"
+                    label="Комментарий"
+                    value={f.values.comment}
+                    onChange={f.handleChange}
+                    className={
+                      matches.small
+                        ? styles.comment
+                        : `${styles.comment} ${styles.commentMedium}`
+                    }
+                    helperText={
+                      f.errors?.comment && f.touched.comment
+                        ? f.errors?.comment
+                        : ' '
+                    }
+                  />
+                </div>
+                <div className={styles.btns}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    style={{
+                      marginBottom: 20,
+                      width: 300,
+                      borderRadius: 20,
+                      padding: '13px 68px',
+                    }}
+                  >
+                    Добавить
+                  </Button>
+                  <Button
+                    onClick={handleClose}
+                    type="button"
+                    variant="outlined"
+                    color="secondary"
+                    style={{
+                      width: 300,
+                      borderRadius: 20,
+                      padding: '13px 68px',
+                    }}
+                  >
+                    Отмена
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Modal>
         </div>
-      </Modal>
-    </div>
+      )}
+    </Media>
   );
 }

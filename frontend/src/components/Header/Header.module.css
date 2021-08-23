@@ -1,0 +1,29 @@
+@import '../../stylesheet/vars.css';
+
+.header {
+  padding: 15px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--secondary-bcg-color);
+}
+.headerMedium {
+  padding: 20px 40px;
+}
+.headerLarge {
+  padding: 20px 85px;
+}
+.exitBox {
+  display: flex;
+  align-items: center;
+  font-family: Circe;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--grey-text-color);
+}
+.name {
+  margin: 0;
+  margin-right: 14px;
+  padding: 0;
+}

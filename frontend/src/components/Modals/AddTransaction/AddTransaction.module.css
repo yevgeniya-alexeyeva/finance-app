@@ -1,4 +1,4 @@
-@import '../../../stylesheet//vars.css';
+@import '../../../stylesheet/vars.css';
 
 .addBtn {
   background-color: var(--green-color-accent);
@@ -9,6 +9,12 @@
   outline: none;
   padding: 12px;
   display: flex;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.addBtn:hover {
+  background-color: var(--blue-color-accent);
+  box-shadow: 0px 6px 15px rgba(74, 86, 226, 0.5);
 }
 .modalWindow {
   position: relative;
@@ -18,24 +24,35 @@
   top: -30px;
   right: -50px;
   background-color: var(--secondary-text-color);
-  color: var(--primery-text-color);
+  color: var(--primary-text-color);
   border: none;
   border-radius: 100%;
   outline: none;
   padding: 12px;
   display: flex;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+.closeBtn:hover,
+.closeBtn:focus {
+  transform: rotate(180deg);
 }
 .title {
   font-family: Segoe UI;
   font-weight: 400;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1.5;
   text-align: center;
-  margin: 0;
+  margin-top: 20px;
   margin-bottom: 40px;
+}
+.titleMedium {
+  font-size: 30px;
+  margin-top: 0;
 }
 .switchBox {
   text-align: center;
+  margin-bottom: 40px;
 }
 .switchBtn {
   margin: 0 20px;
@@ -61,7 +78,7 @@
   content: '';
   position: absolute;
   top: 45%;
-  left: 35%;
+  left: 55%;
   transition: 0.2s ease-out;
 }
 .switchBtnAava label {
@@ -86,6 +103,7 @@
 .switchBtnAava input[type='checkbox'] + label {
   width: 160px;
   background: var(--red-color-accent);
+  box-shadow: 0px 6px 15px rgba(255, 101, 150, 0.5);
 }
 .switchBtnAava input[type='checkbox'] + label:before {
   opacity: 0;
@@ -99,6 +117,7 @@
 .switchBtnAava input[type='checkbox']:checked ~ label {
   width: 160px;
   background: var(--green-color-accent);
+  box-shadow: 0px 6px 15px rgba(36, 204, 167, 0.5);
 }
 .switchBtnAava input[type='checkbox']:checked ~ label:before {
   opacity: 1;
@@ -110,12 +129,13 @@
 }
 
 .switchBtnAava input[type='checkbox']:checked ~ .switchBtnIcon:before {
-  transform: translate(50%, 100%) rotate(0deg);
-  width: 16.66667px;
+  transform: translate(10%, 20%) rotate(0deg);
+  width: 25px;
 }
 
 .switchBtnAava input[type='checkbox']:checked ~ .switchBtnIcon:after {
-  transform: translate(30%) rotate(-90deg);
+  transform: translate(15%) rotate(-90deg);
+  width: 23px;
 }
 
 .switchBtnAava .switchBtnIcon {
@@ -130,13 +150,41 @@
   height: 3px;
   border-radius: 3px;
   background: #fff;
-  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
 }
 .switchBtnAava .switchBtnIcon:before {
   width: 25px;
-  transform: rotate(45deg);
+  transform: rotate(0deg);
 }
 .switchBtnAava .switchBtnIcon:after {
   width: 25px;
-  transform: rotate(-45deg);
+  transform: rotate(0deg);
+}
+.contentForm {
+  padding: 0 10px;
+  margin-bottom: 40px;
+}
+.input {
+  width: 100%;
+}
+.rowInputs {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.rowInputs .input:first-of-type {
+  margin-right: 30px;
+}
+.rowInputs .input {
+  margin-bottom: 8px;
+}
+.comment {
+  width: 100%;
+}
+.commentMedium {
+  margin-bottom: 50px;
+}
+.btns {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -1,3 +1,5 @@
+@import './vars.css';
+
 @font-face {
   font-family: 'Segoe UI';
   src: local('Segoe UI'), url('../assets/fonts/segoeui.ttf') format('truetype');
@@ -29,4 +31,8 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+}
+
+body {
+  background-color: var(--primary-bcg-color);
 }
