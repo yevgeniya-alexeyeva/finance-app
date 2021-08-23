@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/Logo.png';
-import Exit from './header.svg';
+import LogOut from '../Modals/LogOut';
 import routes from '../../routes';
 import styles from './Header.module.css';
 
@@ -13,12 +13,7 @@ const Header = () => {
       </Link>
       <div className={styles.exitBox}>
         <p className={styles.name}>Имя</p>
-        <button className={styles.exitBtn}>
-          <svg className={styles.exitIcon} width="18" height="18">
-            <use href={`${Exit}#icon-exit`}></use>
-          </svg>{' '}
-          Выйти
-        </button>
+        <LogOut />
       </div>
     </div>
   );
