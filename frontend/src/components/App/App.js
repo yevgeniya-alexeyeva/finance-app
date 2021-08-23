@@ -37,44 +37,41 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Switch>
-          <PublicRoute
-            path={routes.register}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <RegisterPage />
-          </PublicRoute>
+    <Suspense fallback={<p>Loading...</p>}>
+      <Switch>
+        <PublicRoute
+          path={routes.register}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <RegisterPage />
+        </PublicRoute>
 
-          <PublicRoute
-            path={routes.login}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <LogInPage />
-          </PublicRoute>
+        <PublicRoute
+          path={routes.login}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <LogInPage />
+        </PublicRoute>
 
-          <PublicRoute
-            path={routes.dashboard}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <DashboardPage />
-          </PublicRoute>
+        <PublicRoute
+          path={routes.dashboard}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <DashboardPage />
+        </PublicRoute>
 
-          <ProtectedRoute path={routes.home} redirectTo={routes.login}>
-            <HomePage />
-          </ProtectedRoute>
-          <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
-            <DiagramPage />
-          </ProtectedRoute>
-
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Suspense>
-    </>
+        <ProtectedRoute path={routes.home} redirectTo={routes.login}>
+          <HomePage />
+        </ProtectedRoute>
+        <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
+          <DiagramPage />
+        </ProtectedRoute>
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   );
 }
 
