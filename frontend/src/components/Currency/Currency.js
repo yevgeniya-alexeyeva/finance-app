@@ -22,14 +22,16 @@ const Currency = () => {
       return;
     }
 
-    const currentCurrency = JSON.parse(localStorage.currency);
+    const currentCurrency = localStorage.currency
+      ? JSON.parse(localStorage.currency)
+      : null;
     if (
       currentCurrency &&
       Date.now() - currentCurrency.dateGetCurrency < 3600000
     ) {
       return setCurrency(currentCurrency.course);
     } else {
-      fetchData();
+      return fetchData();
     }
   }, []);
 

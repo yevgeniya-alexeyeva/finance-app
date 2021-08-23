@@ -1,0 +1,22 @@
+.list {
+  margin: 0;
+  margin-bottom: 10px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+.icon {
+  fill: #6e78e8;
+  border-radius: 8px;
+}
+.icon:hover {
+  fill: var(--blue-color-accent);
+  background-color: var(--secondary-bcg-color);
+  filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 1));
+}
+.btnActive svg {
+  fill: var(--blue-color-accent);
+  background-color: var(--secondary-bcg-color);
+  filter: drop-shadow(0px 3px 10px rgba(74, 86, 226, 1));
+}

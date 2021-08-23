@@ -5,10 +5,9 @@
 }
 
 @media (max-width: 767px) {
-  .container {
-    padding: 10px 20px;
-  }
-  .contentMobile {
+  .content {
+    padding-top: 10px;
+    padding-bottom: 10px;
     text-align: center;
   }
   .btnAdd {
@@ -18,8 +17,9 @@
 }
 
 @media (min-width: 768px) and (max-width: 1279px) {
-  .container {
-    padding: 20px 40px;
+  .content {
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
   .btnAdd {
     bottom: 40px;
@@ -28,8 +28,9 @@
 }
 
 @media (min-width: 1280px) {
-  .container {
-    padding: 40px 85px;
+  .content {
+    padding-top: 40px;
+    padding-bottom: 40px;
   }
   .btnAdd {
     bottom: 40px;

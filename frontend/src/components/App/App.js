@@ -17,14 +17,6 @@ const DashboardPage = lazy(() =>
   import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
 );
 
-const HomePage = lazy(() =>
-  import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
-);
-
-const DiagramPage = lazy(() =>
-  import('../../pages/DiagramPage' /* webpackChunkName: "diagram-page" */),
-);
-
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
 );
@@ -37,44 +29,35 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Switch>
-          <PublicRoute
-            path={routes.register}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <RegisterPage />
-          </PublicRoute>
+    <Suspense fallback={<p>Loading...</p>}>
+      <Switch>
+        <PublicRoute
+          path={routes.register}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <RegisterPage />
+        </PublicRoute>
 
-          <PublicRoute
-            path={routes.login}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <LogInPage />
-          </PublicRoute>
+        <PublicRoute
+          path={routes.login}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <LogInPage />
+        </PublicRoute>
 
-          <PublicRoute
-            path={routes.dashboard}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <DashboardPage />
-          </PublicRoute>
+        <PublicRoute
+          path={routes.dashboard}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <DashboardPage />
+        </PublicRoute>
 
-          <ProtectedRoute path={routes.home} redirectTo={routes.login}>
-            <HomePage />
-          </ProtectedRoute>
-          <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
-            <DiagramPage />
-          </ProtectedRoute>
-
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Suspense>
-    </>
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   );
 }
 

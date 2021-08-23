@@ -1,5 +1,7 @@
 import Media from 'react-media';
 import Header from '../components/Header';
+import Container from '../components/UI/Container';
+import MobileNavigation from '../components/MobileNavigation';
 import Currency from '../components/Currency';
 import AddTransaction from '../components/Modals/AddTransaction';
 import styles from './DashboardPage.module.css';
@@ -16,14 +18,15 @@ const DashboardPage = () => {
       {matches => (
         <>
           <Header />
-          <div className={styles.container}>
-            <div className={styles.contentMobile}>
-              <Currency />
+          <Container>
+            <div className={styles.content}>
+              <MobileNavigation />
+              {!matches.small ? <Currency /> : undefined}
             </div>
             <div className={styles.btnAdd}>
               <AddTransaction />
             </div>
-          </div>
+          </Container>
         </>
       )}
     </Media>
