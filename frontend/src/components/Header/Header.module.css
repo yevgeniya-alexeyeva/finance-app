@@ -1,0 +1,35 @@
+@import '../../stylesheet//vars.css';
+
+.header {
+  padding: 20px 85px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--primery-text-color);
+}
+.logo h1 {
+  margin: 0;
+  margin-left: 20px;
+  font-family: Segoe UI;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 30px;
+  line-height: 1.5;
+}
+.exitBox {
+  display: flex;
+  align-items: center;
+  font-family: Circe;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.5;
+  color: var(--grey-text-color);
+}
+.name {
+  padding: 0 14px;
+}
