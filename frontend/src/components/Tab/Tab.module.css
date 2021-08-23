@@ -1,4 +1,67 @@
-.costItem {
+@import '../../stylesheet/vars.css';
+
+.tabWrapper {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .selectorsWrapper {
+    display: flex;
+  }
+}
+.select.MuiSelect-root
+  MuiSelect-select
+  MuiSelect-outlined
+  MuiInputBase-input
+  MuiOutlinedInput-input {
+  font-family: 'Circe';
+  color: var(--primary-text-color);
+}
+
+.tableHeader {
   display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  width: 280px;
+  height: 58px;
+  background-color: var(--secondary-bcg-color);
+  border-radius: 30px;
+}
+.marker {
+  width: 24px;
+  height: 24px;
+}
+.headerCategory {
+  display: inline-block;
+}
+.headerAmount {
+  display: inline-block;
+  margin-left: auto;
+}
+.costsList {
+  padding: 0;
+}
+.costItem {
+  width: 280px;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: solid 1px;
+  border-bottom-color: var(--light-border-color);
   list-style-type: none;
+}
+.costItem:not(:first-child) {
+  border-top: solid 1px;
+  border-top-color: #ffffff;
+}
+.costCategory {
+  display: inline-block;
+  width: 120px;
+  margin-left: 16px;
+}
+
+.costAmount {
+  display: inline-block;
+  margin-left: auto;
 }

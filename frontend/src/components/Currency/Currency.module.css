@@ -1,0 +1,34 @@
+@import '../../stylesheet//vars.css';
+
+.boxTable {
+  background: url('./BcgCurrency.png'),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.2) -7.46%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    var(--blue-color-accent);
+  color: var(--secondary-text-color);
+  background-repeat: no-repeat;
+  background-position: bottom;
+  display: inline-block;
+  border-radius: 30px;
+  overflow: hidden;
+  height: 348px;
+  text-align: center;
+}
+.table {
+  border-collapse: collapse;
+}
+.table thead {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-family: Circe;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.table th,
+.table td {
+  padding: 16px 24px;
+}

@@ -12,6 +12,13 @@ const RegisterPage = lazy(() =>
 const LogInPage = lazy(() =>
   import('../../pages/LogInPage' /* webpackChunkName: "login-page" */),
 );
+
+const TestPage = lazy(() =>
+  import('../../pages/TestPage' /* webpackChunkName: "test-page" */),
+);
+const DashboardPage = lazy(() =>
+  import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
+);
 const HomePage = lazy(() =>
   import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
 );
@@ -31,36 +38,43 @@ function App() {
   }, [dispatch]);
 
   return (
-    <>
-      <Suspense fallback={<p>Loading...</p>}>
-        <Switch>
-          <PublicRoute
-            path={routes.register}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <RegisterPage />
-          </PublicRoute>
+    <Suspense fallback={<p>Loading...</p>}>
+      <Switch>
+        <PublicRoute
+          path={routes.register}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <RegisterPage />
+        </PublicRoute>
 
-          <PublicRoute
-            path={routes.login}
-            restricted
-            // redirectTo={routes.login}
-          >
-            <LogInPage />
-          </PublicRoute>
+        <PublicRoute
+          path={routes.login}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <LogInPage />
+        </PublicRoute>
 
+        <PublicRoute
+          path={routes.testPublic}
+          restricted
+          // redirectTo={routes.login}
+        >
+          <TestPage />
+        </PublicRoute>
+        <ProtectedRoute path={routes.wallet} redirectTo={routes.login}>
+          <DashboardPage />
           <ProtectedRoute path={routes.home} redirectTo={routes.login}>
             <HomePage />
           </ProtectedRoute>
-          {/* <ProtectedRoute path={routes.diagram} redirectTo={routes.login}> */}
-          <DiagramPage />
-          {/* </ProtectedRoute> */}
-
-          <Route component={NotFoundPage} />
-        </Switch>
-      </Suspense>
-    </>
+          <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
+            <DiagramPage />
+          </ProtectedRoute>
+        </ProtectedRoute>
+        <Route component={NotFoundPage} />
+      </Switch>
+    </Suspense>
   );
 }
 
