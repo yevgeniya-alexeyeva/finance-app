@@ -1,4 +1,4 @@
-@import '../../stylesheet//vars.css';
+@import '../../stylesheet/vars.css';
 
 .boxTable {
   background: url('./BcgCurrency.png'),
@@ -15,8 +15,11 @@
   display: inline-block;
   border-radius: 30px;
   overflow: hidden;
-  height: 348px;
+  height: 174px;
   text-align: center;
+}
+.boxTableLarge {
+  height: 348px;
 }
 .table {
   border-collapse: collapse;
@@ -28,9 +31,16 @@
   font-size: 18px;
   line-height: 1.5;
 }
-
 .table th,
 .table td {
+  padding: 11px 13px;
+}
+.tableMedium th,
+.tableMedium td {
+  padding: 11px 22px;
+}
+.tableLarge th,
+.tableLarge td {
   padding: 16px 24px;
 }
 
