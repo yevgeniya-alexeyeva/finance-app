@@ -4,10 +4,14 @@ import styles from './DiagramTab.module.css';
 
 const DiagramTab = () => {
   return (
-    <div className={styles.wrapper}>
-      <Chart />
-      <Tab />
-    </div>
+    <>
+      <h2 className={styles.head}>Статистика</h2>
+      <div className={styles.wrapper}>
+        <Chart />
+        <Tab />
+      </div>
+      );
+    </>
   );
 };
 
