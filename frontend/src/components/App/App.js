@@ -66,7 +66,7 @@ function App() {
         <ProtectedRoute path={routes.home} redirectTo={routes.login}>
           <HomePage />
         </ProtectedRoute>
-        <DiagramPage />
+
         <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
           <DiagramPage />
         </ProtectedRoute>

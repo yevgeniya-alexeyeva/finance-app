@@ -1,4 +1,4 @@
-import { defaultCostSheet, diagramColors } from '../../utils';
+import { diagramColors } from '../../utils';
 import styles from './Tab.module.css';
 import { Select, InputLabel, FormControl } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,15 +18,21 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Tab = props => {
-  // const { handleChange, costList, debit, credit } = props;
-  const credit = 3000;
-  const debit = 5000;
+const currentYear = new Date().getFullYear();
+const years = [];
+for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+  years.push(i);
+}
 
-  const data = defaultCostSheet.map((cost, index) => {
+const Tab = props => {
+  // const { handleChange, costs, debit, credit } = props;
+  const { costs, debit, credit } = props;
+
+  const data = costs.map((cost, index) => {
     const style = {
       backgroundColor: `${diagramColors[index]}`,
     };
+
     return (
       <li key={cost.category} className={styles.costItem}>
         <div className={styles.marker} style={style}></div>
@@ -35,6 +41,31 @@ const Tab = props => {
       </li>
     );
   });
+  const months = [
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Май',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
+  ];
+  const monthOptions = months.map(i => (
+    <option key={i} value={i}>
+      {i}
+    </option>
+  ));
+
+  const yearOptions = years.map(i => (
+    <option key={i} value={i}>
+      {i}
+    </option>
+  ));
 
   const classes = useStyles();
 
@@ -54,7 +85,7 @@ const Tab = props => {
               borderRadius: 30,
               height: 50,
             }}
-            value={1}
+            // value={null}
             onChange={null}
             label="Month"
             inputProps={{
@@ -63,9 +94,7 @@ const Tab = props => {
             }}
           >
             <option aria-label="None" value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {monthOptions}
           </Select>
         </FormControl>
 
@@ -80,7 +109,7 @@ const Tab = props => {
             className={styles.select}
             native
             style={{ borderRadius: 30, height: 50 }}
-            value={1}
+            // value={1}
             onChange={null}
             label="Age"
             inputProps={{
@@ -89,9 +118,7 @@ const Tab = props => {
             }}
           >
             <option aria-label="None" value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {yearOptions}
           </Select>
         </FormControl>
       </div>
