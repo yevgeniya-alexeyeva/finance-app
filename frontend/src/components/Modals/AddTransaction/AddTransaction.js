@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
+import moment from 'moment';
 import Media from 'react-media';
 import DateFnsUtils from '@date-io/date-fns';
 import * as Yup from 'yup';
@@ -62,43 +63,22 @@ export default function AddTransaction() {
       type: false,
       category: null,
       sum: '0.00',
-      // date: null,
-      // comment: null,
+      date: null,
+      comment: null,
     },
+
     validationSchema: Yup.object({
       type: Yup.bool().required(),
       category: Yup.string().nullable(),
-
-      // Yup.mixed().oneOf([ , null])
-      sum: Yup.string().matches(/^([0-9])*([.][0-9]{2})?$/),
-      //   .required('Обязательное поле'),
-      //  holderName: Yup.string()
-      //    .min(1, 'Minimum 1 character')
-      //    .required('Required field'),
-      //  phoneNumber: Yup.string()
-      //    .min(12, t('validationForm').phoneMin)
-      //    .max(13, t('validationForm').phoneMax)
-      //    .required('Required field')
-      //    .matches(/^\+\d*$/, {
-      //      message: t('validationForm').phoneValidation,
-      //    }),
+      sum: Yup.string()
+        .matches(/^\d{1,9}(\.\d{1,2})?$/)
+        .required(),
+      date: Yup.object().required(),
+      comment: Yup.string(),
     }),
+
     onSubmit: async (values, { resetForm }) => {
       console.log('val', values);
-      //  const payload = {
-      //    type: values.type,
-      //    category: values.type ? null : values.category
-      //  }
-      //  console.log('payload', payload);
-      //  try {
-      //    const { data } = await postShareKey(values);
-      //    await onClose();
-      //    await onSubmit(data);
-      //    resetForm({});
-      //  } catch (error) {
-      //    onClose();
-      //    showErrorMessage(error.response.data.message);
-      //  }
     },
   });
 
@@ -111,8 +91,17 @@ export default function AddTransaction() {
   };
 
   const handleDateChange = date => {
+    const time = moment(date).format('DD.MM.YYYY').split('.');
+    f.setValues({
+      ...f.values,
+      date: { day: time[0], month: time[1], year: time[2] },
+    });
     setSelectedDate(date);
   };
+
+  useEffect(async () => {
+    await handleDateChange(selectedDate);
+  }, [selectedDate]);
 
   return (
     <Media
@@ -230,32 +219,34 @@ export default function AddTransaction() {
                           f.errors?.sum && f.touched.sum ? f.errors?.sum : ' '
                         }
                       />
-                      {/*  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                      <KeyboardDatePicker
-                        error={f.errors?.date && f.touched.date ? true : false}
-                        disableToolbar
-                        variant="inline"
-                        format="dd.MM.yyyy"
-                        margin="normal"
-                        name="date"
-                        className={styles.input}
-                        color="secondary"
-                        id="date-picker-inline"
-                        label="Дата транзакции"
-                        value={selectedDate}
-                        onChange={handleDateChange}
-                        helperText={
-                          f.errors?.date && f.touched.date
-                            ? f.errors?.date
-                            : ' '
-                        }
-                        KeyboardButtonProps={{
-                          'aria-label': 'change date',
-                        }}
-                      />
-                    </MuiPickersUtilsProvider>*/}
+                      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker
+                          error={
+                            f.errors?.date && f.touched.date ? true : false
+                          }
+                          disableToolbar
+                          variant="inline"
+                          format="dd.MM.yyyy"
+                          margin="normal"
+                          name="date"
+                          className={styles.input}
+                          color="secondary"
+                          id="date-picker-inline"
+                          label="Дата транзакции"
+                          value={selectedDate}
+                          onChange={handleDateChange}
+                          helperText={
+                            f.errors?.date && f.touched.date
+                              ? f.errors?.date
+                              : ' '
+                          }
+                          KeyboardButtonProps={{
+                            'aria-label': 'change date',
+                          }}
+                        />
+                      </MuiPickersUtilsProvider>
                     </div>
-                    {/* <TextField
+                    <TextField
                       error={
                         f.errors?.comment && f.touched.comment ? true : false
                       }
@@ -271,7 +262,7 @@ export default function AddTransaction() {
                           ? f.errors?.comment
                           : ' '
                       }
-                    /> */}
+                    />
                   </div>
                   <div className={styles.btns}>
                     <Button

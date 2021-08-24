@@ -1,4 +1,4 @@
-import { defaultCostSheet, diagramColors } from '../../utils';
+import { diagramColors } from '../../utils';
 import styles from './Tab.module.css';
 import { Select, InputLabel, FormControl } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
@@ -14,16 +14,25 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    color: 'black',
+    muiFormLabel: { color: 'black' },
   },
 }));
 
+const currentYear = new Date().getFullYear();
+const years = [];
+for (let i = currentYear - 5; i <= currentYear + 5; i++) {
+  years.push(i);
+}
+
 const Tab = props => {
-  // const { handleChange } = props;
-  const data = defaultCostSheet.map((cost, index) => {
+  // const { handleChange, costs, debit, credit } = props;
+  const { costs, debit, credit } = props;
+
+  const data = costs.map((cost, index) => {
     const style = {
       backgroundColor: `${diagramColors[index]}`,
     };
+
     return (
       <li key={cost.category} className={styles.costItem}>
         <div className={styles.marker} style={style}></div>
@@ -32,20 +41,51 @@ const Tab = props => {
       </li>
     );
   });
+  const months = [
+    'Январь',
+    'Февраль',
+    'Март',
+    'Апрель',
+    'Май',
+    'Июнь',
+    'Июль',
+    'Август',
+    'Сентябрь',
+    'Октябрь',
+    'Ноябрь',
+    'Декабрь',
+  ];
+  const monthOptions = months.map(i => (
+    <option key={i} value={i}>
+      {i}
+    </option>
+  ));
+
+  const yearOptions = years.map(i => (
+    <option key={i} value={i}>
+      {i}
+    </option>
+  ));
+
   const classes = useStyles();
 
   return (
     <div className={styles.tabWrapper}>
       <div className={styles.selectorsWrapper}>
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="month">Месяц</InputLabel>
+          <InputLabel
+            style={{ color: 'black', fontFamily: 'Circe', fontSize: '16px' }}
+            htmlFor="month"
+          >
+            Месяц
+          </InputLabel>
           <Select
             native
             style={{
               borderRadius: 30,
               height: 50,
             }}
-            value={1}
+            // value={null}
             onChange={null}
             label="Month"
             inputProps={{
@@ -54,19 +94,22 @@ const Tab = props => {
             }}
           >
             <option aria-label="None" value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {monthOptions}
           </Select>
         </FormControl>
 
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="month">Год</InputLabel>
+          <InputLabel
+            style={{ color: 'black', fontFamily: 'Circe', fontSize: '16px' }}
+            htmlFor="month"
+          >
+            Год
+          </InputLabel>
           <Select
             className={styles.select}
             native
             style={{ borderRadius: 30, height: 50 }}
-            value={1}
+            // value={1}
             onChange={null}
             label="Age"
             inputProps={{
@@ -75,9 +118,7 @@ const Tab = props => {
             }}
           >
             <option aria-label="None" value="" />
-            <option value={10}>Ten</option>
-            <option value={20}>Twenty</option>
-            <option value={30}>Thirty</option>
+            {yearOptions}
           </Select>
         </FormControl>
       </div>
@@ -86,6 +127,16 @@ const Tab = props => {
         <span className={styles.headerAmount}>Сумма</span>
       </div>
       <ul className={styles.costsList}>{data}</ul>
+      <ul className={styles.total}>
+        <li className={styles.totalItem}>
+          <span>Расходы:</span>
+          <span className={styles.totalCredits}>{credit}</span>
+        </li>
+        <li className={styles.totalItem}>
+          <span>Доходы:</span>
+          <span className={styles.totalDebits}>{debit}</span>
+        </li>
+      </ul>
     </div>
   );
 };
