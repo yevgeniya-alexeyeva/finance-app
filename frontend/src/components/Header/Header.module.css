@@ -1,11 +1,14 @@
 @import '../../stylesheet/vars.css';
 
 .header {
-  padding: 15px 20px;
+  background-color: var(--secondary-bcg-color);
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.headerBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--secondary-bcg-color);
 }
 .exitBox {
   display: flex;
@@ -23,11 +26,12 @@
 }
 @media (min-width: 768px) and (max-width: 1279px) {
   .header {
-    padding: 20px 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
   }
 }
-@media (min-width: 1280px) {
+/* @media (min-width: 1280px) {
   .header {
     padding: 20px 85px;
   }
-}
+} */

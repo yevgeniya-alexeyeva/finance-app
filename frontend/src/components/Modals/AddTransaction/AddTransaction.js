@@ -61,16 +61,17 @@ export default function AddTransaction() {
     initialValues: {
       type: false,
       category: null,
-      sum: 0,
-      date: null,
-      comment: null,
+      sum: '0.00',
+      // date: null,
+      // comment: null,
     },
     validationSchema: Yup.object({
-      sum: Yup.string()
-        .matches(/^([0-9])*([.][0-9]{2})?$/, {
-          message: 'Невалидное значение',
-        })
-        .required('Обязательное поле'),
+      type: Yup.bool().required(),
+      category: Yup.string().nullable(),
+
+      // Yup.mixed().oneOf([ , null])
+      sum: Yup.string().matches(/^([0-9])*([.][0-9]{2})?$/),
+      //   .required('Обязательное поле'),
       //  holderName: Yup.string()
       //    .min(1, 'Minimum 1 character')
       //    .required('Required field'),
@@ -83,6 +84,12 @@ export default function AddTransaction() {
       //    }),
     }),
     onSubmit: async (values, { resetForm }) => {
+      console.log('val', values);
+      //  const payload = {
+      //    type: values.type,
+      //    category: values.type ? null : values.category
+      //  }
+      //  console.log('payload', payload);
       //  try {
       //    const { data } = await postShareKey(values);
       //    await onClose();
@@ -134,7 +141,7 @@ export default function AddTransaction() {
                   : `${classes.paper} ${classes.paperMedium}`
               }
             >
-              {matches.small && <Header />}
+              {matches.small ? <Header /> : undefined}
               <div className={styles.modalWindow}>
                 <button
                   className={styles.closeBtn}
@@ -147,74 +154,83 @@ export default function AddTransaction() {
                 <h2 id="add-transaction-title" className={styles.title}>
                   Добавить транзакцию
                 </h2>
-                <div className={styles.switchBox}>
-                  <div
-                    className={`${styles.switchBtn} ${styles.switchBtnAava}`}
-                  >
-                    <input
-                      id="toggleButton"
-                      type="checkbox"
-                      onChange={e =>
-                        f.setValues({ ...f.values, type: e.target.checked })
-                      }
-                      checked={f.values.type}
-                      value={f.values.type}
-                    />
-                    <label
-                      htmlFor="toggleButton"
-                      data-on-text="Доход"
-                      data-off-text="Расход"
-                    ></label>
-                    <div className={styles.switchBtnIcon}></div>
-                  </div>
-                </div>
-                <div className={matches.small && styles.contentForm}>
-                  {!f.values.type && (
-                    <TextField
-                      error={
-                        f.errors.category && f.touched.category ? true : false
-                      }
-                      fullWidth
-                      id="category"
-                      name="category"
-                      color="secondary"
-                      label="Выберите категорию"
-                      select
-                      value={f.values.category}
-                      onChange={f.handleChange}
-                      helperText={
-                        f.errors?.category && f.touched.category
-                          ? f.errors?.category
-                          : ' '
-                      }
-                      className={styles.input}
+                <form onSubmit={f.handleSubmit}>
+                  <div className={styles.switchBox}>
+                    <div
+                      className={`${styles.switchBtn} ${styles.switchBtnAava}`}
                     >
-                      {categories?.map(c => (
-                        <option
-                          key={c._id}
-                          value={c.name}
-                          className={styles.option}
-                        >
-                          {c.name}
-                        </option>
-                      ))}
-                    </TextField>
-                  )}
-                  <div className={!matches.small && styles.rowInputs}>
-                    <TextField
-                      error={f.errors?.sum && f.touched.sum ? true : false}
-                      id="sum"
-                      name="sum"
-                      color="secondary"
-                      label="Сумма"
-                      value={f.values.sum.toFixed(2)}
-                      onChange={f.handleChange}
-                      className={styles.input}
-                      helperText={
-                        f.errors?.sum && f.touched.sum ? f.errors?.sum : ' '
-                      }
-                    />
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <input
+                        id="toggleButton"
+                        type="checkbox"
+                        onChange={e =>
+                          f.setValues({
+                            ...f.values,
+                            type: e.target.checked,
+                            category: e.target.checked
+                              ? null
+                              : f.values.category,
+                          })
+                        }
+                        checked={f.values.type}
+                        value={f.values.type}
+                      />
+                      <label
+                        htmlFor="toggleButton"
+                        data-on-text="Доход"
+                        data-off-text="Расход"
+                      ></label>
+                      <div className={styles.switchBtnIcon}></div>
+                    </div>
+                  </div>
+                  <div
+                    className={matches.small ? styles.contentForm : undefined}
+                  >
+                    {!f.values.type ? (
+                      <TextField
+                        error={
+                          f.errors.category && f.touched.category ? true : false
+                        }
+                        fullWidth
+                        id="category"
+                        name="category"
+                        color="secondary"
+                        label="Выберите категорию"
+                        select
+                        value={f.values.category}
+                        onChange={f.handleChange}
+                        helperText={
+                          f.errors?.category && f.touched.category
+                            ? f.errors?.category
+                            : ' '
+                        }
+                        className={styles.input}
+                      >
+                        {categories?.map((c, idx) => (
+                          <option
+                            key={c._id}
+                            value={c._id}
+                            className={styles.option}
+                          >
+                            {c.name}
+                          </option>
+                        ))}
+                      </TextField>
+                    ) : undefined}
+                    <div className={!matches.small && styles.rowInputs}>
+                      <TextField
+                        error={f.errors?.sum && f.touched.sum ? true : false}
+                        id="sum"
+                        name="sum"
+                        color="secondary"
+                        label="Сумма"
+                        value={f.values.sum}
+                        onChange={f.handleChange}
+                        className={styles.input}
+                        helperText={
+                          f.errors?.sum && f.touched.sum ? f.errors?.sum : ' '
+                        }
+                      />
+                      {/*  <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <KeyboardDatePicker
                         error={f.errors?.date && f.touched.date ? true : false}
                         disableToolbar
@@ -237,54 +253,55 @@ export default function AddTransaction() {
                           'aria-label': 'change date',
                         }}
                       />
-                    </MuiPickersUtilsProvider>
+                    </MuiPickersUtilsProvider>*/}
+                    </div>
+                    {/* <TextField
+                      error={
+                        f.errors?.comment && f.touched.comment ? true : false
+                      }
+                      id="comment"
+                      name="comment"
+                      color="secondary"
+                      label="Комментарий"
+                      value={f.values.comment}
+                      onChange={f.handleChange}
+                      className={styles.comment}
+                      helperText={
+                        f.errors?.comment && f.touched.comment
+                          ? f.errors?.comment
+                          : ' '
+                      }
+                    /> */}
                   </div>
-                  <TextField
-                    error={
-                      f.errors?.comment && f.touched.comment ? true : false
-                    }
-                    id="comment"
-                    name="comment"
-                    color="secondary"
-                    label="Комментарий"
-                    value={f.values.comment}
-                    onChange={f.handleChange}
-                    className={styles.comment}
-                    helperText={
-                      f.errors?.comment && f.touched.comment
-                        ? f.errors?.comment
-                        : ' '
-                    }
-                  />
-                </div>
-                <div className={styles.btns}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    style={{
-                      marginBottom: 20,
-                      width: 300,
-                      borderRadius: 20,
-                      padding: '13px 68px',
-                    }}
-                  >
-                    Добавить
-                  </Button>
-                  <Button
-                    onClick={handleClose}
-                    type="button"
-                    variant="outlined"
-                    color="secondary"
-                    style={{
-                      width: 300,
-                      borderRadius: 20,
-                      padding: '13px 68px',
-                    }}
-                  >
-                    Отмена
-                  </Button>
-                </div>
+                  <div className={styles.btns}>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      style={{
+                        marginBottom: 20,
+                        width: 300,
+                        borderRadius: 20,
+                        padding: '13px 68px',
+                      }}
+                    >
+                      Добавить
+                    </Button>
+                    <Button
+                      onClick={handleClose}
+                      type="button"
+                      variant="outlined"
+                      color="secondary"
+                      style={{
+                        width: 300,
+                        borderRadius: 20,
+                        padding: '13px 68px',
+                      }}
+                    >
+                      Отмена
+                    </Button>
+                  </div>
+                </form>
               </div>
             </div>
           </Modal>
