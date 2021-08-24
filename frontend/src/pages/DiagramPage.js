@@ -4,8 +4,7 @@ import Container from '../components/UI/Container';
 function DiagramPage() {
   return (
     <Container>
-      <div style={{ backgroundColor: 'grey' }}>
-        <h2>Diagram Page</h2>
+      <div>
         <DiagramTab />
       </div>
     </Container>

@@ -66,9 +66,11 @@ function App() {
         <ProtectedRoute path={routes.home} redirectTo={routes.login}>
           <HomePage />
         </ProtectedRoute>
+
         <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
           <DiagramPage />
         </ProtectedRoute>
+
         <Route component={NotFoundPage} />
       </Switch>
     </Suspense>
