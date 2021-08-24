@@ -14,12 +14,15 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(2),
   },
   root: {
-    color: 'black',
+    muiFormLabel: { color: 'black' },
   },
 }));
 
 const Tab = props => {
-  // const { handleChange } = props;
+  // const { handleChange, costList, debit, credit } = props;
+  const credit = 3000;
+  const debit = 5000;
+
   const data = defaultCostSheet.map((cost, index) => {
     const style = {
       backgroundColor: `${diagramColors[index]}`,
@@ -32,13 +35,19 @@ const Tab = props => {
       </li>
     );
   });
+
   const classes = useStyles();
 
   return (
     <div className={styles.tabWrapper}>
       <div className={styles.selectorsWrapper}>
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="month">Месяц</InputLabel>
+          <InputLabel
+            style={{ color: 'black', fontFamily: 'Circe', fontSize: '16px' }}
+            htmlFor="month"
+          >
+            Месяц
+          </InputLabel>
           <Select
             native
             style={{
@@ -61,7 +70,12 @@ const Tab = props => {
         </FormControl>
 
         <FormControl variant="outlined" className={classes.formControl}>
-          <InputLabel htmlFor="month">Год</InputLabel>
+          <InputLabel
+            style={{ color: 'black', fontFamily: 'Circe', fontSize: '16px' }}
+            htmlFor="month"
+          >
+            Год
+          </InputLabel>
           <Select
             className={styles.select}
             native
@@ -86,6 +100,16 @@ const Tab = props => {
         <span className={styles.headerAmount}>Сумма</span>
       </div>
       <ul className={styles.costsList}>{data}</ul>
+      <ul className={styles.total}>
+        <li className={styles.totalItem}>
+          <span>Расходы:</span>
+          <span className={styles.totalCredits}>{credit}</span>
+        </li>
+        <li className={styles.totalItem}>
+          <span>Доходы:</span>
+          <span className={styles.totalDebits}>{debit}</span>
+        </li>
+      </ul>
     </div>
   );
 };

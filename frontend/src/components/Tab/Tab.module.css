@@ -2,20 +2,14 @@
 
 .tabWrapper {
   width: 100%;
+  font-size: 16px;
+  color: var(--primary-text-color);
 }
 
 @media screen and (min-width: 768px) {
   .selectorsWrapper {
     display: flex;
   }
-}
-.select.MuiSelect-root
-  MuiSelect-select
-  MuiSelect-outlined
-  MuiInputBase-input
-  MuiOutlinedInput-input {
-  font-family: 'Circe';
-  color: var(--primary-text-color);
 }
 
 .tableHeader {
@@ -26,6 +20,8 @@
   height: 58px;
   background-color: var(--secondary-bcg-color);
   border-radius: 30px;
+  font-weight: 700;
+  font-size: 18px;
 }
 .marker {
   width: 24px;
@@ -38,8 +34,10 @@
   display: inline-block;
   margin-left: auto;
 }
+
 .costsList {
   padding: 0;
+  margin: 0;
 }
 .costItem {
   width: 280px;
@@ -50,10 +48,10 @@
   border-bottom: solid 1px;
   border-bottom-color: var(--light-border-color);
   list-style-type: none;
+  font-weight: 400;
 }
 .costItem:not(:first-child) {
-  border-top: solid 1px;
-  border-top-color: #ffffff;
+  border-top: solid 1px #ffffff;
 }
 .costCategory {
   display: inline-block;
@@ -64,4 +62,30 @@
 .costAmount {
   display: inline-block;
   margin-left: auto;
+}
+
+/*total*/
+.total {
+  margin: 0;
+  padding: 15px 20px;
+  list-style: none;
+  border-top: solid 1px #ffffff;
+}
+.totalItem {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  font-weight: 700;
+}
+.totalItem:not(:first-child) {
+  margin-top: 10px;
+}
+.totalCredits {
+  display: inline-block;
+}
+.totalCredits {
+  color: var(--red-color-accent);
+}
+.totalDebits {
+  color: var(--green-color-accent);
 }
