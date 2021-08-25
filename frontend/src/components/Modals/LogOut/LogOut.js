@@ -48,23 +48,8 @@ export default function AddTransaction() {
     <Media queries={{ small: { maxWidth: 767 } }}>
       {matches => (
         <div>
-          <button
-            className={
-              matches.small
-                ? `${styles.exitBtn} ${styles.exitBtnSmall}`
-                : styles.exitBtn
-            }
-            onClick={handleOpen}
-          >
-            <svg
-              className={
-                matches.small
-                  ? `${styles.exitIcon} ${styles.exitIconSmall}`
-                  : styles.exitIcon
-              }
-              width="18"
-              height="18"
-            >
+          <button className={styles.exitBtn} onClick={handleOpen}>
+            <svg className={styles.exitIcon} width="18" height="18">
               <use href={`${Exit}#icon-exit`}></use>
             </svg>
             {matches.small ? '' : 'Выйти'}
@@ -86,25 +71,14 @@ export default function AddTransaction() {
             >
               <div className={styles.modalWindow}>
                 <button
-                  className={
-                    matches.small
-                      ? `${styles.closeBtn} ${styles.closeBtnSmall}`
-                      : styles.closeBtn
-                  }
+                  className={styles.closeBtn}
                   type="button"
                   onClick={handleClose}
                 >
                   <CloseIcon />
                 </button>
 
-                <h2
-                  id="logout-title"
-                  className={
-                    matches.small
-                      ? `${styles.title} ${styles.titleSmall}`
-                      : styles.title
-                  }
-                >
+                <h2 id="logout-title" className={styles.title}>
                   Вы уверены, что хотите выйти?
                 </h2>
 

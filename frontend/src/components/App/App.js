@@ -12,19 +12,9 @@ const RegisterPage = lazy(() =>
 const LogInPage = lazy(() =>
   import('../../pages/LogInPage' /* webpackChunkName: "login-page" */),
 );
-
 const DashboardPage = lazy(() =>
   import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
 );
-
-const HomePage = lazy(() =>
-  import('../../pages/HomePage' /* webpackChunkName: "home-page" */),
-);
-
-const DiagramPage = lazy(() =>
-  import('../../pages/DiagramPage' /* webpackChunkName: "diagram-page" */),
-);
-
 const NotFoundPage = lazy(() =>
   import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
 );
@@ -62,14 +52,6 @@ function App() {
         >
           <DashboardPage />
         </PublicRoute>
-
-        <ProtectedRoute path={routes.home} redirectTo={routes.login}>
-          <HomePage />
-        </ProtectedRoute>
-
-        <ProtectedRoute path={routes.diagram} redirectTo={routes.login}>
-          <DiagramPage />
-        </ProtectedRoute>
 
         <Route component={NotFoundPage} />
       </Switch>
