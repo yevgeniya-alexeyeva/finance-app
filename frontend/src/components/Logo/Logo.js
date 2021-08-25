@@ -15,15 +15,7 @@ const Logo = () => {
             width={matches.small ? '30' : '40'}
             height={matches.small ? '30' : '40'}
           />
-          <h1
-            className={
-              matches.small
-                ? `${styles.title} ${styles.titleSmall}`
-                : styles.title
-            }
-          >
-            Wallet
-          </h1>
+          <h1 className={styles.title}>Wallet</h1>
         </Link>
       )}
     </Media>

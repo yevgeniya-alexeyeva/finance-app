@@ -1,8 +1,24 @@
 import Media from 'react-media';
+import { Suspense, lazy } from 'react';
+import { Switch, Route } from 'react-router-dom';
+import routes from '../routes';
 import Header from '../components/Header';
+import Container from '../components/UI/Container';
+import MobileNavigation from '../components/MobileNavigation';
 import Currency from '../components/Currency';
 import AddTransaction from '../components/Modals/AddTransaction';
 import styles from './DashboardPage.module.css';
+
+const HomeAsync = lazy(() =>
+  import('../pages/HomePage' /*webpackChunkName: "home-page" */),
+);
+const DiagramAsync = lazy(() =>
+  import('../pages/DiagramPage' /*webpackChunkName: "diagram-page" */),
+);
+
+const CurrencyAsync = lazy(() =>
+  import('../pages/CurrencyPage' /*webpackChunkName: "currency-page" */),
+);
 
 const DashboardPage = () => {
   return (
@@ -16,27 +32,34 @@ const DashboardPage = () => {
       {matches => (
         <>
           <Header />
-          <div
-            className={
-              (matches.small && styles.container) ||
-              (matches.medium &&
-                `${styles.container} ${styles.containerMedium}`) ||
-              (matches.large && `${styles.container} ${styles.containerLarge}`)
-            }
-          >
-            <div className={matches.small ? styles.contentMobile : undefined}>
-              <Currency />
+          <Container>
+            <div className={styles.content}>
+              <div className={styles.walletPanel}>
+                <div>
+                  <MobileNavigation />
+                  {!matches.small ? <p>Общая сумма</p> : undefined}
+                </div>
+                {!matches.small ? <Currency /> : undefined}
+              </div>
+
+              <div className={styles.btnAdd}>
+                <AddTransaction />
+              </div>
+              <Suspense fallback={<p>Loading...</p>}>
+                <Switch>
+                  <Route exact path={routes.home} component={HomeAsync} />
+                  <Route exact path={routes.diagram} component={DiagramAsync} />
+                  {matches.small && (
+                    <Route
+                      exact
+                      path={routes.currency}
+                      component={CurrencyAsync}
+                    />
+                  )}
+                </Switch>
+              </Suspense>
             </div>
-            <div
-              className={
-                (matches.small && styles.btnAdd) ||
-                (matches.medium && `${styles.btnAdd} ${styles.btnAddMedium}`) ||
-                (matches.large && `${styles.btnAdd} ${styles.btnAddLarge}`)
-              }
-            >
-              <AddTransaction />
-            </div>
-          </div>
+          </Container>
         </>
       )}
     </Media>

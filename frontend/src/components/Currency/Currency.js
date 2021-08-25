@@ -22,14 +22,16 @@ const Currency = () => {
       return;
     }
 
-    const currentCurrency = JSON.parse(localStorage.currency);
+    const currentCurrency = localStorage.currency
+      ? JSON.parse(localStorage.currency)
+      : null;
     if (
       currentCurrency &&
       Date.now() - currentCurrency.dateGetCurrency < 3600000
     ) {
       return setCurrency(currentCurrency.course);
     } else {
-      fetchData();
+      return fetchData();
     }
   }, []);
 
@@ -42,20 +44,8 @@ const Currency = () => {
       }}
     >
       {matches => (
-        <div
-          className={
-            (matches.small && styles.boxTable) ||
-            (matches.medium && `${styles.boxTable} ${styles.boxTableMedium}`) ||
-            (matches.large && `${styles.boxTable} ${styles.boxTableLarge}`)
-          }
-        >
-          <table
-            className={
-              (matches.small && styles.table) ||
-              (matches.medium && `${styles.table} ${styles.tableMedium}`) ||
-              (matches.large && `${styles.table} ${styles.tableLarge}`)
-            }
-          >
+        <div className={styles.boxTable}>
+          <table className={styles.table}>
             <thead>
               <tr>
                 <th>Валюта</th>

@@ -1,17 +1,14 @@
 @import '../../stylesheet/vars.css';
 
 .header {
-  padding: 15px 20px;
+  background-color: var(--secondary-bcg-color);
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.headerBox {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--secondary-bcg-color);
-}
-.headerMedium {
-  padding: 20px 40px;
-}
-.headerLarge {
-  padding: 20px 85px;
 }
 .exitBox {
   display: flex;
@@ -27,3 +24,14 @@
   margin-right: 14px;
   padding: 0;
 }
+@media (min-width: 768px) and (max-width: 1279px) {
+  .header {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+}
+/* @media (min-width: 1280px) {
+  .header {
+    padding: 20px 85px;
+  }
+} */
