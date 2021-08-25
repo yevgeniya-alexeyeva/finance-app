@@ -11,10 +11,9 @@ const create = async (req, res, next) => {
       _id: userId,
     });
 
-    if (transactionType === 'credit') {
-      console.log(balance - amount < 0);
+    if (transactionType === 'withdrawal') {
       if (balance - amount < 0) {
-        return res.json({
+        return res.status(400).json({
           status: 'error',
           code: 400,
           message: 'Insufficient balance',
@@ -38,7 +37,7 @@ const create = async (req, res, next) => {
       balanceAfter,
     });
 
-    res.json({
+    res.status(201).json({
       status: 'success',
       code: 201,
       data: {
