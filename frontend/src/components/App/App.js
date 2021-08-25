@@ -5,6 +5,7 @@ import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
 import { authOperations } from '../../redux/auth';
 import routes from '../../routes';
+import Loader from '../Loader';
 
 const RegisterPage = lazy(() =>
   import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),
@@ -27,7 +28,7 @@ function App() {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Loader />}>
       <Switch>
         <PublicRoute
           path={routes.register}
