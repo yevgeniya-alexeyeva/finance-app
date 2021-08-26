@@ -6,13 +6,20 @@ import {
   filterTrError,
 } from './transactions-actions';
 
-export const getFilteredTrList = (month, year) => async dispatch => {
-  dispatch(filterTrRequest());
+export const getFilteredTrList =
+  ({ month, year }) =>
+  async dispatch => {
+    console.log(
+      '🚀 ~ file: transactions-operations.js ~ line 10 ~ month, year',
+      month,
+      year,
+    );
+    dispatch(filterTrRequest());
 
-  try {
-    const transactions = await api.getFilteredTransactions(month, year);
-    dispatch(filterTrSuccess(transactions));
-  } catch (error) {
-    dispatch(filterTrError(error));
-  }
-};
+    try {
+      const transactions = await api.getFilteredTransactions(month, year);
+      dispatch(filterTrSuccess(transactions));
+    } catch (error) {
+      dispatch(filterTrError(error));
+    }
+  };

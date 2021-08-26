@@ -5,12 +5,10 @@ import { getFilteredTrList } from '../../redux/transactions/transactions-operati
 import Chart from '../Chart';
 import Tab from '../Tab';
 import styles from './DiagramTab.module.css';
-import { defaultCostSheet } from '../../utils';
-
-const totalDebit = 5000;
+// import { defaultCostSheet } from '../../utils';
 
 const DiagramTab = () => {
-  const currentMonth = new Date().getMonth();
+  const currentMonth = new Date().getMonth() + 1;
 
   const currentYear = new Date().getFullYear();
 
@@ -25,15 +23,11 @@ const DiagramTab = () => {
     }));
 
   // const isLoading = useSelector(getIsLoading);
-  const transactions = useSelector(getFilteredTransactions);
+  const { filteredCosts, income, totalCost } = useSelector(
+    getFilteredTransactions,
+  );
 
-  const totalCredit = transactions
-    .reduce((acc, item) => {
-      return (acc += item.amount);
-    }, 0)
-    .toFixed(2);
-
-  const costList = transactions.map(item => item.amount);
+  const costList = filteredCosts.map(item => item.amount);
 
   useEffect(() => {
     dispatch(getFilteredTrList(data));
@@ -45,9 +39,9 @@ const DiagramTab = () => {
       <div className={styles.wrapper}>
         <Chart costs={costList} />
         <Tab
-          costs={transactions}
-          debit={totalDebit}
-          credit={totalCredit}
+          costs={filteredCosts}
+          debit={income}
+          credit={totalCost}
           onChange={setFilter}
         />
       </div>

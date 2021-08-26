@@ -1,10 +1,17 @@
 import LoginForm from '../components/LoginForm';
+import styles from './LoginPage.module.css';
+
 function LogInPage() {
   return (
-    <>
-      <h2>LogIn Page</h2>;
-      <LoginForm />
-    </>
+    <div className={styles.container}>
+      <div className={styles.conteinerBg}>
+        <p className={styles.appName}>Finance App</p>
+        <div className={styles.left}></div>
+        <div className={styles.right}>
+          <LoginForm />
+        </div>
+      </div>
+    </div>
   );
 }
 

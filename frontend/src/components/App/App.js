@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import ProtectedRoute from '../ProtectedRoute';
+// import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
 import { authOperations } from '../../redux/auth';
 import routes from '../../routes';
