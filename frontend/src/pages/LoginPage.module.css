@@ -1,0 +1,77 @@
+@import '../stylesheet/vars.css';
+@media (max-width: 767px) {
+  .container {
+    width: 320px;
+    margin: auto;
+  }
+  .appName {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+@media (min-width: 768px) and (max-width: 1277px) {
+  .container {
+    width: 768px;
+    height: 1024px;
+    margin: auto;
+  }
+  .conteinerBg {
+    position: relative;
+    padding: 360px 114px 196px 114px;
+    text-align: center;
+    background-color: #e5e5e5;
+    background-image: url('../images/UpperPart.png'),
+      url('../images/LowerPart.png'), url('../images/frame.png');
+    background-position: 100% 0, 0 100%, 114px 63px;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-size: auto, auto, 273px 250px;
+  }
+  .appName {
+    position: absolute;
+    top: 150px;
+    right: 153px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.5;
+  }
+}
+@media (min-width: 1278px) {
+  .container {
+    width: 1280px;
+    height: 720px;
+    margin: auto;
+  }
+  .conteinerBg {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+  .left {
+    width: 560px;
+    height: 720px;
+    background-color: #e5e5e5;
+    background-image: url('../images/frame.png'), url('../images/LowerPart.png');
+    background-position: 30px 153px, 0 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 452px 412px, auto;
+  }
+  .right {
+    width: 720px;
+    height: 720px;
+    padding: 136px 85px 116px 95px;
+    background-image: url('../images/backgraund.jpg');
+    background-size: cover;
+  }
+  .appName {
+    position: absolute;
+    left: 200px;
+    bottom: 77px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 1.5;
+  }
+}
