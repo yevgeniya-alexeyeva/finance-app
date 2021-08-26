@@ -14,7 +14,7 @@ import {
   getCurrentUserError,
 } from './auth-actions';
 
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com/';
+axios.defaults.baseURL = 'http://localhost:3000/';
 
 const token = {
   set(token) {

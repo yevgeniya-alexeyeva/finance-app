@@ -1,7 +1,9 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import Media from 'react-media';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Button } from '@material-ui/core';
+import { authSelectors, authOperations } from '../../../redux/auth';
 import Exit from './logout.svg';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './LogOut.module.css';
@@ -35,6 +37,7 @@ export default function AddTransaction() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   const handleOpen = () => {
     setOpen(true);
@@ -100,6 +103,7 @@ export default function AddTransaction() {
                     variant="contained"
                     color="primary"
                     type="submit"
+                    onClick={() => dispatch(authOperations.logOut())}
                     style={
                       matches.small
                         ? {
