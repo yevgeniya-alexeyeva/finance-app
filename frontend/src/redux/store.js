@@ -16,7 +16,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import { authReducer } from './auth';
-import { transactionsReducer } from './transactions';
+import transactionsReducer from './transactions/transactions-reduser';
 
 const middleware = [
   ...getDefaultMiddleware({
