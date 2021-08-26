@@ -6,8 +6,8 @@
 
 @media (max-width: 767px) {
   .content {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    /* padding-top: 10px;
+    padding-bottom: 10px; */
     text-align: center;
   }
   .btnAdd {
@@ -18,8 +18,8 @@
 
 @media (min-width: 768px) and (max-width: 1279px) {
   .content {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    /* padding-top: 20px;
+    padding-bottom: 20px; */
   }
   .walletPanel {
     display: flex;
@@ -33,12 +33,17 @@
 
 @media (min-width: 1280px) {
   .content {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    /* padding-top: 40px;
+    padding-bottom: 40px; */
     display: flex;
   }
   .walletPanel {
     display: block;
+    padding-right: 30px;
+    border-right: 1px solid #e7e5f2;
+    height: 100vh;
+    box-shadow: 0px -5px 5pxr gba(0, 0, 0, 0.05),
+      inset 0px 5px 5px rgba(255, 255, 255, 0.6);
   }
   .btnAdd {
     bottom: 40px;

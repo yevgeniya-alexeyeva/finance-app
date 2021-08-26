@@ -60,25 +60,37 @@ export default function AddTransaction() {
 
   const f = useFormik({
     initialValues: {
-      type: false,
-      category: null,
-      sum: '0.00',
-      date: null,
+      transactionType: false,
       comment: null,
+      amount: '0.00',
+      categoryId: null,
+      date: null,
     },
 
     validationSchema: Yup.object({
-      type: Yup.bool().required(),
-      category: Yup.string().nullable(),
-      sum: Yup.string()
+      transactionType: Yup.bool().required(),
+      comment: Yup.string(),
+      amount: Yup.string()
         .matches(/^\d{1,9}(\.\d{1,2})?$/)
         .required(),
+      categoryId: Yup.string().nullable(),
       date: Yup.object().required(),
-      comment: Yup.string(),
     }),
 
     onSubmit: async (values, { resetForm }) => {
       console.log('val', values);
+      const payload = {
+        transactionType: values.transactionType ? 'debit' : 'credit',
+        comment: values.comment,
+        amount: Number(values.amount),
+        categoryId: values.categoryId,
+        date: {
+          year: Number(values.date.year),
+          month: Number(values.date.month),
+          day: Number(values.date.day),
+        },
+      };
+      console.log('payload', payload);
     },
   });
 
@@ -154,14 +166,14 @@ export default function AddTransaction() {
                         onChange={e =>
                           f.setValues({
                             ...f.values,
-                            type: e.target.checked,
-                            category: e.target.checked
+                            transactionType: e.target.checked,
+                            categoryId: e.target.checked
                               ? null
-                              : f.values.category,
+                              : f.values.categoryId,
                           })
                         }
-                        checked={f.values.type}
-                        value={f.values.type}
+                        checked={f.values.transactionType}
+                        value={f.values.transactionType}
                       />
                       <label
                         htmlFor="toggleButton"
@@ -174,22 +186,24 @@ export default function AddTransaction() {
                   <div
                     className={matches.small ? styles.contentForm : undefined}
                   >
-                    {!f.values.type ? (
+                    {!f.values.transactionType ? (
                       <TextField
                         error={
-                          f.errors.category && f.touched.category ? true : false
+                          f.errors.categoryId && f.touched.categoryId
+                            ? true
+                            : false
                         }
                         fullWidth
-                        id="category"
-                        name="category"
+                        id="categoryId"
+                        name="categoryId"
                         color="secondary"
                         label="Выберите категорию"
                         select
-                        value={f.values.category}
+                        value={f.values.categoryId}
                         onChange={f.handleChange}
                         helperText={
-                          f.errors?.category && f.touched.category
-                            ? f.errors?.category
+                          f.errors?.categoryId && f.touched.categoryId
+                            ? f.errors?.categoryId
                             : ' '
                         }
                         className={styles.input}
@@ -207,16 +221,20 @@ export default function AddTransaction() {
                     ) : undefined}
                     <div className={!matches.small && styles.rowInputs}>
                       <TextField
-                        error={f.errors?.sum && f.touched.sum ? true : false}
-                        id="sum"
-                        name="sum"
+                        error={
+                          f.errors?.amount && f.touched.amount ? true : false
+                        }
+                        id="amount"
+                        name="amount"
                         color="secondary"
                         label="Сумма"
-                        value={f.values.sum}
+                        value={f.values.amount}
                         onChange={f.handleChange}
                         className={styles.input}
                         helperText={
-                          f.errors?.sum && f.touched.sum ? f.errors?.sum : ' '
+                          f.errors?.amount && f.touched.amount
+                            ? f.errors?.amount
+                            : ' '
                         }
                       />
                       <MuiPickersUtilsProvider utils={DateFnsUtils}>
