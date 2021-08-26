@@ -6,7 +6,9 @@ import {
   filterTrError,
 } from './transactions-actions';
 
-const filter = createReducer([], {
+const initialFilterData = { filteredCosts: [], income: 0, totalCost: 0 };
+
+const filter = createReducer(initialFilterData, {
   [filterTrSuccess]: (_, { payload }) => payload,
 });
 
