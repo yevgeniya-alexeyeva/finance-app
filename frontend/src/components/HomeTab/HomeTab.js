@@ -1,45 +1,131 @@
 import style from './HomeTab.module.css';
 
-function createData(date, type, category, comment, price, balance) {
-  return { date, type, category, comment, price, balance };
-}
-
 const rows = [
-  createData('04.01.19', '-', 'Разное', 'Подарок жене', 300.0, 6900.0),
-  createData('04.01.19', '-', 'Разное', 'Подарок жене', 300.0, 6900.0),
-  createData('04.01.19', '+', 'Разное', 'Подарок жене', 300.0, 6900.0),
-  createData('04.01.19', '-', 'Разное', 'Подарок жене', 300.0, 6900.0),
-  createData('04.01.19', '-', 'Разное', 'Подарок жене', 300.0, 6900.0),
-  createData('04.01.19', '+', 'Нерегулярный ', 'Подарок жене', 300.0, 6900.0),
+  {
+    date: '04.01.19',
+    type: '-',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '-',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '+',
+    category: 'Нерегулярный доход +++',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '+',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '+',
+    category: 'Нерегулярный доход +++',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '+',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '-',
+    category: 'Нерегулярный доход +++',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '+',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '-',
+    category: 'Нерегулярный доход +++',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '+',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '-',
+    category: 'Нерегулярный доход +++',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
+  {
+    date: '04.01.19',
+    type: '-',
+    category: 'Разное',
+    comment: 'Подарок жене',
+    price: '221 300.00',
+    balance: '6900.00',
+  },
 ];
 
 const HomeTab = () => {
   return (
-    <table className={style.tab}>
-      <tbody>
-        <tr className={style.head}>
-          <th>Дата</th>
-          <th>Тип</th>
-          <th>Категория</th>
-          <th>Комментарий</th>
-          <th>Сумма</th>
-          <th>Баланс</th>
-        </tr>
+    <div className={style.tab}>
+      <div className={style.head}>
+        <p>Дата</p>
+        <p>Тип</p>
+        <p>Категория</p>
+        <p>Комментарий</p>
+        <p>Сумма</p>
+        <p>Баланс</p>
+      </div>
+      <div className={style.scroll}>
         {rows.map(i => {
           const accent = i.type === '-' ? style.accentRed : style.accentGreen;
           return (
-            <tr className={style.rows}>
-              <td className={style.row}>{i.date}</td>
-              <td className={style.row}>{i.type}</td>
-              <td className={style.row}>{i.category}</td>
-              <td className={style.row}>{i.comment}</td>
-              <td className={style.row.concat(' ', accent)}>{i.price}</td>
-              <td className={style.row}>{i.balance}</td>
-            </tr>
+            <div className={style.rows}>
+              <p className={style.row}>{i.date}</p>
+              <p className={style.row}>{i.type}</p>
+              <p className={style.row}>{i.category}</p>
+              <p className={style.row}>{i.comment}</p>
+              <p className={style.row.concat(' ', accent)}>{i.price}</p>
+              <p className={style.row}>{i.balance}</p>
+            </div>
           );
         })}
-      </tbody>
-    </table>
+      </div>
+    </div>
   );
 };
 

@@ -8,7 +8,6 @@ import MobileNavigation from '../components/MobileNavigation';
 import Currency from '../components/Currency';
 import AddTransaction from '../components/Modals/AddTransaction';
 import styles from './DashboardPage.module.css';
-import HomeTab from '../components/HomeTab';
 import Loader from '../components/Loader';
 
 const HomeAsync = lazy(() =>
@@ -49,7 +48,7 @@ const DashboardPage = () => {
               </div>
               <Suspense fallback={<Loader />}>
                 <Switch>
-                  <Route exact path={routes.home} component={HomeTab} />
+                  <Route exact path={routes.home} component={HomeAsync} />
                   <Route exact path={routes.diagram} component={DiagramAsync} />
                   {matches.small && (
                     <Route
