@@ -25,8 +25,7 @@ for (let i = currentYear - 5; i <= currentYear + 5; i++) {
 }
 
 const Tab = props => {
-  // const { handleChange, costs, debit, credit } = props;
-  const { costs, debit, credit } = props;
+  const { onChange, costs, debit, credit } = props;
 
   const data = costs.map((cost, index) => {
     const style = {
@@ -86,7 +85,7 @@ const Tab = props => {
               height: 50,
             }}
             // value={null}
-            onChange={null}
+            onChange={onChange}
             label="Month"
             inputProps={{
               name: 'month',
@@ -110,7 +109,7 @@ const Tab = props => {
             native
             style={{ borderRadius: 30, height: 50 }}
             // value={1}
-            onChange={null}
+            onChange={onChange}
             label="Age"
             inputProps={{
               name: 'month',
