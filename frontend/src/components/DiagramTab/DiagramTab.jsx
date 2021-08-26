@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import getFilteredTransactions from '../../redux/transactions/transactions-selectors';
-import { getFilteredTrList } from '../../redux/transactions/transactions-operations';
+import { getFilteredTrList } from '../../redux/transactions/';
 import Chart from '../Chart';
 import Tab from '../Tab';
 import styles from './DiagramTab.module.css';

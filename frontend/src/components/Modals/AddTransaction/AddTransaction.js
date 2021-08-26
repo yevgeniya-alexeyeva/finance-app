@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
+import { useSelector, useDispatch } from 'react-redux';
 import moment from 'moment';
 import Media from 'react-media';
 import DateFnsUtils from '@date-io/date-fns';
@@ -10,16 +11,12 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { getCategories } from '../../../services/transactions';
+import { transactionOperations } from '../../../redux/transactions/transactions-operations';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './AddTransaction.module.css';
-
-const categories = [
-  { _id: '6123b46f7b92ce7fa2ca7442', name: 'Разное' },
-  { _id: '6123b46f7b92ce7fa2ca7443', name: 'Продукты' },
-  { _id: '6123b46f7b92ce7fa2ca7444', name: 'Машина' },
-];
 
 function getModalStyle() {
   const top = 50;
@@ -32,6 +29,20 @@ function getModalStyle() {
   };
 }
 
+const months = {
+  '01': 'Январь',
+  '02': 'Февраль',
+  '03': 'Март',
+  '04': 'Апрель',
+  '05': 'Май',
+  '06': 'Июнь',
+  '07': 'Июль',
+  '08': 'Август',
+  '09': 'Сентябрь',
+  10: 'Октябрь',
+  11: 'Ноябрь',
+  12: 'Декабрь',
+};
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
@@ -56,7 +67,9 @@ export default function AddTransaction() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
+  const [categories, setCategories] = useState();
   const [selectedDate, setSelectedDate] = useState(Date.now());
+  const dispatch = useDispatch();
 
   const f = useFormik({
     initialValues: {
@@ -86,11 +99,11 @@ export default function AddTransaction() {
         categoryId: values.categoryId,
         date: {
           year: Number(values.date.year),
-          month: Number(values.date.month),
+          month: months[values.date.month],
           day: Number(values.date.day),
         },
       };
-      console.log('payload', payload);
+      dispatch(transactionOperations.addTransaction(payload));
     },
   });
 
@@ -114,6 +127,11 @@ export default function AddTransaction() {
   useEffect(async () => {
     await handleDateChange(selectedDate);
   }, [selectedDate]);
+
+  useEffect(async () => {
+    const { data } = await getCategories();
+    return setCategories(data.categorylist);
+  }, []);
 
   return (
     <Media
@@ -186,7 +204,7 @@ export default function AddTransaction() {
                   <div
                     className={matches.small ? styles.contentForm : undefined}
                   >
-                    {!f.values.transactionType ? (
+                    {!f.values.transactionType && categories ? (
                       <TextField
                         error={
                           f.errors.categoryId && f.touched.categoryId
@@ -210,8 +228,8 @@ export default function AddTransaction() {
                       >
                         {categories?.map((c, idx) => (
                           <option
-                            key={c._id}
-                            value={c._id}
+                            key={c.id}
+                            value={c.id}
                             className={styles.option}
                           >
                             {c.name}

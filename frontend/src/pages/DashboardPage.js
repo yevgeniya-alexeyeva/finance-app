@@ -1,7 +1,10 @@
+import { useEffect } from 'react';
 import Media from 'react-media';
+import { useDispatch } from 'react-redux';
 import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import routes from '../routes';
+import { authOperations } from '../redux/auth';
 import Header from '../components/Header';
 import Container from '../components/UI/Container';
 import MobileNavigation from '../components/MobileNavigation';
@@ -21,6 +24,12 @@ const CurrencyAsync = lazy(() =>
 );
 
 const DashboardPage = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
+
   return (
     <Media
       queries={{
