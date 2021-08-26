@@ -39,7 +39,7 @@ const DiagramTab = () => {
       <div className={styles.wrapper}>
         <Chart costs={costList} />
         <Tab
-          costs={filteredCosts}
+          costs={costList}
           debit={income}
           credit={totalCost}
           onChange={setFilter}

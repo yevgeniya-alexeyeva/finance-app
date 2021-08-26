@@ -9,16 +9,11 @@ import {
 export const getFilteredTrList =
   ({ month, year }) =>
   async dispatch => {
-    console.log(
-      '🚀 ~ file: transactions-operations.js ~ line 10 ~ month, year',
-      month,
-      year,
-    );
     dispatch(filterTrRequest());
 
     try {
-      const transactions = await api.getFilteredTransactions(month, year);
-      dispatch(filterTrSuccess(transactions));
+      const data = await api.getFilteredTransactions(month, year);
+      dispatch(filterTrSuccess(data));
     } catch (error) {
       dispatch(filterTrError(error));
     }
