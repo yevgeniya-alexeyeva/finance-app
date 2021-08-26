@@ -8,6 +8,7 @@ import MobileNavigation from '../components/MobileNavigation';
 import Currency from '../components/Currency';
 import AddTransaction from '../components/Modals/AddTransaction';
 import styles from './DashboardPage.module.css';
+import Loader from '../components/Loader';
 
 const HomeAsync = lazy(() =>
   import('../pages/HomePage' /*webpackChunkName: "home-page" */),
@@ -47,7 +48,7 @@ const DashboardPage = () => {
               <div className={styles.btnAdd}>
                 <AddTransaction />
               </div>
-              <Suspense fallback={<p>Loading...</p>}>
+              <Suspense fallback={<Loader />}>
                 <Switch>
                   <Route exact path={routes.home} component={HomeAsync} />
                   <Route exact path={routes.diagram} component={DiagramAsync} />
