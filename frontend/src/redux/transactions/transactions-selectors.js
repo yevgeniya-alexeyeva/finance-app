@@ -1,12 +1,12 @@
-const getFilteredTransactions = state => state.transactions.filter;
+export const getFilteredTransactions = state => state.transactions.filter;
 
-const getIsLoading = state => state.transactions.loader;
+export const getIsLoading = state => state.transactions.loader;
 
-const getErrorMessage = state => state.transactions.error;
+export const getErrorMessage = state => state.transactions.error;
 
-// eslint-disable-next-line
-export default {
-  getFilteredTransactions,
-  getIsLoading,
-  getErrorMessage,
-};
+// // eslint-disable-next-line
+// export default {
+//   getFilteredTransactions,
+//   getIsLoading,
+//   getErrorMessage,
+// };
