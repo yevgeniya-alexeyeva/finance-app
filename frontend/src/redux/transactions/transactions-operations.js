@@ -1,4 +1,4 @@
-import * as api from '../../../API/transactions';
+import * as api from '../../services/transactions';
 import {
   filterTrRequest,
   filterTrSuccess,

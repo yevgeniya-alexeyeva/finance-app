@@ -1,11 +1,9 @@
 import axios from 'axios';
 
-const createTransaction = async data => {
-  const response = await axios.post(
-    'http://localhost:3000/transactions/',
-    data,
-  );
-  return response;
-};
+axios.defaults.baseURL = 'http://localhost:3000/';
 
-export default createTransaction;
+export const getFilteredTransactions = (month, year) => {
+  return axios
+    .get(`/transactions/filter?${month}&${year}`)
+    .then(response => response.data);
+};

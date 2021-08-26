@@ -6,7 +6,6 @@ import PublicRoute from '../PublicRoute';
 import { authOperations } from '../../redux/auth';
 import routes from '../../routes';
 import Loader from '../Loader';
-import HomeTab from '../HomeTab';
 
 const RegisterPage = lazy(() =>
   import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),

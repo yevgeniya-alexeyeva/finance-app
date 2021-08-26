@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  // getIsLoading,
-  getFilteredTransactions,
-} from '../../redux/transactions/transactions-selectors';
+import getFilteredTransactions from '../../redux/transactions/transactions-selectors';
 import { getFilteredTrList } from '../../redux/transactions/transactions-operations';
 import Chart from '../Chart';
 import Tab from '../Tab';
