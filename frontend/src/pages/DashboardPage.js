@@ -34,12 +34,14 @@ const DashboardPage = () => {
           <Header />
           <Container>
             <div className={styles.content}>
-              <div className={styles.walletPanel}>
-                <div>
-                  <MobileNavigation />
-                  {!matches.small ? <p>Общая сумма</p> : undefined}
+              <div className={styles.walletContainer}>
+                <div className={styles.walletPanel}>
+                  <div>
+                    <MobileNavigation />
+                    {!matches.small ? <p>Общая сумма</p> : undefined}
+                  </div>
+                  {!matches.small ? <Currency /> : undefined}
                 </div>
-                {!matches.small ? <Currency /> : undefined}
               </div>
 
               <div className={styles.btnAdd}>

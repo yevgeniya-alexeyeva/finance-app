@@ -1,7 +1,7 @@
 import routes from '../../routes';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import * as register from '../../redux/auth/auth-operations';
+import { useSelector, useDispatch } from 'react-redux';
+import { authOperations, authSelectors } from '../../redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
@@ -27,7 +27,8 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const onRegister = data => dispatch(register(data));
+  const registrationError = useSelector(authSelectors.getErrorMessage);
+  const onRegister = data => dispatch(authOperations.register(data));
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
@@ -35,7 +36,7 @@ const RegistrationForm = () => {
         email: '',
         password: '',
         confirm: '',
-        firstName: '',
+        name: '',
       },
       validationSchema: Yup.object({
         email: Yup.string()
@@ -50,14 +51,15 @@ const RegistrationForm = () => {
           .min(6, 'Must be equal 6 characters or more')
           .max(12, 'Must be equal 12 characters or less')
           .required('Required field'),
-        firstName: Yup.string()
+        name: Yup.string()
           .min(1, 'Enter your name')
           .max(12, 'Enter 12 symbols or less')
           .required('Required field'),
       }),
       onSubmit: (values, { setSubmitting, setErrors, resetForm }) => {
         console.log(values);
-        onRegister(values).then(
+        const { confirm, ...payload } = values;
+        onRegister(payload).then(
           result => {
             console.log('addItem result:', result);
             setSubmitting(false);
@@ -171,7 +173,7 @@ const RegistrationForm = () => {
             ></progress>
           </div>
           <div className={styles.inputWrap}>
-            <div className={styles.labelWrap} htmlFor="firstName">
+            <div className={styles.labelWrap} htmlFor="name">
               <img
                 className={styles.icon}
                 src={manIcon}
@@ -184,15 +186,15 @@ const RegistrationForm = () => {
             <TextField
               className={classes.textField}
               type="text"
-              name="firstName"
-              values={values.firstName}
+              name="name"
+              values={values.name}
               onBlur={handleBlur}
               onChange={handleChange}
               label="Enter you name"
             />
-            {touched.firstName && errors.firstName ? (
+            {touched.name && errors.name ? (
               <p className={styles.error} style={{ color: 'red' }}>
-                {errors.firstName}
+                {errors.name}
               </p>
             ) : null}
           </div>
