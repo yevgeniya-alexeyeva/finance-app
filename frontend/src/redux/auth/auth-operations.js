@@ -62,6 +62,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
   const {
     auth: { token: persistedToken },
   } = getState();
+
   if (!persistedToken) {
     return;
   }

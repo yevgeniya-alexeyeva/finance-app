@@ -21,12 +21,12 @@ const NotFoundPage = lazy(() =>
 );
 
 function App() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
   }, [dispatch]);
-  
+
   return (
     <Suspense fallback={<Loader />}>
       <Switch>

@@ -12,7 +12,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { getCategories } from '../../../services/transactions';
-import { transactionOperations } from '../../../redux/transactions/transactions-operations';
+import { addTransaction } from '../../../redux/transactions/transactions-operations';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -103,7 +103,7 @@ export default function AddTransaction() {
           day: Number(values.date.day),
         },
       };
-      dispatch(transactionOperations.addTransaction(payload));
+      dispatch(addTransaction(payload));
     },
   });
 
