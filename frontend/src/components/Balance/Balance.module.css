@@ -1,0 +1,41 @@
+@import '../../stylesheet/vars.css';
+
+.wrapper {
+  width: 280px;
+  height: 80px;
+  padding: 8px 30px;
+  margin: 10px auto 30px;
+  border-radius: 30px;
+  background-color: var(--secondary-bcg-color);
+  text-align: left;
+}
+.title {
+  font-family: 'Circe';
+  font-size: 12px;
+  color: var(--light-text-color);
+}
+.amount {
+  display: flex;
+  margin-top: 10px;
+  font-family: 'Poppins';
+  font-size: 30px;
+  font-weight: 700;
+}
+.sign {
+  font-weight: 400;
+  margin-right: 5px;
+}
+
+@media screen and (min-width: 768px) {
+  .wrapper {
+    width: 334px;
+    padding: 8px 40px;
+    margin: 20px auto 40px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    width: 350px;
+    margin: 30px auto;
+  }
+}
