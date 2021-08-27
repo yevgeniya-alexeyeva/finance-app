@@ -30,7 +30,6 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
-        <DashboardPage />
         <PublicRoute path={routes.register} restricted redirectTo={routes.home}>
           <RegisterPage />
         </PublicRoute>
