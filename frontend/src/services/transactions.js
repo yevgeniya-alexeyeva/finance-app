@@ -19,6 +19,7 @@ export const getAllTransactions = async () => {
   } catch (error) {
     console.error(error);
   }
+};
 
 export const getCategories = async () => {
   const { data } = await axios.get('/transactions/categories');

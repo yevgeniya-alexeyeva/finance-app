@@ -1,5 +1,9 @@
 @import '../../stylesheet/vars.css';
 
+p {
+  margin: 0;
+}
+
 .wrapper {
   width: 280px;
   height: 80px;
