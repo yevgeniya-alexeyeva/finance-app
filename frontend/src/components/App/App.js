@@ -4,6 +4,8 @@ import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
 import routes from '../../routes';
 import Loader from '../Loader';
+import { authOperations } from '../../redux/auth';
+import { useDispatch } from 'react-redux';
 
 const RegisterPage = lazy(() =>
   import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),
@@ -19,6 +21,12 @@ const NotFoundPage = lazy(() =>
 );
 
 function App() {
+    const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(authOperations.getCurrentUser());
+  }, [dispatch]);
+  
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
