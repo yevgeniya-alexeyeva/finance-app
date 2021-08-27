@@ -12,3 +12,10 @@ export const getFilteredTransactions = async (month, year) => {
     console.log(error);
   }
 };
+export const getAllTransactions = async () => {
+  try {
+    return await axios.get('/transactions');
+  } catch (error) {
+    console.error(error);
+  }
+};
