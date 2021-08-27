@@ -1,7 +1,8 @@
-import routes from '../../routes';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { authOperations, authSelectors } from '../../redux/auth';
+// import routes from '../../routes';
+// import {useCallback} from 'react';
+// import { Redirect } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../../redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
@@ -64,8 +65,7 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const registrationError = useSelector(authSelectors.getErrorMessage);
-  const onRegister = data => dispatch(authOperations.register(data));
+  // const onRegister = data => dispatch(authOperations.register(data));
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
@@ -93,21 +93,8 @@ const RegistrationForm = () => {
           .max(12, 'Enter 12 symbols or less')
           .required('Required field'),
       }),
-
-      onSubmit: (values, { setSubmitting, setErrors, resetForm }) => {
-        console.log(values);
-        const { confirm, ...payload } = values;
-        onRegister(payload).then(
-          result => {
-            console.log('addItem result:', result);
-            setSubmitting(false);
-            console.log('Add Values:', values);
-            resetForm({});
-          },
-          errors => {
-            console.log(errors);
-          },
-        );
+      onSubmit: ({ email, password, name }) => {
+        dispatch(authOperations.register({ email, password, name }));
       },
     });
   const setRangeValue = (data, touched) => {
@@ -246,9 +233,9 @@ const RegistrationForm = () => {
                   matches.small ? classes.signInBtn : classes.signInBtnMedium
                 }
               >
-                <Link to={routes.login} className={styles.linkBtn}>
-                  Войти
-                </Link>
+                {/* <Link to={routes.login} className={styles.linkBtn}> */}
+                Войти
+                {/* </Link> */}
               </Button>
             </div>
           </form>
@@ -257,4 +244,5 @@ const RegistrationForm = () => {
     </Media>
   );
 };
+
 export default RegistrationForm;
