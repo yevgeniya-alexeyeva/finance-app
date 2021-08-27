@@ -15,15 +15,14 @@ const initialUserState = {
   name: null,
   email: null,
 };
-const userReducers = createReducer(initialUserState, {
+const userReducer = createReducer(initialUserState, {
   [registerSuccess]: (_, { payload }) => payload.data,
   [loginSuccess]: (_, { payload }) => payload.data,
   [logoutSuccess]: () => initialUserState,
-  [getCurrentUserSuccess]: (_, { payload }) => payload.data,
+  [getCurrentUserSuccess]: (_, { payload }) => payload,
 });
 
-const tokenReducers = createReducer(null, {
-  // [registerSuccess]: (_, { payload }) => payload.data.token,
+const tokenReducer = createReducer(null, {
   [loginSuccess]: (_, { payload }) => payload.data.token,
   [logoutSuccess]: () => null,
 });
@@ -37,8 +36,8 @@ const errorReducer = createReducer(null, {
   [getCurrentUserError]: (_, { payload }) => payload,
 });
 
-const isAuthenticatedReducers = createReducer(false, {
-  [registerSuccess]: () => true,
+const isAuthenticatedReducer = createReducer(false, {
+  [registerSuccess]: () => false,
   [loginSuccess]: () => true,
   [getCurrentUserSuccess]: () => true,
   [registerError]: () => false,
@@ -47,9 +46,9 @@ const isAuthenticatedReducers = createReducer(false, {
   [logoutSuccess]: () => false,
 });
 const authReducer = combineReducers({
-  user: userReducers,
-  isAuthenticated: isAuthenticatedReducers,
-  token: tokenReducers,
+  user: userReducer,
+  isAuthenticated: isAuthenticatedReducer,
+  token: tokenReducer,
   error: errorReducer,
 });
 

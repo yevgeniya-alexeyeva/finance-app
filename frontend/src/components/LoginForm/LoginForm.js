@@ -1,18 +1,19 @@
-import routes from '../../routes';
-import { Link } from 'react-router-dom';
+// import routes from '../../routes';
+// import {useCallback} from 'react';
+// import { Redirect } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-//import * as logIn from '../../redux/auth/auth-operations';
+import { authOperations } from '../../redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { authOperations, authSelectors } from '../../redux/auth';
-import styles from './LoginForm.module.css';
-import logo from '../RegistrationForm/icons/logo.png';
+import styles from './RegistrationForm.module.css';
+import logo from './icons/logo.png';
+import Media from 'react-media';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import MailIcon from '@material-ui/icons/Mail';
 import LockIcon from '@material-ui/icons/Lock';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import Media from 'react-media';
 
 const useStyles = makeStyles(theme => ({
   registerBtn: {
@@ -23,10 +24,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#24CCA7',
     color: '#fff',
     marginBottom: 20,
-    fontFamily: 'Circe',
-    fontWeight: 400,
-    fontSize: 18,
-    lineHeight: 1.5,
   },
   registerBtnMedium: {
     maxWidth: 300,
@@ -36,10 +33,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#24CCA7',
     color: '#fff',
     marginBottom: 20,
-    fontFamily: 'Circe',
-    fontWeight: 400,
-    fontSize: 18,
-    lineHeight: 1.5,
   },
   width: {
     maxWidth: 280,
@@ -68,48 +61,55 @@ const useStyles = makeStyles(theme => ({
     borderColor: '#24CCA7',
   },
 }));
-const LoginForm = () => {
+
+const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const onLogin = data => dispatch(authOperations.logIn(data));
+  // const onRegister = data => dispatch(authOperations.register(data));
 
-  const {
-    handleSubmit,
-    handleChange,
-    values,
-    touched,
-    errors,
-    handleBlur,
-    isValid,
-  } = useFormik({
-    initialValues: {
-      email: '',
-      password: '',
-    },
-    validationSchema: Yup.object({
-      email: Yup.string()
-        .required('Required field')
-        .email('Email must be correct'),
-      password: Yup.string()
-        .min(6, 'Must be equal 6 characters or more')
-        .max(12, 'Must be equal 12 characters or less')
-        .required('Required field'),
-    }),
-    onSubmit: (values, { setSubmitting, setErrors, resetForm }) => {
-      console.log(values);
-      onLogin(values).then(
-        result => {
-          console.log('addItem result:', result);
-          setSubmitting(false);
-          console.log('Add Values:', values);
-          resetForm({});
-        },
-        errors => {
-          console.log(errors);
-        },
-      );
-    },
-  });
+  const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
+    useFormik({
+      initialValues: {
+        email: '',
+        password: '',
+        confirm: '',
+        name: '',
+      },
+      validationSchema: Yup.object({
+        email: Yup.string()
+          .required('Required field')
+          .email('Email must be correct'),
+        password: Yup.string()
+          .min(6, 'Must be equal 6 characters or more')
+          .max(12, 'Must be equal 12 characters or less')
+          .required('Required field'),
+        confirm: Yup.string()
+          .oneOf([Yup.ref('password'), null], 'Passwords must match')
+          .min(6, 'Must be equal 6 characters or more')
+          .max(12, 'Must be equal 12 characters or less')
+          .required('Required field'),
+        name: Yup.string()
+          .min(1, 'Enter your name')
+          .max(12, 'Enter 12 symbols or less')
+          .required('Required field'),
+      }),
+      onSubmit: ({ email, password, name }) => {
+        dispatch(authOperations.register({ email, password, name }));
+      },
+    });
+  const setRangeValue = (data, touched) => {
+    const countOfTouchedEl = Object.values(touched).length;
+    if (!countOfTouchedEl) {
+      return;
+    }
+    const totalValidationValue = 4;
+    const totalcountErr = Object.values(data).filter(
+      valueErr => valueErr !== '',
+    ).length;
+    return totalValidationValue - totalcountErr;
+  };
+
+  const valuesRange = setRangeValue(errors, touched);
   return (
     <Media
       queries={{
@@ -168,6 +168,54 @@ const LoginForm = () => {
               }}
               helperText={touched.password && errors.password}
             />
+            <div className={styles.wrapProgress}>
+              <TextField
+                className={matches.small ? classes.width : classes.widthInput}
+                type="text"
+                name="confirm"
+                values={values.confirm}
+                onBlur={handleBlur}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <LockIcon htmlColor="#E0E0E0" />
+                    </InputAdornment>
+                  ),
+                }}
+                helperText={touched.confirm && errors.confirm}
+              />
+              <div
+                className={
+                  matches.small ? styles.progressbar : styles.progressbarMedium
+                }
+              >
+                <progress
+                  min="0"
+                  max="4"
+                  value={valuesRange}
+                  id="progress"
+                ></progress>
+              </div>
+            </div>
+            <TextField
+              className={matches.small ? classes.width : classes.widthInput}
+              type="text"
+              name="name"
+              values={values.name}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              placeholder="Enter you name"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <AccountBoxIcon htmlColor="#E0E0E0" />
+                  </InputAdornment>
+                ),
+              }}
+              helperText={touched.firstName && errors.firstName}
+            />
             <div className={styles.btnWrapper}>
               <Button
                 className={
@@ -175,21 +223,19 @@ const LoginForm = () => {
                     ? classes.registerBtn
                     : classes.registerBtnMedium
                 }
-                disabled={!isValid}
+                disabled={valuesRange !== 4}
                 type="submit"
               >
-                {/* <Link to={routes.home} className={styles.linkBtnHome}> */}
-                Вход
-                {/* </Link> */}
+                Регистрация
               </Button>
               <Button
                 className={
                   matches.small ? classes.signInBtn : classes.signInBtnMedium
                 }
               >
-                <Link to={routes.register} className={styles.linkBtn}>
-                  Регистрация
-                </Link>
+                {/* <Link to={routes.login} className={styles.linkBtn}> */}
+                Войти
+                {/* </Link> */}
               </Button>
             </div>
           </form>
@@ -198,4 +244,5 @@ const LoginForm = () => {
     </Media>
   );
 };
-export default LoginForm;
+
+export default RegistrationForm;
