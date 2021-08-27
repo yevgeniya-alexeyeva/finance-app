@@ -7,6 +7,9 @@ import {
   fetchTrRequest,
   fetchTrSuccess,
   fetchTrError,
+  addTransactionRequest,
+  addTransactionSuccess,
+  addTransactionError,
 } from './transactions-actions';
 
 const initialFilterData = { filteredCosts: [], income: 0, totalCost: 0 };
@@ -22,6 +25,9 @@ const loader = createReducer([], {
   [fetchTrRequest]: () => true,
   [fetchTrSuccess]: () => false,
   [fetchTrError]: () => false,
+  [addTransactionRequest]: () => true,
+  [addTransactionSuccess]: () => false,
+  [addTransactionError]: () => false,
 });
 
 const error = createReducer([], {
@@ -33,6 +39,12 @@ const error = createReducer([], {
 
 const transactionList = createReducer([], {
   [fetchTrSuccess]: (_, { payload }) => payload,
+  [addTransactionError]: (_, { payload }) => payload,
+  [addTransactionSuccess]: () => null,
+});
+
+const transactions = createReducer([], {
+  [addTransactionSuccess]: (state, { payload }) => [payload, ...state],
 });
 
 const transactionsReducer = combineReducers({
@@ -40,6 +52,7 @@ const transactionsReducer = combineReducers({
   loader,
   error,
   transactionList,
+  transactions,
 });
 
 export default transactionsReducer;
