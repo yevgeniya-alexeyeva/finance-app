@@ -1,9 +1,10 @@
 import routes from '../../routes';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import * as logIn from '../../redux/auth/auth-operations';
+//import * as logIn from '../../redux/auth/auth-operations';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { authOperations, authSelectors } from '../../redux/auth';
 import styles from './LoginForm.module.css';
 import logo from '../RegistrationForm/icons/logo.png';
 import { TextField, Button } from '@material-ui/core';
@@ -70,7 +71,7 @@ const useStyles = makeStyles(theme => ({
 const LoginForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const onLogin = data => dispatch(logIn(data));
+  const onLogin = data => dispatch(authOperations.logIn(data));
 
   const {
     handleSubmit,
@@ -177,9 +178,9 @@ const LoginForm = () => {
                 disabled={!isValid}
                 type="submit"
               >
-                <Link to={routes.home} className={styles.linkBtnHome}>
-                  Вход
-                </Link>
+                {/* <Link to={routes.home} className={styles.linkBtnHome}> */}
+                Вход
+                {/* </Link> */}
               </Button>
               <Button
                 className={

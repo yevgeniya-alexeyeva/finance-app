@@ -1,11 +1,11 @@
 import { Suspense, lazy, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-// import ProtectedRoute from '../ProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
-import { authOperations } from '../../redux/auth';
 import routes from '../../routes';
 import Loader from '../Loader';
+import { authOperations } from '../../redux/auth';
+import { useDispatch } from 'react-redux';
 
 const RegisterPage = lazy(() =>
   import('../../pages/RegisterPage' /* webpackChunkName: "register-page" */),
@@ -21,38 +21,26 @@ const NotFoundPage = lazy(() =>
 );
 
 function App() {
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
   }, [dispatch]);
-
+  
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
-        <PublicRoute
-          path={routes.register}
-          restricted
-          // redirectTo={routes.login}
-        >
+        <PublicRoute path={routes.register} restricted redirectTo={routes.home}>
           <RegisterPage />
         </PublicRoute>
 
-        <PublicRoute
-          path={routes.login}
-          restricted
-          // redirectTo={routes.login}
-        >
+        <PublicRoute path={routes.login} restricted redirectTo={routes.home}>
           <LogInPage />
         </PublicRoute>
 
-        <PublicRoute
-          path={routes.dashboard}
-          restricted
-          // redirectTo={routes.login}
-        >
+        <ProtectedRoute path={routes.dashboard} redirectTo={routes.login}>
           <DashboardPage />
-        </PublicRoute>
+        </ProtectedRoute>
 
         <Route component={NotFoundPage} />
       </Switch>
