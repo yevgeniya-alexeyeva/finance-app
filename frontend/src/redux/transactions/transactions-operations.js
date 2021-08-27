@@ -4,6 +4,9 @@ import {
   filterTrRequest,
   filterTrSuccess,
   filterTrError,
+  fetchTrRequest,
+  fetchTrSuccess,
+  fetchTrError,
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
@@ -13,7 +16,6 @@ export const getFilteredTrList =
   ({ month, year }) =>
   async dispatch => {
     dispatch(filterTrRequest());
-
   try {
     const transactions = await api.getFilteredTransactions(month, year);
     dispatch(filterTrSuccess(transactions));
@@ -31,3 +33,11 @@ export const addTransaction = newTransaction => async dispatch => {
     dispatch(addTransactionError(error));
   }
 };
+
+  export const fetchTrList = () => async dispatch => {
+  dispatch(fetchTrRequest());
+  try {
+    const data = await api.getAllTransactions();
+    dispatch(fetchTrSuccess(data));
+  } catch (error) {
+    dispatch(fetchTrError());
