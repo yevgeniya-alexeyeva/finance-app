@@ -16,15 +16,15 @@ const initialUserState = {
   email: null,
 };
 const userReducers = createReducer(initialUserState, {
-  [registerSuccess]: (_, { payload }) => payload.user,
-  [loginSuccess]: (_, { payload }) => payload.user,
+  [registerSuccess]: (_, { payload }) => payload.data,
+  [loginSuccess]: (_, { payload }) => payload.data,
   [logoutSuccess]: () => initialUserState,
-  [getCurrentUserSuccess]: (_, { payload }) => payload,
+  [getCurrentUserSuccess]: (_, { payload }) => payload.data,
 });
 
 const tokenReducers = createReducer(null, {
-  [registerSuccess]: (_, { payload }) => payload.token,
-  [loginSuccess]: (_, { payload }) => payload.token,
+  // [registerSuccess]: (_, { payload }) => payload.data.token,
+  [loginSuccess]: (_, { payload }) => payload.data.token,
   [logoutSuccess]: () => null,
 });
 
