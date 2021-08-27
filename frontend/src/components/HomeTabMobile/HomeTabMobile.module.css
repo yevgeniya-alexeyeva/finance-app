@@ -1,0 +1,48 @@
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.listItem {
+  display: flex;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: var(--secondary-bcg-color);
+  overflow: hidden;
+}
+.listItem::before {
+  content: '';
+  display: block;
+  width: 5px;
+  background-color: var(--green-color-accent);
+}
+.transaktionList {
+  width: 100%;
+}
+.transaktionDescr {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #dcdcdf;
+  padding: 12px 20px;
+}
+.transaktionDescr p {
+  font-family: Circe;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.transaktionDescr > .row {
+  font-weight: normal;
+  font-size: 16px;
+  margin-left: auto;
+}
+.accentRed {
+  font-weight: bold;
+  color: var(--red-color-accent);
+}
+.accentGreen {
+  font-weight: bold;
+  color: var(--green-color-accent);
+}

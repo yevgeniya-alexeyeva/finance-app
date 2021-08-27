@@ -1,4 +1,5 @@
 import * as api from '../../services/transactions';
+
 import {
   filterTrRequest,
   filterTrSuccess,
@@ -8,8 +9,10 @@ import {
   addTransactionError,
 } from './transactions-actions';
 
-export const getFilteredTrList = (month, year) => async dispatch => {
-  dispatch(filterTrRequest());
+export const getFilteredTrList =
+  ({ month, year }) =>
+  async dispatch => {
+    dispatch(filterTrRequest());
 
   try {
     const transactions = await api.getFilteredTransactions(month, year);
