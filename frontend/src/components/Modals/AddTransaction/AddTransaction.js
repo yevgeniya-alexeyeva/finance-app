@@ -12,7 +12,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { getCategories } from '../../../services/transactions';
-import { transactionOperations } from '../../../redux/transactions/transactions-operations';
+import transactionOperations from '../../../redux/transactions/transactions-operations';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -29,20 +29,6 @@ function getModalStyle() {
   };
 }
 
-const months = {
-  '01': 'Январь',
-  '02': 'Февраль',
-  '03': 'Март',
-  '04': 'Апрель',
-  '05': 'Май',
-  '06': 'Июнь',
-  '07': 'Июль',
-  '08': 'Август',
-  '09': 'Сентябрь',
-  10: 'Октябрь',
-  11: 'Ноябрь',
-  12: 'Декабрь',
-};
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
@@ -77,7 +63,7 @@ export default function AddTransaction() {
       comment: null,
       amount: '0.00',
       categoryId: null,
-      date: null,
+      date: selectedDate,
     },
 
     validationSchema: Yup.object({
@@ -93,17 +79,19 @@ export default function AddTransaction() {
     onSubmit: async (values, { resetForm }) => {
       console.log('val', values);
       const payload = {
-        transactionType: values.transactionType ? 'debit' : 'credit',
+        transactionType: values.transactionType ? 'deposit' : 'withdrawal',
         comment: values.comment,
         amount: Number(values.amount),
         categoryId: values.categoryId,
         date: {
           year: Number(values.date.year),
-          month: months[values.date.month],
+          month: Number(values.date.month),
           day: Number(values.date.day),
         },
       };
       dispatch(transactionOperations.addTransaction(payload));
+      resetForm();
+      setOpen(false);
     },
   });
 

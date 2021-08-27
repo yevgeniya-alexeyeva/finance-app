@@ -8,7 +8,7 @@ import {
   addTransactionError,
 } from './transactions-actions';
 
-export const getFilteredTrList = (month, year) => async dispatch => {
+const getFilteredTrList = (month, year) => async dispatch => {
   dispatch(filterTrRequest());
 
   try {
@@ -19,7 +19,7 @@ export const getFilteredTrList = (month, year) => async dispatch => {
   }
 };
 
-export const addTransaction = newTransaction => async dispatch => {
+const addTransaction = newTransaction => async dispatch => {
   dispatch(addTransactionRequest());
   try {
     const { data } = await api.addNewTransaction(newTransaction);
@@ -28,3 +28,5 @@ export const addTransaction = newTransaction => async dispatch => {
     dispatch(addTransactionError(error));
   }
 };
+
+export default { getFilteredTrList, addTransaction };

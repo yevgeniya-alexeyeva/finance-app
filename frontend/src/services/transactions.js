@@ -13,7 +13,7 @@ export const getCategories = async () => {
   return data;
 };
 
-export const addNewTransaction = async () => {
-  const { data } = await axios.get('/transactions/');
-  return data;
+export const addNewTransaction = async data => {
+  const response = await axios.post('/transactions', data);
+  return response;
 };
