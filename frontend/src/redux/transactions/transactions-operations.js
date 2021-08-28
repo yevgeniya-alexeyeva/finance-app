@@ -35,7 +35,7 @@ const addTransaction = newTransaction => async dispatch => {
 const fetchTrList = () => async dispatch => {
   dispatch(fetchTrRequest());
   try {
-    const data = await api.getAllTransactions();
+    const { data } = await api.getAllTransactions();
     dispatch(fetchTrSuccess(data));
   } catch (error) {
     dispatch(fetchTrError());
