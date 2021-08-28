@@ -73,11 +73,10 @@ export default function AddTransactionModal() {
         .matches(/^\d{1,9}(\.\d{1,2})?$/)
         .required(),
       categoryId: Yup.string().nullable(),
-      date: Yup.object().required(),
+      date: Yup.object().nullable().required(),
     }),
 
-    onSubmit: async (values, { resetForm }) => {
-      console.log('val', values);
+    onSubmit: async (values, { setValues }) => {
       const payload = {
         transactionType: values.transactionType ? 'deposit' : 'withdrawal',
         comment: values.comment,
@@ -90,8 +89,7 @@ export default function AddTransactionModal() {
         },
       };
       dispatch(transactionsOperations.addTransaction(payload));
-      resetForm();
-      setOpen(false);
+      handleClose();
     },
   });
 

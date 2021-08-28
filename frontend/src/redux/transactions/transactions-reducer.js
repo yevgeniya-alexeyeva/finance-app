@@ -38,13 +38,13 @@ const error = createReducer([], {
 });
 
 const transactionList = createReducer([], {
-  [fetchTrSuccess]: (_, { payload }) => payload,
+  [fetchTrSuccess]: (_, { payload }) => payload.data,
   [addTransactionError]: (_, { payload }) => payload,
-  [addTransactionSuccess]: () => null,
+  [addTransactionSuccess]: (state, { payload }) => [...state, payload.data],
 });
 
 const transactions = createReducer([], {
-  [addTransactionSuccess]: (state, { payload }) => [payload, ...state],
+  [addTransactionSuccess]: (state, { payload }) => [payload.data, ...state],
 });
 
 const transactionsReducer = combineReducers({
