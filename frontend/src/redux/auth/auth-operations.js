@@ -14,7 +14,7 @@ import {
   getCurrentUserError,
 } from './auth-actions';
 
-axios.defaults.baseURL = 'http://localhost:3000/';
+axios.defaults.baseURL = 'https://git.heroku.com/finance-app-wallet.git';
 
 const token = {
   set(token) {
