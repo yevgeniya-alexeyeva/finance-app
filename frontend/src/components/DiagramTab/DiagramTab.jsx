@@ -33,21 +33,21 @@ const DiagramTab = () => {
 
   useEffect(() => {
     dispatch(transactionsOperations.getFilteredTrList(data));
-  });
+  }, [data]);
 
   return (
-    <>
+    <div>
       <h2 className={styles.head}>Статистика</h2>
       <div className={styles.wrapper}>
         <Chart costs={costList} />
         <Tab
-          costs={costList}
+          costs={filteredCosts}
           debit={income}
           credit={totalCost}
           onChange={setFilter}
         />
       </div>
-    </>
+    </div>
   );
 };
 

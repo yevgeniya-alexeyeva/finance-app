@@ -15,7 +15,7 @@ import {
 const initialFilterData = { filteredCosts: [], income: 0, totalCost: 0 };
 
 const filter = createReducer(initialFilterData, {
-  [filterTrSuccess]: (_, { payload }) => payload,
+  [filterTrSuccess]: (_, { payload }) => payload.data,
 });
 
 const loader = createReducer([], {

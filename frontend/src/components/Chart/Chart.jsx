@@ -4,13 +4,20 @@ import { diagramColors } from '../../utils';
 import { authSelectors } from '../../redux/auth';
 import { useSelector } from 'react-redux';
 
-const Chart = ({ costs = [100] }) => {
+function add(accumulator, a) {
+  return accumulator + a;
+}
+
+const Chart = ({ costs }) => {
   const balance = useSelector(authSelectors.getUserBalance);
+
+  const costList =
+    costs.reduce(add, 0) > 0 ? costs : [1, 1, 1, 1, 1, 1, 1, 1, 1];
 
   const data = {
     datasets: [
       {
-        data: costs,
+        data: costList,
         backgroundColor: diagramColors,
         borderWidth: 0,
       },
@@ -19,7 +26,7 @@ const Chart = ({ costs = [100] }) => {
 
   return (
     <div className={styles.chartWrapper}>
-      <div className={styles.balance}>{`${balance}`}</div>
+      <div className={styles.balance}>&#8372;{` ${balance}`}</div>
       <Doughnut data={data} />
     </div>
   );
