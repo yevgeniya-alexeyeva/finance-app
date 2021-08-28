@@ -54,8 +54,8 @@ const Tab = props => {
     'Ноябрь',
     'Декабрь',
   ];
-  const monthOptions = months.map(i => (
-    <option key={i} value={i}>
+  const monthOptions = months.map((i, index) => (
+    <option key={i} value={index + 1}>
       {i}
     </option>
   ));
@@ -112,8 +112,8 @@ const Tab = props => {
             onChange={onChange}
             label="Age"
             inputProps={{
-              name: 'month',
-              id: 'month',
+              name: 'year',
+              id: 'year',
             }}
           >
             <option aria-label="None" value="" />

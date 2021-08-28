@@ -95,7 +95,7 @@ const RegistrationForm = () => {
       }),
       onSubmit: ({ email, password, name }) => {
         dispatch(authOperations.register({ email, password, name }));
-        // push(routes.login)
+        push(routes.login);
       },
     });
 
