@@ -1,6 +1,6 @@
-// import routes from '../../routes';
+import routes from '../../routes';
 // import {useCallback} from 'react';
-// import { Redirect } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../redux/auth';
 import { useFormik } from 'formik';
@@ -65,7 +65,7 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const onRegister = data => dispatch(authOperations.register(data));
+  const { push } = useHistory();
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
@@ -95,8 +95,10 @@ const RegistrationForm = () => {
       }),
       onSubmit: ({ email, password, name }) => {
         dispatch(authOperations.register({ email, password, name }));
+        // push(routes.login)
       },
     });
+
   const setRangeValue = (data, touched) => {
     const countOfTouchedEl = Object.values(touched).length;
     if (!countOfTouchedEl) {
@@ -218,25 +220,21 @@ const RegistrationForm = () => {
             />
             <div className={styles.btnWrapper}>
               <Button
-                className={
-                  matches.small
-                    ? classes.registerBtn
-                    : classes.registerBtnMedium
-                }
-                disabled={valuesRange !== 4}
+                variant="contained"
+                color="primary"
                 type="submit"
+                style={{
+                  marginBottom: 20,
+                  width: 300,
+                  borderRadius: 20,
+                  padding: '13px 68px',
+                }}
               >
                 Регистрация
               </Button>
-              <Button
-                className={
-                  matches.small ? classes.signInBtn : classes.signInBtnMedium
-                }
-              >
-                {/* <Link to={routes.login} className={styles.linkBtn}> */}
+              <Link to={routes.login} className={styles.linkBtn}>
                 Войти
-                {/* </Link> */}
-              </Button>
+              </Link>
             </div>
           </form>
         </div>

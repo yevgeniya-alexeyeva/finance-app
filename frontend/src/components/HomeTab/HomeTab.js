@@ -1,7 +1,7 @@
 import style from './HomeTab.module.css';
 import { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
-import { fetchTrList } from '../../redux/transactions/transactions-operations';
+import transactionOperations from '../../redux/transactions';
 
 const HomeTab = () => {
   // const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const HomeTab = () => {
   //   state => state.transactions.transactionList,
   //   shallowEqual,
   // );
-  // useEffect(() => dispatch(fetchTrList()));
+  // useEffect(() =>   // useEffect(() =>  dispatch(transactionOperations.fetchTrList())));
   // if (!transactions.length) {
   //   return <p className={style.empty}>No such user's collection</p>;
   // }

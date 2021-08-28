@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFilteredTransactions } from '../../redux/transactions/transactions-selectors';
-import { getFilteredTrList } from '../../redux/transactions/transactions-operations';
+import {
+  transactionsSelectors,
+  transactionsOperations,
+} from '../../redux/transactions';
 import Chart from '../Chart';
 import Tab from '../Tab';
 import styles from './DiagramTab.module.css';
@@ -24,13 +26,13 @@ const DiagramTab = () => {
 
   // const isLoading = useSelector(getIsLoading);
   const { filteredCosts, income, totalCost } = useSelector(
-    getFilteredTransactions,
+    transactionsSelectors.getFilteredTransactions,
   );
 
   const costList = filteredCosts.map(item => item.amount);
 
   useEffect(() => {
-    dispatch(getFilteredTrList(data));
+    dispatch(transactionsOperations.getFilteredTrList(data));
   });
 
   return (

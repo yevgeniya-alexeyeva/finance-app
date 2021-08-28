@@ -39,7 +39,6 @@ const logIn = credentials => async dispatch => {
   dispatch(loginRequest());
   try {
     const response = await axios.post('/users/login', credentials);
-    console.log(response);
     token.set(response.data.token);
     dispatch(loginSuccess(response.data));
   } catch (error) {

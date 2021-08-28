@@ -1,6 +1,6 @@
-// import routes from '../../routes';
+import routes from '../../routes';
 // import {useCallback} from 'react';
-// import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../redux/auth';
 import { useFormik } from 'formik';
@@ -10,7 +10,6 @@ import logo from '../RegistrationForm/icons/logo.png';
 import Media from 'react-media';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import MailIcon from '@material-ui/icons/Mail';
 import LockIcon from '@material-ui/icons/Lock';
 import InputAdornment from '@material-ui/core/InputAdornment';
@@ -65,15 +64,12 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  // const onRegister = data => dispatch(authOperations.register(data));
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
       initialValues: {
         email: '',
         password: '',
-        confirm: '',
-        name: '',
       },
       validationSchema: Yup.object({
         email: Yup.string()
@@ -83,33 +79,12 @@ const RegistrationForm = () => {
           .min(6, 'Must be equal 6 characters or more')
           .max(12, 'Must be equal 12 characters or less')
           .required('Required field'),
-        confirm: Yup.string()
-          .oneOf([Yup.ref('password'), null], 'Passwords must match')
-          .min(6, 'Must be equal 6 characters or more')
-          .max(12, 'Must be equal 12 characters or less')
-          .required('Required field'),
-        name: Yup.string()
-          .min(1, 'Enter your name')
-          .max(12, 'Enter 12 symbols or less')
-          .required('Required field'),
       }),
-      onSubmit: ({ email, password, name }) => {
-        dispatch(authOperations.register({ email, password, name }));
+      onSubmit: ({ email, password }) => {
+        dispatch(authOperations.logIn({ email, password }));
       },
     });
-  const setRangeValue = (data, touched) => {
-    const countOfTouchedEl = Object.values(touched).length;
-    if (!countOfTouchedEl) {
-      return;
-    }
-    const totalValidationValue = 4;
-    const totalcountErr = Object.values(data).filter(
-      valueErr => valueErr !== '',
-    ).length;
-    return totalValidationValue - totalcountErr;
-  };
 
-  const valuesRange = setRangeValue(errors, touched);
   return (
     <Media
       queries={{
@@ -168,75 +143,24 @@ const RegistrationForm = () => {
               }}
               helperText={touched.password && errors.password}
             />
-            <div className={styles.wrapProgress}>
-              <TextField
-                className={matches.small ? classes.width : classes.widthInput}
-                type="text"
-                name="confirm"
-                values={values.confirm}
-                onBlur={handleBlur}
-                onChange={handleChange}
-                placeholder="Enter your password"
-                InputProps={{
-                  startAdornment: (
-                    <InputAdornment position="start">
-                      <LockIcon htmlColor="#E0E0E0" />
-                    </InputAdornment>
-                  ),
-                }}
-                helperText={touched.confirm && errors.confirm}
-              />
-              <div
-                className={
-                  matches.small ? styles.progressbar : styles.progressbarMedium
-                }
-              >
-                <progress
-                  min="0"
-                  max="4"
-                  value={valuesRange}
-                  id="progress"
-                ></progress>
-              </div>
-            </div>
-            <TextField
-              className={matches.small ? classes.width : classes.widthInput}
-              type="text"
-              name="name"
-              values={values.name}
-              onBlur={handleBlur}
-              onChange={handleChange}
-              placeholder="Enter you name"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <AccountBoxIcon htmlColor="#E0E0E0" />
-                  </InputAdornment>
-                ),
-              }}
-              helperText={touched.firstName && errors.firstName}
-            />
+
             <div className={styles.btnWrapper}>
               <Button
-                className={
-                  matches.small
-                    ? classes.registerBtn
-                    : classes.registerBtnMedium
-                }
-                disabled={valuesRange !== 4}
+                variant="contained"
+                color="primary"
                 type="submit"
+                style={{
+                  marginBottom: 20,
+                  width: 300,
+                  borderRadius: 20,
+                  padding: '13px 68px',
+                }}
               >
-                Регистрация
-              </Button>
-              <Button
-                className={
-                  matches.small ? classes.signInBtn : classes.signInBtnMedium
-                }
-              >
-                {/* <Link to={routes.login} className={styles.linkBtn}> */}
                 Войти
-                {/* </Link> */}
               </Button>
+              <Link to={routes.register} className={styles.linkBtn}>
+                Регистрация
+              </Link>
             </div>
           </form>
         </div>

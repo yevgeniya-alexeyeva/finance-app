@@ -1,5 +1,4 @@
 import * as api from '../../services/transactions';
-
 import {
   filterTrRequest,
   filterTrSuccess,
@@ -12,19 +11,18 @@ import {
   addTransactionError,
 } from './transactions-actions';
 
-export const getFilteredTrList =
-  ({ month, year }) =>
-  async dispatch => {
-    dispatch(filterTrRequest());
-    try {
-      const transactions = await api.getFilteredTransactions(month, year);
-      dispatch(filterTrSuccess(transactions));
-    } catch (error) {
-      dispatch(filterTrError(error));
-    }
-  };
+const getFilteredTrList = (month, year) => async dispatch => {
+  dispatch(filterTrRequest());
 
-export const addTransaction = newTransaction => async dispatch => {
+  try {
+    const transactions = await api.getFilteredTransactions(month, year);
+    dispatch(filterTrSuccess(transactions));
+  } catch (error) {
+    dispatch(filterTrError(error));
+  }
+};
+
+const addTransaction = newTransaction => async dispatch => {
   dispatch(addTransactionRequest());
   try {
     const { data } = await api.addNewTransaction(newTransaction);
@@ -34,7 +32,7 @@ export const addTransaction = newTransaction => async dispatch => {
   }
 };
 
-export const fetchTrList = () => async dispatch => {
+const fetchTrList = () => async dispatch => {
   dispatch(fetchTrRequest());
   try {
     const data = await api.getAllTransactions();
@@ -43,3 +41,6 @@ export const fetchTrList = () => async dispatch => {
     dispatch(fetchTrError());
   }
 };
+
+// eslint-disable-next-line
+export default { getFilteredTrList, addTransaction, fetchTrList };

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import Media from 'react-media';
 import DateFnsUtils from '@date-io/date-fns';
@@ -12,7 +12,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { getCategories } from '../../../services/transactions';
-import { addTransaction } from '../../../redux/transactions/transactions-operations';
+import { transactionsOperations } from '../../../redux/transactions';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -29,20 +29,6 @@ function getModalStyle() {
   };
 }
 
-const months = {
-  '01': 'Январь',
-  '02': 'Февраль',
-  '03': 'Март',
-  '04': 'Апрель',
-  '05': 'Май',
-  '06': 'Июнь',
-  '07': 'Июль',
-  '08': 'Август',
-  '09': 'Сентябрь',
-  10: 'Октябрь',
-  11: 'Ноябрь',
-  12: 'Декабрь',
-};
 const useStyles = makeStyles(theme => ({
   paper: {
     position: 'absolute',
@@ -63,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function AddTransaction() {
+export default function AddTransactionModal() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -77,12 +63,12 @@ export default function AddTransaction() {
       comment: null,
       amount: '0.00',
       categoryId: null,
-      date: null,
+      date: selectedDate,
     },
 
     validationSchema: Yup.object({
       transactionType: Yup.bool().required(),
-      comment: Yup.string(),
+      // comment: Yup.string().optional(),
       amount: Yup.string()
         .matches(/^\d{1,9}(\.\d{1,2})?$/)
         .required(),
@@ -93,17 +79,19 @@ export default function AddTransaction() {
     onSubmit: async (values, { resetForm }) => {
       console.log('val', values);
       const payload = {
-        transactionType: values.transactionType ? 'debit' : 'credit',
+        transactionType: values.transactionType ? 'deposit' : 'withdrawal',
         comment: values.comment,
         amount: Number(values.amount),
         categoryId: values.categoryId,
         date: {
           year: Number(values.date.year),
-          month: months[values.date.month],
+          month: Number(values.date.month),
           day: Number(values.date.day),
         },
       };
-      dispatch(addTransaction(payload));
+      dispatch(transactionsOperations.addTransaction(payload));
+      resetForm();
+      setOpen(false);
     },
   });
 
@@ -124,13 +112,19 @@ export default function AddTransaction() {
     setSelectedDate(date);
   };
 
-  useEffect(async () => {
-    await handleDateChange(selectedDate);
+  useEffect(() => {
+    async function changeData() {
+      await handleDateChange(selectedDate);
+    }
+    changeData();
   }, [selectedDate]);
 
-  useEffect(async () => {
-    const { data } = await getCategories();
-    return setCategories(data.categorylist);
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await getCategories();
+      return setCategories(data.categorylist);
+    }
+    fetchData();
   }, []);
 
   return (
