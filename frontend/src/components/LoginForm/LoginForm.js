@@ -1,5 +1,5 @@
+import axios from 'axios';
 import routes from '../../routes';
-// import {useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { authOperations } from '../../redux/auth';
@@ -7,12 +7,14 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from './LoginForm.module.css';
 import logo from '../RegistrationForm/icons/logo.png';
-import Media from 'react-media';
 import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import MailIcon from '@material-ui/icons/Mail';
 import LockIcon from '@material-ui/icons/Lock';
 import InputAdornment from '@material-ui/core/InputAdornment';
+import Media from 'react-media';
+
+axios.defaults.baseURL = 'http://localhost:3000/';
 
 const useStyles = makeStyles(theme => ({
   registerBtn: {
@@ -23,6 +25,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#24CCA7',
     color: '#fff',
     marginBottom: 20,
+    fontFamily: 'Circe',
+    fontWeight: 400,
+    fontSize: 18,
+    lineHeight: 1.5,
   },
   registerBtnMedium: {
     maxWidth: 300,
@@ -32,6 +38,10 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#24CCA7',
     color: '#fff',
     marginBottom: 20,
+    fontFamily: 'Circe',
+    fontWeight: 400,
+    fontSize: 18,
+    lineHeight: 1.5,
   },
   width: {
     maxWidth: 280,
@@ -60,31 +70,36 @@ const useStyles = makeStyles(theme => ({
     borderColor: '#24CCA7',
   },
 }));
-
-const RegistrationForm = () => {
+const LoginForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
-  const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
-    useFormik({
-      initialValues: {
-        email: '',
-        password: '',
-      },
-      validationSchema: Yup.object({
-        email: Yup.string()
-          .required('Required field')
-          .email('Email must be correct'),
-        password: Yup.string()
-          .min(6, 'Must be equal 6 characters or more')
-          .max(12, 'Must be equal 12 characters or less')
-          .required('Required field'),
-      }),
-      onSubmit: ({ email, password }) => {
-        dispatch(authOperations.logIn({ email, password }));
-      },
-    });
-
+  const {
+    handleSubmit,
+    handleChange,
+    values,
+    touched,
+    errors,
+    handleBlur,
+    isValid,
+  } = useFormik({
+    initialValues: {
+      email: '',
+      password: '',
+    },
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .required('Required field')
+        .email('Email must be correct'),
+      password: Yup.string()
+        .min(6, 'Must be equal 6 characters or more')
+        .max(12, 'Must be equal 12 characters or less')
+        .required('Required field'),
+    }),
+    onSubmit: ({ email, password }) => {
+      dispatch(authOperations.logIn({ email, password }));
+    },
+  });
   return (
     <Media
       queries={{
@@ -143,24 +158,29 @@ const RegistrationForm = () => {
               }}
               helperText={touched.password && errors.password}
             />
-
             <div className={styles.btnWrapper}>
               <Button
-                variant="contained"
-                color="primary"
+                className={
+                  matches.small
+                    ? classes.registerBtn
+                    : classes.registerBtnMedium
+                }
+                disabled={!isValid}
                 type="submit"
-                style={{
-                  marginBottom: 20,
-                  width: 300,
-                  borderRadius: 20,
-                  padding: '13px 68px',
-                }}
               >
-                Войти
+                {/* <Link to={routes.home} className={styles.linkBtnHome}> */}
+                Вход
+                {/* </Link> */}
               </Button>
-              <Link to={routes.register} className={styles.linkBtn}>
-                Регистрация
-              </Link>
+              <Button
+                className={
+                  matches.small ? classes.signInBtn : classes.signInBtnMedium
+                }
+              >
+                <Link to={routes.register} className={styles.linkBtn}>
+                  Регистрация
+                </Link>
+              </Button>
             </div>
           </form>
         </div>
@@ -168,5 +188,4 @@ const RegistrationForm = () => {
     </Media>
   );
 };
-
-export default RegistrationForm;
+export default LoginForm;
