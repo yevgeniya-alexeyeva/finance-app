@@ -40,19 +40,19 @@ const error = createReducer([], {
 const transactionList = createReducer([], {
   [fetchTrSuccess]: (_, { payload }) => payload.data,
   [addTransactionError]: (_, { payload }) => payload,
-  [addTransactionSuccess]: (state, { payload }) => [...state, payload.data],
-});
-
-const transactions = createReducer([], {
   [addTransactionSuccess]: (state, { payload }) => [payload.data, ...state],
 });
+
+// const transactions = createReducer([], {
+//   [addTransactionSuccess]: (state, { payload }) => [payload.data, ...state],
+// });
 
 const transactionsReducer = combineReducers({
   filter,
   loader,
   error,
   transactionList,
-  transactions,
+  // transactions,
 });
 
 export default transactionsReducer;
