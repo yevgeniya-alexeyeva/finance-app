@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import moment from 'moment';
 import Media from 'react-media';
 import DateFnsUtils from '@date-io/date-fns';
@@ -68,7 +68,7 @@ export default function AddTransactionModal() {
 
     validationSchema: Yup.object({
       transactionType: Yup.bool().required(),
-      comment: Yup.string(),
+      // comment: Yup.string().optional(),
       amount: Yup.string()
         .matches(/^\d{1,9}(\.\d{1,2})?$/)
         .required(),
@@ -112,13 +112,19 @@ export default function AddTransactionModal() {
     setSelectedDate(date);
   };
 
-  useEffect(async () => {
-    await handleDateChange(selectedDate);
+  useEffect(() => {
+    async function changeData() {
+      await handleDateChange(selectedDate);
+    }
+    changeData();
   }, [selectedDate]);
 
-  useEffect(async () => {
-    const { data } = await getCategories();
-    return setCategories(data.categorylist);
+  useEffect(() => {
+    async function fetchData() {
+      const { data } = await getCategories();
+      return setCategories(data.categorylist);
+    }
+    fetchData();
   }, []);
 
   return (
