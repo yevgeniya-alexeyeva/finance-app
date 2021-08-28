@@ -5,4 +5,21 @@ const create = async (userId, transaction) => {
   return result;
 };
 
-module.exports = { create };
+const getAll = async (owner) => {
+  return Transaction.find({ owner });
+};
+
+const getFilteredTransactions = async (id, month, year) => {
+  {
+    const data = await Transaction.find({
+      owner: id,
+      'date.year': year,
+      'date.month': month,
+    });
+
+    return data;
+  }
+};
+
+
+module.exports = { create, getAll, getFilteredTransactions, };

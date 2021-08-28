@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Media from 'react-media';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Button } from '@material-ui/core';
-import { authSelectors, authOperations } from '../../../redux/auth';
+import { authOperations } from '../../../redux/auth';
 import Exit from './logout.svg';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './LogOut.module.css';

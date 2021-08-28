@@ -12,7 +12,7 @@ import {
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import { getCategories } from '../../../services/transactions';
-import transactionOperations from '../../../redux/transactions/transactions-operations';
+import { transactionsOperations } from '../../../redux/transactions';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function AddTransaction() {
+export default function AddTransactionModal() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
@@ -89,7 +89,7 @@ export default function AddTransaction() {
           day: Number(values.date.day),
         },
       };
-      dispatch(transactionOperations.addTransaction(payload));
+      dispatch(transactionsOperations.addTransaction(payload));
       resetForm();
       setOpen(false);
     },

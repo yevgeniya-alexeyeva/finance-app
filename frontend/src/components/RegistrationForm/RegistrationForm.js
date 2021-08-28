@@ -1,7 +1,8 @@
 import routes from '../../routes';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { authOperations, authSelectors } from '../../redux/auth';
+// import {useCallback} from 'react';
+import { Link, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { authOperations } from '../../redux/auth';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import styles from './RegistrationForm.module.css';
@@ -64,8 +65,7 @@ const useStyles = makeStyles(theme => ({
 const RegistrationForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const registrationError = useSelector(authSelectors.getErrorMessage);
-  const onRegister = data => dispatch(authOperations.register(data));
+  const { push } = useHistory();
 
   const { handleSubmit, handleChange, values, touched, errors, handleBlur } =
     useFormik({
@@ -93,23 +93,12 @@ const RegistrationForm = () => {
           .max(12, 'Enter 12 symbols or less')
           .required('Required field'),
       }),
-
-      onSubmit: (values, { setSubmitting, setErrors, resetForm }) => {
-        console.log(values);
-        const { confirm, ...payload } = values;
-        onRegister(payload).then(
-          result => {
-            console.log('addItem result:', result);
-            setSubmitting(false);
-            console.log('Add Values:', values);
-            resetForm({});
-          },
-          errors => {
-            console.log(errors);
-          },
-        );
+      onSubmit: ({ email, password, name }) => {
+        dispatch(authOperations.register({ email, password, name }));
+        // push(routes.login)
       },
     });
+
   const setRangeValue = (data, touched) => {
     const countOfTouchedEl = Object.values(touched).length;
     if (!countOfTouchedEl) {
@@ -231,25 +220,21 @@ const RegistrationForm = () => {
             />
             <div className={styles.btnWrapper}>
               <Button
-                className={
-                  matches.small
-                    ? classes.registerBtn
-                    : classes.registerBtnMedium
-                }
-                disabled={valuesRange !== 4}
+                variant="contained"
+                color="primary"
                 type="submit"
+                style={{
+                  marginBottom: 20,
+                  width: 300,
+                  borderRadius: 20,
+                  padding: '13px 68px',
+                }}
               >
                 Регистрация
               </Button>
-              <Button
-                className={
-                  matches.small ? classes.signInBtn : classes.signInBtnMedium
-                }
-              >
-                <Link to={routes.login} className={styles.linkBtn}>
-                  Войти
-                </Link>
-              </Button>
+              <Link to={routes.login} className={styles.linkBtn}>
+                Войти
+              </Link>
             </div>
           </form>
         </div>
@@ -257,4 +242,5 @@ const RegistrationForm = () => {
     </Media>
   );
 };
+
 export default RegistrationForm;

@@ -1,4 +1,8 @@
 import Media from 'react-media';
+import HomeTab from '../components/HomeTab';
+import HomeTabMobile from '../components/HomeTabMobile';
+import Balance from '../components/Balance';
+import style from './HomePage.module.css';
 
 function HomePage() {
   return (
@@ -11,8 +15,10 @@ function HomePage() {
     >
       {matches => (
         <>
-          <h2>Home Page</h2>
-          {matches.small ? <p>Общая сумма</p> : undefined}
+          {matches.small ? <Balance /> : undefined}
+          <div className={style.wrapper}>
+            {matches.small ? <HomeTabMobile /> : <HomeTab />}
+          </div>
         </>
       )}
     </Media>

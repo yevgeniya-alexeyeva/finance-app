@@ -1,8 +1,4 @@
-import {
-  configureStore,
-  combineReducers,
-  getDefaultMiddleware,
-} from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import {
   persistStore,
   persistReducer,
@@ -16,7 +12,7 @@ import {
 import storage from 'redux-persist/lib/storage';
 import logger from 'redux-logger';
 import { authReducer } from './auth';
-import transactionsReducer from './transactions/transactions-reduser';
+import { transactionsReducer } from './transactions';
 
 const middleware = [
   ...getDefaultMiddleware({
@@ -32,13 +28,11 @@ const authPersistConfig = {
   whitelist: ['token'],
 };
 
-const rootReducer = combineReducers({
-  auth: persistReducer(authPersistConfig, authReducer),
-  transactions: transactionsReducer,
-});
-
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    transactions: transactionsReducer,
+  },
   middleware,
   devTools: process.env.NODE_ENV === 'development',
 });

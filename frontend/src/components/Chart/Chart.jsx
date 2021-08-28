@@ -1,8 +1,12 @@
 import { Doughnut } from 'react-chartjs-2';
 import styles from './Chart.module.css';
 import { diagramColors } from '../../utils';
+import { authSelectors } from '../../redux/auth';
+import { useSelector } from 'react-redux';
 
-const Chart = ({ costs }) => {
+const Chart = ({ costs = [100] }) => {
+  const balance = useSelector(authSelectors.getUserBalance);
+
   const data = {
     datasets: [
       {
@@ -15,6 +19,7 @@ const Chart = ({ costs }) => {
 
   return (
     <div className={styles.chartWrapper}>
+      <div className={styles.balance}>{`${balance}`}</div>
       <Doughnut data={data} />
     </div>
   );

@@ -1,8 +1,12 @@
 import * as api from '../../services/transactions';
+
 import {
   filterTrRequest,
   filterTrSuccess,
   filterTrError,
+  fetchTrRequest,
+  fetchTrSuccess,
+  fetchTrError,
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
@@ -29,4 +33,15 @@ const addTransaction = newTransaction => async dispatch => {
   }
 };
 
-export default { getFilteredTrList, addTransaction };
+const fetchTrList = () => async dispatch => {
+  dispatch(fetchTrRequest());
+  try {
+    const data = await api.getAllTransactions();
+    dispatch(fetchTrSuccess(data));
+  } catch (error) {
+    dispatch(fetchTrError());
+  }
+};
+
+// eslint-disable-next-line
+export default { getFilteredTrList, addTransaction, fetchTrList };

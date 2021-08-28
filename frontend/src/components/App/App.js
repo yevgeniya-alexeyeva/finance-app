@@ -1,4 +1,4 @@
-import { Suspense, lazy, useEffect } from 'react';
+import { Suspense, lazy } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
@@ -22,7 +22,11 @@ function App() {
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
-        <PublicRoute path={routes.register} restricted redirectTo={routes.home}>
+        <PublicRoute
+          path={routes.register}
+          restricted
+          redirectTo={routes.login}
+        >
           <RegisterPage />
         </PublicRoute>
 
