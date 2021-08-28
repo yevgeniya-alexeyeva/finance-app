@@ -31,7 +31,7 @@ const resendVerifyEmail = async (req, res, next) => {
     const mail = {
       to: email,
       subject: 'Verification',
-      text: `http://localhost:3000/users/verify/${user.verifyToken}`,
+      text: `https://612a4c290d73d595ea17f2a0--finance-app-wallet.netlify.app/users/verify/${user.verifyToken}`,
     };
     sendMail(mail);
     res.json({

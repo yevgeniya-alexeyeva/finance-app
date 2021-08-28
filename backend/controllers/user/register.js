@@ -23,7 +23,7 @@ const register = async (req, res, next) => {
     const mail = {
       to: email,
       subject: 'Verification',
-      text: `http://localhost:3000/users/verify/${verifyToken}`,
+      text: `https://612a4c290d73d595ea17f2a0--finance-app-wallet.netlify.app/users/verify/${verifyToken}`,
     };
     sendMail(mail);
     res.status(201).json({
