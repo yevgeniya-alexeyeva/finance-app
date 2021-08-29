@@ -10,9 +10,10 @@ require('./utils/passport-config');
 const app = express();
 
 // Middlewares
+app.use(cors({ origin: true, credentials: true }));
+
 const formatsLogger = app.get('env') === 'development' ? 'dev' : 'short';
 app.use(logger(formatsLogger));
-app.use(cors());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

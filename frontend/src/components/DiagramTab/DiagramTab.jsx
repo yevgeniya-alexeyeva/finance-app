@@ -7,7 +7,6 @@ import {
 import Chart from '../Chart';
 import Tab from '../Tab';
 import styles from './DiagramTab.module.css';
-// import { defaultCostSheet } from '../../utils';
 
 const DiagramTab = () => {
   const currentMonth = new Date().getMonth() + 1;
@@ -24,7 +23,6 @@ const DiagramTab = () => {
       [e.target.name]: e.target.value,
     }));
 
-  // const isLoading = useSelector(getIsLoading);
   const { filteredCosts, income, totalCost } = useSelector(
     transactionsSelectors.getFilteredTransactions,
   );
@@ -33,7 +31,7 @@ const DiagramTab = () => {
 
   useEffect(() => {
     dispatch(transactionsOperations.getFilteredTrList(data));
-  }, [data]);
+  }, [dispatch, data]);
 
   return (
     <div>
