@@ -1,7 +1,7 @@
 import { Suspense, lazy } from 'react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
 import { authOperations } from '../../redux/auth';
@@ -17,9 +17,6 @@ const LogInPage = lazy(() =>
 const DashboardPage = lazy(() =>
   import('../../pages/DashboardPage' /* webpackChunkName: "dashboard-page" */),
 );
-const NotFoundPage = lazy(() =>
-  import('../../pages/NotFoundPage' /* webpackChunkName: "notFound-page" */),
-);
 
 function App() {
   const dispatch = useDispatch();
@@ -27,6 +24,7 @@ function App() {
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
   }, [dispatch]);
+
   return (
     <Suspense fallback={<Loader />}>
       <Switch>
@@ -46,7 +44,7 @@ function App() {
           <DashboardPage />
         </ProtectedRoute>
 
-        <Route component={NotFoundPage} />
+        <Redirect to={routes.login} />
       </Switch>
     </Suspense>
   );

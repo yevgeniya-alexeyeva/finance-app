@@ -10,6 +10,9 @@ import {
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
+  fetchCategoriesRequest,
+  fetchCategoriesSuccess,
+  fetchCategoriesError,
 } from './transactions-actions';
 
 const initialFilterData = { filteredCosts: [], income: 0, totalCost: 0 };
@@ -28,6 +31,9 @@ const loader = createReducer([], {
   [addTransactionRequest]: () => true,
   [addTransactionSuccess]: () => false,
   [addTransactionError]: () => false,
+  [fetchCategoriesRequest]: () => true,
+  [fetchCategoriesSuccess]: () => false,
+  [fetchCategoriesError]: () => false,
 });
 
 const error = createReducer([], {
@@ -39,12 +45,12 @@ const error = createReducer([], {
 
 const transactionList = createReducer([], {
   [fetchTrSuccess]: (_, { payload }) => payload.data,
-  [addTransactionError]: (_, { payload }) => payload,
+  [addTransactionError]: (_, { payload }) => payload.data,
   [addTransactionSuccess]: (state, { payload }) => [...state, payload.data],
 });
 
-const transactions = createReducer([], {
-  [addTransactionSuccess]: (state, { payload }) => [payload.data, ...state],
+const categories = createReducer([], {
+  [fetchCategoriesSuccess]: (_, { payload }) => payload.categorylist,
 });
 
 const transactionsReducer = combineReducers({
@@ -52,7 +58,7 @@ const transactionsReducer = combineReducers({
   loader,
   error,
   transactionList,
-  transactions,
+  categories,
 });
 
 export default transactionsReducer;
