@@ -13,22 +13,12 @@ import {
   getCurrentUserSuccess,
   getCurrentUserError,
 } from './auth-actions';
-
-axios.defaults.baseURL = 'https://git.heroku.com/finance-app-wallet.git';
-
-const token = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+import BASE_URL from '../../utils/environments';
 
 const register = credentials => async dispatch => {
   dispatch(registerRequest());
   try {
-    const response = await axios.post('/users/signup', credentials);
+    const response = await axios.post(`${BASE_URL}/users/signup`, credentials);
     dispatch(registerSuccess(response.data));
   } catch (error) {
     dispatch(registerError(error.message));
@@ -38,8 +28,7 @@ const register = credentials => async dispatch => {
 const logIn = credentials => async dispatch => {
   dispatch(loginRequest());
   try {
-    const response = await axios.post('/users/login', credentials);
-    token.set(response.data.token);
+    const response = await axios.post(`${BASE_URL}/users/login`, credentials);
     dispatch(loginSuccess(response.data));
   } catch (error) {
     dispatch(loginError(error.message));
@@ -49,15 +38,14 @@ const logIn = credentials => async dispatch => {
 const logOut = () => async dispatch => {
   dispatch(logoutRequest());
   try {
-    await axios.post('/users/logout');
-    token.unset();
+    await axios.post(`${BASE_URL}/users/logout`);
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutError(error.message));
   }
 };
 
-const getCurrentUser = () => async (dispatch, getState) => {
+const getCurrentUser = token => async (dispatch, getState) => {
   const {
     auth: { token: persistedToken },
   } = getState();
@@ -65,10 +53,11 @@ const getCurrentUser = () => async (dispatch, getState) => {
   if (!persistedToken) {
     return;
   }
-  token.set(persistedToken);
   dispatch(getCurrentUserRequest());
   try {
-    const response = await axios.get('/users/current');
+    const response = await axios.get(`${BASE_URL}/users/current`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     dispatch(getCurrentUserSuccess(response.data));
   } catch (error) {
     dispatch(getCurrentUserError(error.message));

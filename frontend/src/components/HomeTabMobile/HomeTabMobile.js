@@ -1,87 +1,39 @@
 import style from './HomeTabMobile.module.css';
+import { useEffect } from 'react';
+import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { transactionsOperations } from '../../redux/transactions';
 
-const rows = [
-  {
-    date: '04.01.19',
-    type: '-',
-    category: 'Разное',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '-',
-    category: 'Разное',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '+',
-    category: 'Нерегулярный доход +++',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '+',
-    category: 'Разное',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '+',
-    category: 'Нерегулярный доход +++',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '+',
-    category: 'Разное',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '+',
-    category: 'Нерегулярный доход +++',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-  {
-    date: '04.01.19',
-    type: '+',
-    category: 'Разное',
-    comment: 'Подарок жене',
-    price: '221 300.00',
-    balance: '6900.00',
-  },
-];
 const HomeTabMobile = () => {
-  return (
+  const dispatch = useDispatch();
+  const transactions = useSelector(
+    state => state.transactions.transactionList,
+    shallowEqual,
+  );
+
+  useEffect(() => {
+    dispatch(transactionsOperations.fetchTrList());
+  }, [dispatch]);
+  return transactions.length ? (
     <ul>
-      {rows.map(i => {
-        const accent = i.type === '-' ? style.accentRed : style.accentGreen;
+      {transactions.map(i => {
+        const date = `${i.date.day}.${i.date.month}.${i.date.year
+          .toString()
+          .split('')
+          .slice(2)
+          .join('')}`;
+        const type = i.transactionType === 'deposit' ? '+' : '-';
+        const accent = type === '-' ? style.accentRed : style.accentGreen;
 
         return (
-          <li className={style.listItem}>
+          <li key={i._id} className={style.listItem.concat(' ', accent)}>
             <ul className={style.transaktionList}>
               <li className={style.transaktionDescr}>
                 <p>Дата</p>
-                <p className={style.row}>{i.date}</p>
+                <p className={style.row}>{date}</p>
               </li>
               <li className={style.transaktionDescr}>
                 <p>Тип</p>
-                <p className={style.row}>{i.type}</p>
+                <p className={style.row}>{type}</p>
               </li>
               <li className={style.transaktionDescr}>
                 <p>Категория</p>
@@ -93,17 +45,21 @@ const HomeTabMobile = () => {
               </li>
               <li className={style.transaktionDescr}>
                 <p>Сумма</p>
-                <p className={style.row.concat(' ', accent)}>{i.price}</p>
+                <p className={style.row.concat(' ', style.amount)}>
+                  {i.amount}
+                </p>
               </li>
               <li className={style.transaktionDescr}>
                 <p>Баланс</p>
-                <p className={style.row}>{i.balance}</p>
+                <p className={style.row}>{i.balanceAfter}</p>
               </li>
             </ul>
           </li>
         );
       })}
     </ul>
+  ) : (
+    <p className={style.empty}>No such user's collection</p>
   );
 };
 

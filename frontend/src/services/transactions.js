@@ -1,11 +1,11 @@
 import axios from 'axios';
+import BASE_URL from '../utils/environments';
 
-axios.defaults.baseURL = 'https://git.heroku.com/finance-app-wallet.git';
-
-export const getFilteredTransactions = async (month, year) => {
+export const getFilteredTransactions = async (month, year, token) => {
   try {
     const { data } = await axios.get(
-      `/transactions/filter?year=${year}&month=${month}`,
+      `${BASE_URL}/transactions/filter?year=${year}&month=${month}`,
+      { headers: { Authorization: `Bearer ${token}` } },
     );
     return data;
   } catch (error) {
@@ -13,20 +13,26 @@ export const getFilteredTransactions = async (month, year) => {
   }
 };
 
-export const getAllTransactions = async () => {
+export const getAllTransactions = async token => {
   try {
-    return await axios.get('/transactions');
+    return await axios.get(`${BASE_URL}/transactions`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
   } catch (error) {
     console.error(error);
   }
 };
 
-export const getCategories = async () => {
-  const { data } = await axios.get('/transactions/categories');
+export const getCategories = async token => {
+  const { data } = await axios.get(`${BASE_URL}/transactions/categories`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return data;
 };
 
-export const addNewTransaction = async data => {
-  const response = await axios.post('/transactions', data);
+export const addNewTransaction = async (data, token) => {
+  const response = await axios.post(`${BASE_URL}/transactions`, data, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response;
 };

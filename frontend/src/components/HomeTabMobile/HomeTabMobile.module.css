@@ -15,7 +15,6 @@ ul {
   content: '';
   display: block;
   width: 5px;
-  background-color: var(--green-color-accent);
 }
 .transaktionList {
   width: 100%;
@@ -38,11 +37,18 @@ ul {
   font-size: 16px;
   margin-left: auto;
 }
-.accentRed {
+
+.listItem.accentGreen .amount {
+  font-weight: bold;
+  color: var(--green-color-accent);
+}
+.listItem.accentGreen::before {
+  background-color: var(--green-color-accent);
+}
+.listItem.accentRed .amount {
   font-weight: bold;
   color: var(--red-color-accent);
 }
-.accentGreen {
-  font-weight: bold;
-  color: var(--green-color-accent);
+.listItem.accentRed::before {
+  background-color: var(--red-color-accent);
 }
