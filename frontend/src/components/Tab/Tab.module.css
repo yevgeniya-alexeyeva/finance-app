@@ -6,6 +6,7 @@
   width: 280px;
   font-size: 16px;
   color: var(--primary-text-color);
+  margin: 0 auto;
 }
 
 /*table header*/
@@ -38,6 +39,7 @@
 .costsList {
   padding: 0;
   margin: 0;
+  text-align: left;
 }
 .costItem {
   width: 100%;
@@ -100,6 +102,6 @@
   }
   .tabWrapper {
     width: 350px;
-    margin-left: 35px;
+    margin: 0 0 0 35px;
   }
 }
