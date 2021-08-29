@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { authSelectors } from '../../redux/auth';
 import {
   transactionsSelectors,
   transactionsOperations,
@@ -26,12 +27,13 @@ const DiagramTab = () => {
   const { filteredCosts, income, totalCost } = useSelector(
     transactionsSelectors.getFilteredTransactions,
   );
+  const token = useSelector(authSelectors.getToken);
 
   const costList = filteredCosts.map(item => item.amount);
 
   useEffect(() => {
-    dispatch(transactionsOperations.getFilteredTrList(data));
-  }, [dispatch, data]);
+    dispatch(transactionsOperations.getFilteredTrList(data, token));
+  }, [dispatch, data, token]);
 
   return (
     <div>

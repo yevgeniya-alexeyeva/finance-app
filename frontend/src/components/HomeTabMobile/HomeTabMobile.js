@@ -12,7 +12,7 @@ const HomeTabMobile = () => {
 
   useEffect(() => {
     dispatch(transactionsOperations.fetchTrList());
-  }, []);
+  }, [dispatch]);
   return transactions.length ? (
     <ul>
       {transactions.map(i => {

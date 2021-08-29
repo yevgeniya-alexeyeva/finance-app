@@ -1,10 +1,11 @@
 import { useEffect } from 'react';
 import Media from 'react-media';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Suspense, lazy } from 'react';
 import { Switch, Route, useLocation } from 'react-router-dom';
 import routes from '../routes';
 import { authOperations } from '../redux/auth';
+import { authSelectors } from '../redux/auth';
 import Header from '../components/Header';
 import Container from '../components/UI/Container';
 import MobileNavigation from '../components/MobileNavigation';
@@ -27,11 +28,14 @@ const CurrencyAsync = lazy(() =>
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
+
   const { pathname } = useLocation();
 
+  const token = useSelector(authSelectors.getToken);
+
   useEffect(() => {
-    dispatch(authOperations.getCurrentUser());
-  }, [dispatch]);
+    dispatch(authOperations.getCurrentUser(token));
+  }, [dispatch, token]);
 
   return (
     <Media

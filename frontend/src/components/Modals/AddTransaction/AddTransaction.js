@@ -15,6 +15,7 @@ import {
   transactionsOperations,
   transactionsSelectors,
 } from '../../../redux/transactions';
+import { authSelectors } from '../../../redux/auth';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -58,6 +59,7 @@ export default function AddTransactionModal() {
   const [selectedDate, setSelectedDate] = useState(Date.now());
   const categories = useSelector(transactionsSelectors.getCategories);
   const dispatch = useDispatch();
+  const token = useSelector(authSelectors.getToken);
 
   const f = useFormik({
     initialValues: {
@@ -90,7 +92,7 @@ export default function AddTransactionModal() {
         categoryId: !!values.categoryId ? values.categoryId : null,
         date: dateObj,
       };
-      dispatch(transactionsOperations.addTransaction(payload));
+      dispatch(transactionsOperations.addTransaction(payload, token));
       setSelectedDate(Date.now());
       resetForm();
       handleClose();
@@ -111,8 +113,8 @@ export default function AddTransactionModal() {
   };
 
   useEffect(() => {
-    dispatch(transactionsOperations.fetchCategories());
-  }, [dispatch]);
+    dispatch(transactionsOperations.fetchCategories(token));
+  }, [dispatch, token]);
 
   return (
     <Media
