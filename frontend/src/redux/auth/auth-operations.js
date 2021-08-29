@@ -14,7 +14,7 @@ import {
   getCurrentUserError,
 } from './auth-actions';
 
-axios.defaults.baseURL = 'http://localhost:3000/';
+// axios.defaults.baseURL = 'http://localhost:3000/';
 
 const token = {
   set(token) {
@@ -28,7 +28,10 @@ const token = {
 const register = credentials => async dispatch => {
   dispatch(registerRequest());
   try {
-    const response = await axios.post('/users/signup', credentials);
+    const response = await axios.post(
+      'http://localhost:3000/users/signup',
+      credentials,
+    );
     dispatch(registerSuccess(response.data));
   } catch (error) {
     dispatch(registerError(error.message));
@@ -38,7 +41,10 @@ const register = credentials => async dispatch => {
 const logIn = credentials => async dispatch => {
   dispatch(loginRequest());
   try {
-    const response = await axios.post('/users/login', credentials);
+    const response = await axios.post(
+      'http://localhost:3000/users/login',
+      credentials,
+    );
     token.set(response.data.token);
     dispatch(loginSuccess(response.data));
   } catch (error) {
@@ -49,7 +55,7 @@ const logIn = credentials => async dispatch => {
 const logOut = () => async dispatch => {
   dispatch(logoutRequest());
   try {
-    await axios.post('/users/logout');
+    await axios.post('http://localhost:3000/users/logout');
     token.unset();
     dispatch(logoutSuccess());
   } catch (error) {
@@ -68,7 +74,7 @@ const getCurrentUser = () => async (dispatch, getState) => {
   token.set(persistedToken);
   dispatch(getCurrentUserRequest());
   try {
-    const response = await axios.get('/users/current');
+    const response = await axios.get('http://localhost:3000/users/current');
     dispatch(getCurrentUserSuccess(response.data));
   } catch (error) {
     dispatch(getCurrentUserError(error.message));
