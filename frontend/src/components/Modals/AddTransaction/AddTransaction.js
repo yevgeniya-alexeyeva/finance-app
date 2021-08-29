@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useFormik } from 'formik';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import moment from 'moment';
 import Media from 'react-media';
 import DateFnsUtils from '@date-io/date-fns';
@@ -11,8 +11,10 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { getCategories } from '../../../services/transactions';
-import { transactionsOperations } from '../../../redux/transactions';
+import {
+  transactionsOperations,
+  transactionsSelectors,
+} from '../../../redux/transactions';
 import Header from '../../Header';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
@@ -53,42 +55,44 @@ export default function AddTransactionModal() {
   const classes = useStyles();
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
-  const [categories, setCategories] = useState();
   const [selectedDate, setSelectedDate] = useState(Date.now());
+  const categories = useSelector(transactionsSelectors.getCategories);
   const dispatch = useDispatch();
 
   const f = useFormik({
     initialValues: {
       transactionType: false,
-      comment: null,
+      comment: '',
       amount: '0.00',
-      categoryId: null,
+      categoryId: '',
       date: selectedDate,
     },
-
     validationSchema: Yup.object({
       transactionType: Yup.bool().required(),
-      // comment: Yup.string().optional(),
+      comment: Yup.string().optional(),
       amount: Yup.string()
-        .matches(/^\d{1,9}(\.\d{1,2})?$/)
+        .matches(/^[1-9]\d{0,9}(\.\d{1,2})?$/)
         .required(),
-      categoryId: Yup.string().nullable(),
-      date: Yup.object().nullable().required(),
+      categoryId: Yup.string(),
+      date: Yup.number().required(),
     }),
-
-    onSubmit: async (values, { setValues }) => {
+    onSubmit: (values, { resetForm }) => {
+      const time = moment(values.date).format('DD.MM.YYYY').split('.');
+      const dateObj = {
+        day: Number(time[0]),
+        month: Number(time[1]),
+        year: Number(time[2]),
+      };
       const payload = {
         transactionType: values.transactionType ? 'deposit' : 'withdrawal',
-        comment: values.comment,
+        comment: !!values.comment ? values.comment : null,
         amount: Number(values.amount),
-        categoryId: values.categoryId,
-        date: {
-          year: Number(values.date.year),
-          month: Number(values.date.month),
-          day: Number(values.date.day),
-        },
+        categoryId: !!values.categoryId ? values.categoryId : null,
+        date: dateObj,
       };
       dispatch(transactionsOperations.addTransaction(payload));
+      setSelectedDate(Date.now());
+      resetForm();
       handleClose();
     },
   });
@@ -102,28 +106,13 @@ export default function AddTransactionModal() {
   };
 
   const handleDateChange = date => {
-    const time = moment(date).format('DD.MM.YYYY').split('.');
-    f.setValues({
-      ...f.values,
-      date: { day: time[0], month: time[1], year: time[2] },
-    });
+    f.setValues({ ...f.values, date: Date.parse(date) });
     setSelectedDate(date);
   };
 
   useEffect(() => {
-    async function changeData() {
-      await handleDateChange(selectedDate);
-    }
-    changeData();
-  }, [selectedDate]);
-
-  useEffect(() => {
-    async function fetchData() {
-      const { data } = await getCategories();
-      return setCategories(data.categorylist);
-    }
-    fetchData();
-  }, []);
+    dispatch(transactionsOperations.fetchCategories());
+  }, [dispatch]);
 
   return (
     <Media

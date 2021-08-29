@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Media from 'react-media';
 import { useDispatch } from 'react-redux';
 import { Suspense, lazy } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import routes from '../routes';
 import { authOperations } from '../redux/auth';
 import Header from '../components/Header';
@@ -27,6 +27,7 @@ const CurrencyAsync = lazy(() =>
 
 const DashboardPage = () => {
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser());
@@ -55,9 +56,11 @@ const DashboardPage = () => {
                 </div>
               </div>
 
-              <div className={styles.btnAdd}>
-                <AddTransaction />
-              </div>
+              {pathname.includes('home') && (
+                <div className={styles.btnAdd}>
+                  <AddTransaction />
+                </div>
+              )}
               <Suspense fallback={<Loader />}>
                 <Switch>
                   <Route exact path={routes.home} component={HomeAsync} />

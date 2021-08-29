@@ -17,3 +17,12 @@ export const addTransactionSuccess = createAction(
 export const addTransactionError = createAction(
   'transactions/addTransactionError',
 );
+export const fetchCategoriesRequest = createAction(
+  'transactions/fetchCategoriesRequest',
+);
+export const fetchCategoriesSuccess = createAction(
+  'transactions/fetchCategoriesSuccess',
+);
+export const fetchCategoriesError = createAction(
+  'transactions/fetchCategoriesError',
+);

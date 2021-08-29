@@ -9,6 +9,9 @@ import {
   addTransactionRequest,
   addTransactionSuccess,
   addTransactionError,
+  fetchCategoriesRequest,
+  fetchCategoriesSuccess,
+  fetchCategoriesError,
 } from './transactions-actions';
 
 const getFilteredTrList =
@@ -44,5 +47,19 @@ const fetchTrList = () => async dispatch => {
   }
 };
 
+const fetchCategories = () => async dispatch => {
+  dispatch(fetchCategoriesRequest());
+  try {
+    const { data } = await api.getCategories();
+    dispatch(fetchCategoriesSuccess(data));
+  } catch (error) {
+    dispatch(fetchCategoriesError());
+  }
+};
 // eslint-disable-next-line
-export default { getFilteredTrList, addTransaction, fetchTrList };
+export default {
+  getFilteredTrList,
+  addTransaction,
+  fetchTrList,
+  fetchCategories,
+};
