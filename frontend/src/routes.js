@@ -1,10 +1,10 @@
 const routes = {
   register: '/register',
   login: '/login',
-  dashboard: '/dashboard',
-  home: '/dashboard/home',
-  diagram: '/dashboard/diagram',
-  currency: '/dashboard/currency',
+  dashboard: '/',
+  home: '/home',
+  diagram: '/diagram',
+  currency: '/currency',
 };
 
 export default routes;

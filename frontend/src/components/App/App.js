@@ -1,10 +1,11 @@
 import { Suspense, lazy } from 'react';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Switch, Redirect } from 'react-router-dom';
 import ProtectedRoute from '../ProtectedRoute';
 import PublicRoute from '../PublicRoute';
 import { authOperations } from '../../redux/auth';
+import { authSelectors } from '../../redux/auth';
 import routes from '../../routes';
 import Loader from '../Loader';
 
@@ -21,9 +22,12 @@ const DashboardPage = lazy(() =>
 function App() {
   const dispatch = useDispatch();
 
+  const token = useSelector(authSelectors.getToken);
+  console.log('🚀 ~ file: App.js ~ line 26 ~ App ~ token', token);
+
   useEffect(() => {
-    dispatch(authOperations.getCurrentUser());
-  }, [dispatch]);
+    dispatch(authOperations.getCurrentUser(token));
+  }, [dispatch, token]);
 
   return (
     <Suspense fallback={<Loader />}>
@@ -35,15 +39,12 @@ function App() {
         >
           <RegisterPage />
         </PublicRoute>
-
         <PublicRoute path={routes.login} restricted redirectTo={routes.home}>
           <LogInPage />
         </PublicRoute>
-
         <ProtectedRoute path={routes.dashboard} redirectTo={routes.login}>
           <DashboardPage />
         </ProtectedRoute>
-
         <Redirect to={routes.login} />
       </Switch>
     </Suspense>

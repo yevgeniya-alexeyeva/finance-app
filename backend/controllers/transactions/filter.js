@@ -6,6 +6,15 @@ const filter = async (req, res, next) => {
   const { _id: id } = req.user;
   const { month, year } = req.query;
 
+  if (!year) {
+    res.status(400).json({
+      status: 'bad request',
+      code: 400,
+      message: 'Year is required',
+    });
+    return;
+  }
+
   try {
     const categoriesList = await categories.getAll();
 
