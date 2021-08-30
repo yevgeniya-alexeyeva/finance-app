@@ -35,10 +35,12 @@ const logIn = credentials => async dispatch => {
   }
 };
 
-const logOut = () => async dispatch => {
+const logOut = token => async dispatch => {
   dispatch(logoutRequest());
   try {
-    await axios.post(`${BASE_URL}/users/logout`);
+    await axios.post(`${BASE_URL}/users/logout`, null, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     dispatch(logoutSuccess());
   } catch (error) {
     dispatch(logoutError(error.message));
