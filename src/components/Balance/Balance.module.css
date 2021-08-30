@@ -34,7 +34,7 @@ p {
   .wrapper {
     width: 334px;
     padding: 8px 40px;
-    margin: 20px auto 40px;
+    margin: 20px auto 0;
   }
 }
 @media screen and (min-width: 1280px) {

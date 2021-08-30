@@ -15,7 +15,7 @@ const MobileNavigation = () => {
     >
       {matches => (
         <ul className={styles.list}>
-          <li>
+          <li className={styles.listItem}>
             <NavLink
               to={routes.home}
               activeClassName={styles.btnActive}
@@ -27,7 +27,7 @@ const MobileNavigation = () => {
               {!matches.small && 'Главная'}
             </NavLink>
           </li>
-          <li>
+          <li className={styles.listItem}>
             <NavLink
               to={routes.diagram}
               activeClassName={styles.btnActive}
