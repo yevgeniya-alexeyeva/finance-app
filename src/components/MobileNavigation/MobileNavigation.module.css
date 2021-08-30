@@ -6,6 +6,7 @@
   display: flex;
   justify-content: space-around;
 }
+
 .icon {
   fill: #6e78e8;
   border-radius: 8px;
@@ -37,8 +38,9 @@
   .list {
     display: block;
   }
-  .list li {
-    margin: 5px;
+  .listItem {
+    margin-top: 10px;
+    height: 27px;
   }
   .icon {
     margin-right: 20px;
