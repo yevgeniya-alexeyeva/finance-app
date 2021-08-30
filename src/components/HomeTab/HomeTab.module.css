@@ -79,6 +79,7 @@ p {
 .tab {
   width: 100%;
 }
+
 .scroll {
   max-height: 70vh;
   overflow-y: scroll;

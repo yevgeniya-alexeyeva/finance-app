@@ -66,7 +66,7 @@ export default function AddTransactionModal() {
       transactionType: false,
       comment: '',
       amount: '0.00',
-      categoryId: '',
+      category: '',
       date: selectedDate,
     },
     validationSchema: Yup.object({
@@ -75,7 +75,7 @@ export default function AddTransactionModal() {
       amount: Yup.string()
         .matches(/^[1-9]\d{0,9}(\.\d{1,2})?$/)
         .required(),
-      categoryId: Yup.string(),
+      category: Yup.string().nullable(),
       date: Yup.number().required(),
     }),
     onSubmit: (values, { resetForm }) => {
@@ -89,7 +89,7 @@ export default function AddTransactionModal() {
         transactionType: values.transactionType ? 'deposit' : 'withdrawal',
         comment: !!values.comment ? values.comment : null,
         amount: Number(values.amount),
-        categoryId: !!values.categoryId ? values.categoryId : null,
+        category: !!values.category ? values.category : null,
         date: dateObj,
       };
       dispatch(transactionsOperations.addTransaction(payload, token));
@@ -168,9 +168,9 @@ export default function AddTransactionModal() {
                           f.setValues({
                             ...f.values,
                             transactionType: e.target.checked,
-                            categoryId: e.target.checked
+                            category: e.target.checked
                               ? null
-                              : f.values.categoryId,
+                              : f.values.category,
                           })
                         }
                         checked={f.values.transactionType}
@@ -190,21 +190,19 @@ export default function AddTransactionModal() {
                     {!f.values.transactionType && categories ? (
                       <TextField
                         error={
-                          f.errors.categoryId && f.touched.categoryId
-                            ? true
-                            : false
+                          f.errors.category && f.touched.category ? true : false
                         }
                         fullWidth
-                        id="categoryId"
-                        name="categoryId"
+                        id="category"
+                        name="category"
                         color="secondary"
                         label="Выберите категорию"
                         select
-                        value={f.values.categoryId}
+                        value={f.values.category}
                         onChange={f.handleChange}
                         helperText={
-                          f.errors?.categoryId && f.touched.categoryId
-                            ? f.errors?.categoryId
+                          f.errors?.category && f.touched.category
+                            ? f.errors?.category
                             : ' '
                         }
                         className={styles.input}
