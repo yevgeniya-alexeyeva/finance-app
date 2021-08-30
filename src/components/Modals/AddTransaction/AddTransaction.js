@@ -89,13 +89,9 @@ export default function AddTransactionModal() {
         transactionType: values.transactionType ? 'deposit' : 'withdrawal',
         comment: !!values.comment ? values.comment : null,
         amount: Number(values.amount),
-        categoryId: !!values.category ? values.category : null,
+        categoryId: !!values.categoryId ? values.categoryId : null,
         date: dateObj,
       };
-      console.log(
-        '🚀 ~ file: AddTransaction.js ~ line 95 ~ AddTransactionModal ~ payload',
-        payload,
-      );
       dispatch(transactionsOperations.addTransaction(payload, token));
       setSelectedDate(Date.now());
       resetForm();
@@ -194,7 +190,9 @@ export default function AddTransactionModal() {
                     {!f.values.transactionType && categories ? (
                       <TextField
                         error={
-                          f.errors.category && f.touched.category ? true : false
+                          f.errors.categoryId && f.touched.categoryId
+                            ? true
+                            : false
                         }
                         fullWidth
                         id="categoryId"
