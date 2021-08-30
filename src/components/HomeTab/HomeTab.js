@@ -42,7 +42,9 @@ const HomeTab = () => {
                 .split('')
                 .slice(2)
                 .join('')}`;
-              const category = categories.find(item => item.id === i.category);
+              const category = categories.find(
+                item => item.id === i.categoryId,
+              );
               const type = i.transactionType === 'deposit' ? '+' : '-';
               const accent = type === '-' ? style.accentRed : style.accentGreen;
               return (
@@ -52,7 +54,7 @@ const HomeTab = () => {
                   <p className={style.row}>{category?.name || 'Депозит'}</p>
                   <p className={style.row}>{i.comment}</p>
                   <p className={style.row.concat(' ', accent)}>{i.amount}</p>
-                  <p className={style.row}>{i.balanceAfter}</p>
+                  <p className={style.row}>{i.balance}</p>
                 </div>
               );
             })}

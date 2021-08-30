@@ -21,10 +21,8 @@ const DashboardPage = lazy(() =>
 
 function App() {
   const dispatch = useDispatch();
-  console.log('deploy s');
 
   const token = useSelector(authSelectors.getToken);
-  console.log('🚀 ~ file: App.js ~ line 26 ~ App ~ token', token);
 
   useEffect(() => {
     dispatch(authOperations.getCurrentUser(token));
