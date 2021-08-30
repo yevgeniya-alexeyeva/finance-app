@@ -44,9 +44,9 @@ const error = createReducer([], {
 });
 
 const transactionList = createReducer([], {
-  [fetchTrSuccess]: (_, { payload }) => payload.data,
+  [fetchTrSuccess]: (_, { payload }) => payload.data.reverse(),
   [addTransactionError]: (_, { payload }) => payload.data,
-  [addTransactionSuccess]: (state, { payload }) => [...state, payload.data],
+  [addTransactionSuccess]: (state, { payload }) => [payload.data, ...state],
 });
 
 const categories = createReducer([], {
