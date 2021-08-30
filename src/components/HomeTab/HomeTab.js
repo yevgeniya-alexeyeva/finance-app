@@ -35,7 +35,7 @@ const HomeTab = () => {
             <p>Сумма</p>
             <p>Баланс</p>
           </div>
-          <div className={style.scroll}>
+          <ul className={style.scroll}>
             {transactions.map(i => {
               const date = `${i.date.day}.${i.date.month}.${i.date.year
                 .toString()
@@ -48,17 +48,17 @@ const HomeTab = () => {
               const type = i.transactionType === 'deposit' ? '+' : '-';
               const accent = type === '-' ? style.accentRed : style.accentGreen;
               return (
-                <div key={i._id} className={style.transactions}>
+                <li key={i._id} className={style.transactions}>
                   <p className={style.row}>{date}</p>
                   <p className={style.row}>{type}</p>
                   <p className={style.row}>{category?.name || 'Депозит'}</p>
                   <p className={style.row}>{i.comment}</p>
                   <p className={style.row.concat(' ', accent)}>{i.amount}</p>
                   <p className={style.row}>{i.balance}</p>
-                </div>
+                </li>
               );
             })}
-          </div>
+          </ul>
         </div>
       )}
       {!loading && !transactions.length && (
