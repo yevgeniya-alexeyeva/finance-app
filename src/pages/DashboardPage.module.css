@@ -9,16 +9,16 @@
     padding-top: 10px;
     padding-bottom: 10px;
     text-align: center;
+    z-index: 20;
   }
   .btnAdd {
     bottom: 30px;
     right: 20px;
   }
 }
-
 @media (min-width: 768px) and (max-width: 1279px) {
   .content {
-    padding-top: 20px;
+    padding-top: 30px;
     padding-bottom: 20px;
   }
   .walletPanel {
@@ -29,8 +29,13 @@
     bottom: 40px;
     right: 40px;
   }
+  .wrapperImg {
+    background-image: url('../images/bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
+  }
 }
-
 @media (min-width: 1280px) {
   .content {
     padding: 0;
@@ -48,5 +53,11 @@
   .btnAdd {
     bottom: 40px;
     right: 85px;
+  }
+  .wrapperImg {
+    background-image: url('../images/bg.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto;
   }
 }
