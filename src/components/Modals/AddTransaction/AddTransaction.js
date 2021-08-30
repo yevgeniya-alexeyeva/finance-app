@@ -66,7 +66,7 @@ export default function AddTransactionModal() {
       transactionType: false,
       comment: '',
       amount: '0.00',
-      category: '',
+      categoryId: '',
       date: selectedDate,
     },
     validationSchema: Yup.object({
@@ -75,7 +75,7 @@ export default function AddTransactionModal() {
       amount: Yup.string()
         .matches(/^[1-9]\d{0,9}(\.\d{1,2})?$/)
         .required(),
-      category: Yup.string().nullable(),
+      categoryId: Yup.string().nullable(),
       date: Yup.number().required(),
     }),
     onSubmit: (values, { resetForm }) => {
@@ -172,9 +172,9 @@ export default function AddTransactionModal() {
                           f.setValues({
                             ...f.values,
                             transactionType: e.target.checked,
-                            category: e.target.checked
+                            categoryId: e.target.checked
                               ? null
-                              : f.values.category,
+                              : f.values.categoryId,
                           })
                         }
                         checked={f.values.transactionType}
@@ -197,16 +197,16 @@ export default function AddTransactionModal() {
                           f.errors.category && f.touched.category ? true : false
                         }
                         fullWidth
-                        id="category"
-                        name="category"
+                        id="categoryId"
+                        name="categoryId"
                         color="secondary"
                         label="Выберите категорию"
                         select
-                        value={f.values.category}
+                        value={f.values.categoryId}
                         onChange={f.handleChange}
                         helperText={
-                          f.errors?.category && f.touched.category
-                            ? f.errors?.category
+                          f.errors?.categoryId && f.touched.categoryId
+                            ? f.errors?.categoryId
                             : ' '
                         }
                         className={styles.input}
