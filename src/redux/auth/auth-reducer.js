@@ -10,6 +10,7 @@ import {
   getCurrentUserSuccess,
   getCurrentUserError,
 } from './auth-actions';
+import { addTransactionSuccess } from '../transactions/transactions-actions';
 
 const initialUserState = {
   name: null,
@@ -20,6 +21,10 @@ const userReducer = createReducer(initialUserState, {
   [loginSuccess]: (_, { payload }) => payload.data,
   [logoutSuccess]: () => initialUserState,
   [getCurrentUserSuccess]: (_, { payload: { data } }) => data,
+  [addTransactionSuccess]: (state, { payload: { data } }) => ({
+    ...state,
+    balance: data.balance,
+  }),
 });
 
 const tokenReducer = createReducer(null, {
