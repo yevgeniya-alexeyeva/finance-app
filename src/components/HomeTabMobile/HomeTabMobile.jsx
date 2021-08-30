@@ -2,6 +2,7 @@ import style from './HomeTabMobile.module.css';
 import { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { transactionsOperations } from '../../redux/transactions';
+import { authSelectors } from '../../redux/auth';
 
 const HomeTabMobile = () => {
   const dispatch = useDispatch();
@@ -9,10 +10,10 @@ const HomeTabMobile = () => {
     state => state.transactions.transactionList,
     shallowEqual,
   );
-
+  const token = useSelector(authSelectors.getToken);
   useEffect(() => {
-    dispatch(transactionsOperations.fetchTrList());
-  }, [dispatch]);
+    dispatch(transactionsOperations.fetchTrList(token));
+  }, [dispatch, token]);
   return transactions.length ? (
     <ul>
       {transactions.map(i => {

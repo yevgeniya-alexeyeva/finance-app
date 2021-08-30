@@ -35,7 +35,6 @@ const addTransaction = (newTransaction, token) => async dispatch => {
   dispatch(addTransactionRequest());
   try {
     const { data } = await api.addNewTransaction(newTransaction, token);
-    console.log(newTransaction);
     dispatch(addTransactionSuccess(data));
   } catch (error) {
     dispatch(addTransactionError(error));
