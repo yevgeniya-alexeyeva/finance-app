@@ -8,9 +8,7 @@ export const getFilteredTransactions = async (month, year, token) => {
       { headers: { Authorization: `Bearer ${token}` } },
     );
     return data;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) {}
 };
 
 export const getAllTransactions = async token => {
