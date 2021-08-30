@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Media from 'react-media';
 import { makeStyles } from '@material-ui/core/styles';
 import { Modal, Button } from '@material-ui/core';
 import { authOperations } from '../../../redux/auth';
+import { authSelectors } from '../../../redux/auth';
 import Exit from './logout.svg';
 import CloseIcon from '@material-ui/icons/Close';
 import styles from './LogOut.module.css';
@@ -38,6 +39,7 @@ export default function LogOut() {
   const [modalStyle] = useState(getModalStyle);
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
+  const token = useSelector(authSelectors.getToken);
 
   const handleOpen = () => {
     setOpen(true);
@@ -103,7 +105,7 @@ export default function LogOut() {
                     variant="contained"
                     color="primary"
                     type="submit"
-                    onClick={() => dispatch(authOperations.logOut())}
+                    onClick={() => dispatch(authOperations.logOut(token))}
                     style={
                       matches.small
                         ? {
