@@ -78,10 +78,11 @@ p {
 }
 .tab {
   width: 100%;
+  margin-bottom: 40px;
 }
 
 .scroll {
-  max-height: 70vh;
+  max-height: 319px;
   overflow-y: scroll;
 }
 .scroll::-webkit-scrollbar {
@@ -101,7 +102,7 @@ p {
 }
 @media screen and (min-width: 768px) and (max-width: 1279px) {
   .tab {
-    max-height: 262px;
+    max-height: 319px;
     width: 100%;
   }
 }
