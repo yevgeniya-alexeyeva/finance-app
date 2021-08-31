@@ -8,6 +8,7 @@ import {
 import Chart from '../Chart';
 import Tab from '../Tab';
 import styles from './DiagramTab.module.css';
+import Notification from '../Notification';
 
 const DiagramTab = () => {
   const currentMonth = new Date().getMonth() + 1;
@@ -37,6 +38,13 @@ const DiagramTab = () => {
 
   return (
     <div>
+      {!token && (
+        <Notification
+          type={'error'}
+          message={'Пользователь не аутентифицирован'}
+          title={'Ошибка'}
+        />
+      )}
       <h2 className={styles.head}>Статистика</h2>
       <div className={styles.wrapper}>
         <Chart costs={costList} />
