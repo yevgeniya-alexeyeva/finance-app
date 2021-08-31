@@ -1,4 +1,5 @@
 @import '../stylesheet/vars.css';
+
 @media (max-width: 767px) {
   .container {
     width: 320px;
@@ -8,32 +9,58 @@
     visibility: hidden;
     opacity: 0;
   }
+  .img {
+    display: none;
+  }
 }
+
+.img {
+  width: 435px;
+  height: 419px;
+  background-image: url('../images/frameGirl.png');
+  background-position: center;
+  background-size: 260px 250px;
+  background-repeat: no-repeat;
+}
+
 @media (min-width: 768px) and (max-width: 1277px) {
   .container {
-    width: 768px;
-    height: 1024px;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
     margin: auto;
-  }
-  .conteinerBg {
-    position: relative;
-    padding: 360px 114px 196px 114px;
-    text-align: center;
     background-color: #e5e5e5;
     background-image: url('../images/UpperPart.png'),
-      url('../images/LowerPart.png'), url('../images/frameGirl.png');
+      url('../images/LowerPart.png');
     background-position: 100% 0, 0 100%, 114px 63px;
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-size: auto, auto, 273px 250px;
   }
+
+  .imgWrapper {
+    display: flex;
+    margin: 60px auto 0 auto;
+    width: 540px;
+  }
+
+  .img {
+    width: 250px;
+    height: 260px;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
   .appName {
-    position: absolute;
-    top: 150px;
-    right: 153px;
+    display: block;
+    margin: auto;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 30px;
     line-height: 1.5;
+    text-align: center;
   }
 }
 @media (min-width: 1278px) {
@@ -42,37 +69,46 @@
     height: 720px;
     margin: auto;
   }
-  .conteinerBg {
-    position: relative;
+  .containerBg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-  .left {
-    width: 560px;
-    height: 720px;
+
     background-color: #e5e5e5;
-    background-image: url('../images/frameGirl.png'),
+
+    background-image: url('../images/UpperPart.png'),
       url('../images/LowerPart.png');
-    background-position: 30px 153px, 0 100%;
-    background-repeat: no-repeat, no-repeat;
-    background-size: 452px 412px, auto;
+    background-position: 100% 0, 0 100%;
+    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-size: auto, auto;
   }
-  .right {
-    width: 720px;
-    height: 720px;
-    padding: 52px 85px 52px 95px;
+
+  .imgWrapper {
+    width: 452px;
+    height: 419px;
+    margin: auto;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 452px 419px;
+  }
+  .formWrapper {
+    display: flex;
+    align-items: center;
     background-image: url('../images/backgraund.jpg');
     background-size: cover;
+    width: 60vw;
   }
   .appName {
-    position: absolute;
-    left: 200px;
-    bottom: 77px;
+    display: block;
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     font-size: 30px;
     line-height: 1.5;
+    margin-top: 28px;
+    text-align: center;
   }
 }
