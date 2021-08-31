@@ -15,8 +15,8 @@
 }
 
 .img {
-  width: 435px;
-  height: 419px;
+  width: 260px;
+  height: 250px;
   background-image: url('../images/frame.png');
   background-position: center;
   background-size: 260px 250px;
@@ -44,13 +44,6 @@
     display: flex;
     margin: 60px auto 0 auto;
     width: 540px;
-  }
-
-  .img {
-    width: 250px;
-    height: 260px;
-    background-position: center;
-    background-repeat: no-repeat;
   }
 
   .appName {
@@ -91,8 +84,15 @@
     margin: auto;
     background-position: 0 100%;
     background-repeat: no-repeat;
-    background-size: 435px 419px;
+    background-size: 435px 420px;
   }
+  .img {
+    width: 435px;
+    height: 420px;
+    background-size: 435px 420px;
+    background-repeat: no-repeat;
+  }
+
   .formWrapper {
     display: flex;
     align-items: center;
