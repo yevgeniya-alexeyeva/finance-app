@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { transactionsOperations } from '../../redux/transactions';
 import { authSelectors } from '../../redux/auth';
+import Notification from '../Notification';
+import SmallLoader from '../UI/SmallLoader';
 
 const HomeTab = () => {
   const dispatch = useDispatch();
@@ -24,7 +26,14 @@ const HomeTab = () => {
 
   return (
     <>
-      {loading && <p>Loading</p>}
+      {!token && (
+        <Notification
+          type={'error'}
+          message={'Пользователь не аутентифицирован'}
+          title={'Ошибка'}
+        />
+      )}
+      {loading && <SmallLoader />}
       {!loading && !!transactions.length && (
         <div className={style.tab}>
           <div className={style.head}>

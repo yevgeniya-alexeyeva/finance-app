@@ -7,7 +7,7 @@ const Notification = ({ type, title, message }) => {
       type={type}
       title={title}
       text={message}
-      delay={20000}
+      delay={5000}
       shadow={true}
       nonblock={true}
     ></PNotify>

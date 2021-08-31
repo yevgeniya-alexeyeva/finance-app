@@ -104,7 +104,7 @@ export default function LogOut() {
                   <Button
                     variant="contained"
                     color="primary"
-                    type="submit"
+                    type="button"
                     onClick={() => dispatch(authOperations.logOut(token))}
                     style={
                       matches.small

@@ -2,6 +2,7 @@
 
 .btnAdd {
   position: absolute;
+  z-index: 1;
 }
 
 @media (max-width: 767px) {

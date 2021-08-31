@@ -59,6 +59,7 @@ const RegistrationForm = () => {
       dispatch(authOperations.logIn({ email, password }));
     },
   });
+
   return (
     <div className={styles.container}>
       <div className={styles.logoBox}>
