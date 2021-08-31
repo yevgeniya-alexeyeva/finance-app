@@ -15,8 +15,8 @@
 }
 
 .img {
-  width: 435px;
-  height: 419px;
+  width: 260px;
+  height: 250px;
   background-image: url('../images/frameGirl.png');
   background-position: center;
   background-size: 260px 250px;
@@ -46,13 +46,6 @@
     width: 540px;
   }
 
-  .img {
-    width: 250px;
-    height: 260px;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
   .appName {
     display: block;
     margin: auto;
@@ -63,6 +56,7 @@
     text-align: center;
   }
 }
+
 @media (min-width: 1278px) {
   .container {
     width: 1280px;
@@ -85,6 +79,12 @@
     background-position: 100% 0, 0 100%;
     background-repeat: no-repeat, no-repeat, no-repeat;
     background-size: auto, auto;
+  }
+
+  .img {
+    width: 452px;
+    height: 419px;
+    background-size: 452px 419px;
   }
 
   .imgWrapper {

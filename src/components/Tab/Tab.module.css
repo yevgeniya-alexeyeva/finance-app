@@ -110,4 +110,11 @@
     max-height: 319px;
     overflow-y: scroll;
   }
+  .costsList::-webkit-scrollbar {
+    width: 3px;
+  }
+  .costsList::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: var(--grey-text-color);
+  }
 }
