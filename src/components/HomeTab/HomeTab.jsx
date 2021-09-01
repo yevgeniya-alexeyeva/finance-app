@@ -71,7 +71,7 @@ const HomeTab = () => {
         </div>
       )}
       {!loading && !transactions.length && (
-        <p className={style.empty}>No such user's collection</p>
+        <p className={style.empty}>Ваш список доходов и расходов пуст.</p>
       )}
     </>
   );
