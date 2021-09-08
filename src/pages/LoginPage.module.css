@@ -35,9 +35,9 @@
     background-color: #e5e5e5;
     background-image: url('../images/UpperPart.png'),
       url('../images/LowerPart.png');
-    background-position: 100% 0, 0 100%, 114px 63px;
-    background-repeat: no-repeat, no-repeat, no-repeat;
-    background-size: auto, auto, 273px 250px;
+    background-position: 100% 0, 0 100%;
+    background-repeat: no-repeat, no-repeat;
+    background-size: auto, auto;
   }
 
   .imgWrapper {
@@ -76,7 +76,7 @@
     background-image: url('../images/UpperPart.png'),
       url('../images/LowerPart.png');
     background-position: 100% 0, 0 100%;
-    background-repeat: no-repeat, no-repeat, no-repeat;
+    background-repeat: no-repeat, no-repeat;
     background-size: auto, auto;
   }
 
