@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const RegistrationForm = () => {
+const LoginForm = () => {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -141,4 +141,4 @@ const RegistrationForm = () => {
   );
 };
 
-export default RegistrationForm;
+export default LoginForm;
