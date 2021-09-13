@@ -38,7 +38,6 @@ const useStyles = makeStyles(theme => ({
     width: '100vw',
     height: '100vh',
     padding: '0px 11px 30px',
-    overflow: 'scroll',
     backgroundColor: theme.palette.background.paper,
   },
   paperMedium: {
