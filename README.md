@@ -4,6 +4,6 @@
 
 ### [backend](https://github.com/yevgeniya-alexeyeva/finance-app-backend)
 
-![Home page capture](https://github.com/yevgeniya-alexeyeva/finance-app/tree/master/src/images/preview/home.JPG?raw=true 'Home page preview')
-![Add transaction modal capture](https://github.com/yevgeniya-alexeyeva/finance-app/tree/master/src/images/preview/addTr.JPG?raw=true 'Add transaction modal preview')
-![Statistic page capture](https://github.com/yevgeniya-alexeyeva/finance-app/tree/master/src/images/preview/statistic.JPG?raw=true 'Statistic page preview')
+![Home page capture](https://github.com/yevgeniya-alexeyeva/finance-app/blob/master/src/images/preview/home.JPG?raw=true 'Home page preview')
+![Add transaction modal capture](https://github.com/yevgeniya-alexeyeva/finance-app/blob/master/src/images/preview/addTr.JPG?raw=true 'Add transaction modal preview')
+![Statistic page capture](https://github.com/yevgeniya-alexeyeva/finance-app/blob/master/src/images/preview/statistic.JPG?raw=true 'Statistic page preview')
