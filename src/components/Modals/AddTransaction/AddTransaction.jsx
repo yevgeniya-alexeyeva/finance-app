@@ -153,7 +153,7 @@ export default function AddTransactionModal() {
                 </button>
 
                 <h2 id="add-transaction-title" className={styles.title}>
-                  Добавить транзакцию
+                  Add transaction
                 </h2>
                 <form onSubmit={f.handleSubmit}>
                   <div className={styles.switchBox}>
@@ -177,8 +177,8 @@ export default function AddTransactionModal() {
                       />
                       <label
                         htmlFor="toggleButton"
-                        data-on-text="Доход"
-                        data-off-text="Расход"
+                        data-on-text="Income"
+                        data-off-text="Expense"
                       ></label>
                       <div className={styles.switchBtnIcon}></div>
                     </div>
@@ -197,7 +197,7 @@ export default function AddTransactionModal() {
                         id="categoryId"
                         name="categoryId"
                         color="secondary"
-                        label="Выберите категорию"
+                        label="Choose category"
                         select
                         value={f.values.categoryId}
                         onChange={f.handleChange}
@@ -227,7 +227,7 @@ export default function AddTransactionModal() {
                         id="amount"
                         name="amount"
                         color="secondary"
-                        label="Сумма"
+                        label="Amount"
                         value={f.values.amount}
                         onChange={f.handleChange}
                         className={styles.input}
@@ -250,7 +250,7 @@ export default function AddTransactionModal() {
                           className={styles.input}
                           color="secondary"
                           id="date-picker-inline"
-                          label="Дата транзакции"
+                          label="Transaction date"
                           value={selectedDate}
                           onChange={handleDateChange}
                           helperText={
@@ -271,7 +271,7 @@ export default function AddTransactionModal() {
                       id="comment"
                       name="comment"
                       color="secondary"
-                      label="Комментарий"
+                      label="Comment"
                       value={f.values.comment}
                       onChange={f.handleChange}
                       className={styles.comment}
@@ -294,7 +294,7 @@ export default function AddTransactionModal() {
                         padding: '13px 68px',
                       }}
                     >
-                      Добавить
+                      Add
                     </Button>
                     <Button
                       onClick={handleClose}
@@ -307,7 +307,7 @@ export default function AddTransactionModal() {
                         padding: '13px 68px',
                       }}
                     >
-                      Отмена
+                      Cancel
                     </Button>
                   </div>
                 </form>

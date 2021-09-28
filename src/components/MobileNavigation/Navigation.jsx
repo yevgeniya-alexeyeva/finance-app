@@ -4,7 +4,7 @@ import routes from '../../routes';
 import iconsSvg from '../../assets/mobileNavigation.svg';
 import styles from './MobileNavigation.module.css';
 
-const MobileNavigation = () => {
+const Navigation = () => {
   return (
     <Media
       queries={{
@@ -24,7 +24,7 @@ const MobileNavigation = () => {
               <svg className={styles.icon} width="38" height="38">
                 <use href={`${iconsSvg}#icon-home`}></use>
               </svg>
-              {!matches.small && 'Главная'}
+              {!matches.small && 'Home'}
             </NavLink>
           </li>
           <li className={styles.listItem}>
@@ -36,7 +36,7 @@ const MobileNavigation = () => {
               <svg className={styles.icon} width="38" height="38">
                 <use href={`${iconsSvg}#icon-diagram`}></use>
               </svg>
-              {!matches.small && 'Статистика'}
+              {!matches.small && 'Statistic'}
             </NavLink>
           </li>
           {matches.small && (
@@ -58,4 +58,4 @@ const MobileNavigation = () => {
   );
 };
 
-export default MobileNavigation;
+export default Navigation;

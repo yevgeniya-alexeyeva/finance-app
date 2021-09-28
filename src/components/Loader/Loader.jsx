@@ -3,7 +3,7 @@ import Animation from './loader.gif';
 
 const Loader = () => {
   return (
-    <div className={style.backprop}>
+    <div className={style.backdrop}>
       <img className={style.loader} src={Animation} alt="loader" />
     </div>
   );
