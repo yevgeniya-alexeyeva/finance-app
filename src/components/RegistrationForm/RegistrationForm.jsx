@@ -243,10 +243,10 @@ const RegistrationForm = () => {
               padding: '13px 68px',
             }}
           >
-            Регистрация
+            Sign up
           </Button>
           <Link to={routes.login} className={styles.linkBtn}>
-            Войти
+            Sign in
           </Link>
         </div>
       </form>

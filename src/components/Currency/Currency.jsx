@@ -48,9 +48,9 @@ const Currency = () => {
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Валюта</th>
-                <th>Покупка</th>
-                <th>Продажа</th>
+                <th>Currencies</th>
+                <th>Buying</th>
+                <th>Selling</th>
               </tr>
             </thead>
             <tbody>

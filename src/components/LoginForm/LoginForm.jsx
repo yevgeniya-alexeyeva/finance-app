@@ -130,10 +130,10 @@ const LoginForm = () => {
               padding: '13px 68px',
             }}
           >
-            Войти
+            Sign in
           </Button>
           <Link to={routes.register} className={styles.linkBtn}>
-            Регистрация
+            Sign Up
           </Link>
         </div>
       </form>

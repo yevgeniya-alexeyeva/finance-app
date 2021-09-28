@@ -57,7 +57,7 @@ export default function LogOut() {
             <svg className={styles.exitIcon} width="18" height="18">
               <use href={`${Exit}#icon-exit`}></use>
             </svg>
-            {matches.small ? '' : 'Выйти'}
+            {matches.small ? '' : 'Sign out'}
           </button>
 
           <Modal
@@ -84,7 +84,7 @@ export default function LogOut() {
                 </button>
 
                 <h2 id="logout-title" className={styles.title}>
-                  Вы уверены, что хотите выйти?
+                  Are you sure you want to log out?
                 </h2>
 
                 <div className={styles.btns}>
@@ -99,7 +99,7 @@ export default function LogOut() {
                         : { width: 100, borderRadius: 20, padding: '13px 68px' }
                     }
                   >
-                    Отмена
+                    Cancel
                   </Button>
                   <Button
                     variant="contained"
@@ -122,7 +122,7 @@ export default function LogOut() {
                           }
                     }
                   >
-                    Да
+                    Yes
                   </Button>
                 </div>
               </div>

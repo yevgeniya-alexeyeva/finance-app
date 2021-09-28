@@ -41,18 +41,18 @@ const Tab = props => {
     );
   });
   const months = [
-    'Январь',
-    'Февраль',
-    'Март',
-    'Апрель',
-    'Май',
-    'Июнь',
-    'Июль',
-    'Август',
-    'Сентябрь',
-    'Октябрь',
-    'Ноябрь',
-    'Декабрь',
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
   ];
   const monthOptions = months.map((i, index) => (
     <option key={i} value={index + 1}>
@@ -76,7 +76,7 @@ const Tab = props => {
             style={{ color: 'black', fontFamily: 'Circe', fontSize: '16px' }}
             htmlFor="month"
           >
-            Месяц
+            Month
           </InputLabel>
           <Select
             native
@@ -84,7 +84,6 @@ const Tab = props => {
               borderRadius: 30,
               height: 50,
             }}
-            // value={null}
             onChange={onChange}
             label="Month"
             inputProps={{
@@ -102,15 +101,14 @@ const Tab = props => {
             style={{ color: 'black', fontFamily: 'Circe', fontSize: '16px' }}
             htmlFor="month"
           >
-            Год
+            Year
           </InputLabel>
           <Select
             className={styles.select}
             native
             style={{ borderRadius: 30, height: 50 }}
-            // value={1}
             onChange={onChange}
-            label="Age"
+            label="Year"
             inputProps={{
               name: 'year',
               id: 'year',
@@ -122,17 +120,17 @@ const Tab = props => {
         </FormControl>
       </div>
       <div className={styles.tableHeader}>
-        <span className={styles.headerCategory}>Категория</span>
-        <span className={styles.headerAmount}>Сумма</span>
+        <span className={styles.headerCategory}>Category</span>
+        <span className={styles.headerAmount}>Amount</span>
       </div>
       <ul className={styles.costsList}>{data}</ul>
       <ul className={styles.total}>
         <li className={styles.totalItem}>
-          <span>Расходы:</span>
+          <span>Expenses:</span>
           <span className={styles.totalCredits}>{credit}</span>
         </li>
         <li className={styles.totalItem}>
-          <span>Доходы:</span>
+          <span>Incomes:</span>
           <span className={styles.totalDebits}>{debit}</span>
         </li>
       </ul>
