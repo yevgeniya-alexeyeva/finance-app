@@ -41,11 +41,11 @@ const DiagramTab = () => {
       {!token && (
         <Notification
           type={'error'}
-          message={'Пользователь не аутентифицирован'}
-          title={'Ошибка'}
+          message={'User is not authenticated'}
+          title={'Error'}
         />
       )}
-      <h2 className={styles.head}>Статистика</h2>
+      <h2 className={styles.head}>Statistic</h2>
       <div className={styles.wrapper}>
         <Chart costs={costList} />
         <Tab

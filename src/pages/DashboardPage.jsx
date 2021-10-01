@@ -8,7 +8,7 @@ import { authOperations } from '../redux/auth';
 import { authSelectors } from '../redux/auth';
 import Header from '../components/Header';
 import Container from '../components/UI/Container';
-import MobileNavigation from '../components/MobileNavigation';
+import Navigation from '../components/MobileNavigation';
 import Currency from '../components/Currency';
 import AddTransaction from '../components/Modals/AddTransaction';
 import styles from './DashboardPage.module.css';
@@ -54,7 +54,7 @@ const DashboardPage = () => {
                 <div className={styles.walletContainer}>
                   <div className={styles.walletPanel}>
                     <div>
-                      <MobileNavigation />
+                      <Navigation />
                       {!matches.small ? <Balance /> : undefined}
                     </div>
                     {!matches.small ? <Currency /> : undefined}

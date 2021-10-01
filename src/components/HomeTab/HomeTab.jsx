@@ -5,19 +5,23 @@ import { transactionsOperations } from '../../redux/transactions';
 import { authSelectors } from '../../redux/auth';
 import Notification from '../Notification';
 import SmallLoader from '../UI/SmallLoader';
+import { transactionsSelectors } from '../../redux/transactions';
 
 const HomeTab = () => {
   const dispatch = useDispatch();
 
   const transactions = useSelector(
-    state => state.transactions.transactionList,
+    transactionsSelectors.getTransactions,
     shallowEqual,
   );
+
   const categories = useSelector(
-    state => state.transactions.categories,
+    transactionsSelectors.getCategories,
     shallowEqual,
   );
-  const loading = useSelector(state => state.transactions.loader);
+
+  const loading = useSelector(transactionsSelectors.getIsLoading);
+
   const token = useSelector(authSelectors.getToken);
 
   useEffect(() => {
@@ -29,20 +33,20 @@ const HomeTab = () => {
       {!token && (
         <Notification
           type={'error'}
-          message={'Пользователь не аутентифицирован'}
-          title={'Ошибка'}
+          message={'User is not authenticated'}
+          title={'Error'}
         />
       )}
       {loading && <SmallLoader />}
       {!loading && !!transactions.length && (
         <div className={style.tab}>
           <div className={style.head}>
-            <p>Дата</p>
-            <p>Тип</p>
-            <p>Категория</p>
-            <p>Комментарий</p>
-            <p>Сумма</p>
-            <p>Баланс</p>
+            <p>Date</p>
+            <p>Type</p>
+            <p>Category</p>
+            <p>Comment</p>
+            <p>Amount</p>
+            <p>Balance</p>
           </div>
           <ul className={style.scroll}>
             {transactions.map(i => {
@@ -60,7 +64,7 @@ const HomeTab = () => {
                 <li key={i._id} className={style.transactions}>
                   <p className={style.row}>{date}</p>
                   <p className={style.row}>{type}</p>
-                  <p className={style.row}>{category?.name || 'Депозит'}</p>
+                  <p className={style.row}>{category?.name || 'Income'}</p>
                   <p className={style.row}>{i.comment}</p>
                   <p className={style.row.concat(' ', accent)}>{i.amount}</p>
                   <p className={style.row}>{i.balance}</p>
@@ -71,7 +75,9 @@ const HomeTab = () => {
         </div>
       )}
       {!loading && !transactions.length && (
-        <p className={style.empty}>Ваш список доходов и расходов пуст.</p>
+        <p className={style.empty}>
+          Your list of income and expenses is empty.
+        </p>
       )}
     </>
   );

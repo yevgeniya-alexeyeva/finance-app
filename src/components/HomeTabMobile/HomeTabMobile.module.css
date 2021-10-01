@@ -16,23 +16,23 @@ ul {
   display: block;
   width: 5px;
 }
-.transaktionList {
+.transactionList {
   width: 100%;
 }
-.transaktionDescr {
+.transactionDescr {
   display: flex;
   flex-direction: row;
   border-bottom: 1px solid #dcdcdf;
   padding: 12px 20px;
 }
-.transaktionDescr p {
+.transactionDescr p {
   font-family: Circe;
   font-style: normal;
   font-weight: bold;
   font-size: 18px;
   line-height: 1.5;
 }
-.transaktionDescr > .row {
+.transactionDescr > .row {
   font-weight: normal;
   font-size: 16px;
   margin-left: auto;
